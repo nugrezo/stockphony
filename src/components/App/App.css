@@ -1,11 +1,10 @@
-/* App.css */
-
+/* Apply this to your main container that holds the content */
 .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.content {
-  flex: 1;
+.main-content {
+  flex-grow: 1;
 }

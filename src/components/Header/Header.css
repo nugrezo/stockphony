@@ -1,119 +1,58 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* General Navbar styling */
 .navbar {
-  width: 100%;
-  background: linear-gradient(to right, #862e9c, #862e9c);
+  background-color: #000; /* Dark background */
   display: flex;
-  height: auto;
-  align-items: center;
   justify-content: space-between;
-  opacity: 1;
-  margin: 0;
-  padding: 0;
-  padding-right: 0.5rem;
-}
-
-.collapse {
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
-}
-
-.ml-auto {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-}
-
-.navbar-text {
-  background-color: #cc5de8;
-  padding: 8px;
-  border-radius: 16px;
-  color: #f3d9fa;
-}
-
-.login-icon {
-  color: #a61e4d;
-  padding-left: 2px;
-  margin: 0 auto;
-  width: 36px;
-  height: 36px;
-}
-
-.sign-up,
-.sign-out,
-.about-app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  width: 60px;
-  height: 60px;
-  background-color: #faa2c1;
-  border: none;
-  box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-  outline: none;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.sign-up:hover,
-.sign-out:hover,
-.about-app:hover {
-  background-color: #f783ac;
-  color: #ffdeeb;
-  font-weight: bold;
-}
-
-.sign-up:hover .login-icon,
-.sign-out:hover .signout-icon,
-.about-app:hover .about-icon {
-  stroke: #ffdeeb;
-}
-
-.sign-up:active,
-.sign-out:active,
-.about-app:active {
-  background-color: #f06595;
-  stroke: #ffdeeb;
-  font-weight: bold;
-}
-
-.brand {
-  padding: 0.3rem;
   padding-left: 1rem;
-  padding-right: 1rem;
+  padding-top: 0;
+  padding-bottom: 0.2rem;
+  align-items: center;
+  border-bottom: 0.5px solid #939393; /* Add subtle border */
+  position: relative;
 }
 
-.brand:hover {
-  color: #ffec99;
+/* Brand/logo styling */
+.brand img {
+  width: 120px;
+  height: auto;
 }
 
-.signout-icon {
-  width: 32px;
-  height: 32px;
-  stroke: #a61e4d;
+/* Navbar Text styling */
+.navbar-text {
+  color: #fff; /* White text for the username */
+  font-size: 18px;
 }
 
-.about-icon {
-  width: 36px;
-  height: 36px;
-  stroke: #a61e4d;
+/* Button Styling */
+.sign-out-btn,
+.about-btn,
+.sign-up-btn {
+  font-size: 16px;
+  padding: 0.5rem 1rem;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
 }
 
-@media (max-width: 414px) {
+.sign-out-btn:hover,
+.about-btn:hover,
+.sign-up-btn:hover {
+  background-color: #2b8a3e; /* Change button background on hover */
+  color: white;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
   .navbar {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
+    padding: 1rem;
   }
-  .ml-auto {
-    display: flex;
+
+  .navbar-text {
+    font-size: 16px;
+  }
+
+  .sign-out-btn,
+  .about-btn,
+  .sign-up-btn {
+    font-size: 14px;
   }
 }

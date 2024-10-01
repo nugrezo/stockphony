@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import "./SignUp.css";
-
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { signIn, signUp } from "../../../api/auth";
 import messages from "../../AutoDismissAlert/messages";
 import DotsLoader from "../../DotsLoader/DotsLoader";
+
+const imageArray = [
+  `${process.env.PUBLIC_URL}/stock_chart.png`,
+  `${process.env.PUBLIC_URL}/stock_chart1.png`,
+  `${process.env.PUBLIC_URL}/stock_chart2.png`,
+  `${process.env.PUBLIC_URL}/stock_chart3.png`,
+  `${process.env.PUBLIC_URL}/stock_chart4.png`,
+  `${process.env.PUBLIC_URL}/stock_chart5.png`,
+  `${process.env.PUBLIC_URL}/stock_chart6.png`,
+  `${process.env.PUBLIC_URL}/stock_chart7.png`,
+  `${process.env.PUBLIC_URL}/stock_chart8.png`,
+  `${process.env.PUBLIC_URL}/stock_chart9.png`,
+  `${process.env.PUBLIC_URL}/stock_chart10.png`,
+  `${process.env.PUBLIC_URL}/stock_chart11.png`,
+  `${process.env.PUBLIC_URL}/stock_chart12.png`,
+  `${process.env.PUBLIC_URL}/stock_chart13.png`,
+  `${process.env.PUBLIC_URL}/stock_chart14.png`,
+  `${process.env.PUBLIC_URL}/stock_chart15.png`,
+];
 
 const validateEmail = (email) => {
   const emailRegex = /^\S+@\S+\.\S{2,}$/;
@@ -19,22 +37,9 @@ const validateEmail = (email) => {
       "hotmail.com",
       "yahoo.com",
       "outlook.com",
-      "aol.com",
-      "hotmail.co.uk",
-      "hotmail.fr",
-      "msn.com",
-      "yahoo.fr",
-      "wanadoo.fr",
-      "orange.fr",
-      "yahoo.co.uk",
-      "ahoo.com.br",
-      "live.com",
-      "yandex.ru",
-      "googlemail.com",
-      "yahoo.de",
+      // add rest of the domains
     ];
     const domain = email.split("@")[1].toLowerCase();
-
     return validDomains.includes(domain);
   } else {
     return false;
@@ -59,6 +64,14 @@ const SignUp = ({ msgAlert, setUser }) => {
   const [passwordIsValid, setPasswordIsValid] = useState(true);
   const [passwordConfirmationIsValid, setPasswordConfirmationIsValid] =
     useState(true);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageArray.length);
+    }, 3000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -69,11 +82,7 @@ const SignUp = ({ msgAlert, setUser }) => {
     } else if (name === "password") {
       setPasswordIsValid(validatePassword(value));
     } else if (name === "passwordConfirmation") {
-      if (value === formData.password) {
-        setPasswordConfirmationIsValid(true);
-      } else {
-        setPasswordConfirmationIsValid(false);
-      }
+      setPasswordConfirmationIsValid(value === formData.password);
     }
   };
 
@@ -110,127 +119,116 @@ const SignUp = ({ msgAlert, setUser }) => {
     }
   };
 
-  const passwordConditionStyle = (isValid, password) => ({
-    color:
-      isValid || (password && password.length >= 8) ? "green" : "lightcoral",
-  });
-
   return (
-    <div className="row">
-      <div className="sign-up-form col-sm-10 col-md-8 mx-auto">
-        <h3 className="sign-up--title">Create an Account</h3>
-        <Form className="sign-up--form" onSubmit={onSignUp}>
-          <Form.Group controlId="email">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              required
-              type="email"
-              name="email"
-              value={formData.email}
-              placeholder="Enter your email"
-              onChange={handleChange}
-              style={{
-                backgroundColor: emailIsValid ? "" : "#ffc9c9",
-              }}
-            />
-            {!emailIsValid && (
-              <Form.Text className="text-danger">
-                Invalid email format
-              </Form.Text>
-            )}
-          </Form.Group>
-          <Form.Group controlId="username">
-            <Form.Label>User Name</Form.Label>
-            <Form.Control
-              required
-              type="username"
-              name="username"
-              value={formData.username}
-              placeholder="Enter your User Name"
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              required
-              name="password"
-              value={formData.password}
-              type="password"
-              placeholder="Enter your Password"
-              onChange={handleChange}
-              style={{
-                backgroundColor: passwordIsValid ? "" : "#ffc9c9",
-              }}
-            />
-            {!passwordIsValid && (
-              <Form.Text className="text-danger">
-                <ul>
-                  <li
-                    style={passwordConditionStyle(
-                      validatePassword(formData.password),
-                      formData.password
-                    )}
-                  >
-                    min 8 characters
-                  </li>
-
-                  <li
-                    style={passwordConditionStyle(
-                      /[A-Z]/.test(formData.password)
-                    )}
-                  >
-                    min 1 uppercase letter
-                  </li>
-                  <li
-                    style={passwordConditionStyle(
-                      /[a-z]/.test(formData.password)
-                    )}
-                  >
-                    min 1 lowercase letter
-                  </li>
-                  <li
-                    style={passwordConditionStyle(
-                      /[0-9]/.test(formData.password)
-                    )}
-                  >
-                    min 1 number
-                  </li>
-                  <li
-                    style={passwordConditionStyle(
-                      /[!@#$%^&*]/.test(formData.password)
-                    )}
-                  >
-                    min 1 special character (!@#$%^&*)
-                  </li>
-                </ul>
-              </Form.Text>
-            )}
-          </Form.Group>
-          <Form.Group controlId="passwordConfirmation">
-            <Form.Label>Password Confirmation</Form.Label>
-            <Form.Control
-              required
-              name="passwordConfirmation"
-              value={formData.passwordConfirmation}
-              type="password"
-              placeholder="Confirm Password"
-              onChange={handleChange}
-              style={{
-                backgroundColor: passwordConfirmationIsValid ? "" : "#ffc9c9",
-              }}
-            />
-          </Form.Group>
-          <Button className="sign-up--btn" type="submit">
-            {loading ? <DotsLoader /> : "Sign Up"}
-          </Button>
-          <div className="navigate-sign-in">
-            <p className="have-account">Have an account?</p>
-            <Nav.Link className="navigate--sign-in" href="#sign-in">
-              Sign In
-            </Nav.Link>
-          </div>
-        </Form>
+    <div className="sign-up-container">
+      <div className="left-section">
+        <img
+          src={imageArray[currentImageIndex]}
+          alt="Stock chart"
+          className="chart-image"
+        />
+      </div>
+      <div className="right-section">
+        <div className="circle circle1"></div>
+        <div className="circle circle2"></div>
+        <div className="sign-up-form">
+          <h3 className="sign-up--title">Create an Account</h3>
+          <Form className="sign-up--form" onSubmit={onSignUp}>
+            <Form.Group controlId="email">
+              <Form.Label>Full Name</Form.Label>
+              <Form.Control
+                required
+                type="email"
+                name="email"
+                value={formData.email}
+                placeholder="Enter your Full Name"
+                onChange={handleChange}
+                style={{
+                  backgroundColor: emailIsValid ? "" : "#ffc9c9",
+                }}
+              />
+              {!emailIsValid && (
+                <Form.Text className="text-danger">
+                  Invalid email format
+                </Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group controlId="email">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                required
+                type="email"
+                name="email"
+                value={formData.email}
+                placeholder="Enter your email"
+                onChange={handleChange}
+                style={{
+                  backgroundColor: emailIsValid ? "" : "#ffc9c9",
+                }}
+              />
+              {!emailIsValid && (
+                <Form.Text className="text-danger">
+                  Invalid email format
+                </Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group controlId="username">
+              <Form.Label>User Name</Form.Label>
+              <Form.Control
+                required
+                type="username"
+                name="username"
+                value={formData.username}
+                placeholder="Enter your User Name"
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                required
+                name="password"
+                value={formData.password}
+                type="password"
+                placeholder="Enter your Password"
+                onChange={handleChange}
+                style={{
+                  backgroundColor: passwordIsValid ? "" : "#ffc9c9",
+                }}
+              />
+              {!passwordIsValid && (
+                <Form.Text className="text-danger">
+                  <ul>
+                    <li>Min 8 characters, 1 uppercase, 1 number, 1 special</li>
+                  </ul>
+                </Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group controlId="passwordConfirmation">
+              <Form.Label>Password Confirmation</Form.Label>
+              <Form.Control
+                required
+                name="passwordConfirmation"
+                value={formData.passwordConfirmation}
+                type="password"
+                placeholder="Confirm Password"
+                onChange={handleChange}
+                style={{
+                  backgroundColor: passwordConfirmationIsValid ? "" : "#ffc9c9",
+                }}
+              />
+            </Form.Group>
+            <Button className="sign-up--btn" type="submit">
+              {loading ? <DotsLoader /> : "Sign Up"}
+            </Button>
+            <div className="navigate-sign-in">
+              <p className="have-account">Have an account?</p>
+              <Nav.Link className="navigate--sign-in" href="#sign-in">
+                Sign In
+              </Nav.Link>
+            </div>
+          </Form>
+        </div>
       </div>
     </div>
   );

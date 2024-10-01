@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
 // import AuthenticatedRoute from "../AuthenticatedRoute/AuthenticatedRoute";
 import AutoDismissAlert from "../AutoDismissAlert/AutoDismissAlert";
 import Header from "../Header/Header";
@@ -7,17 +8,9 @@ import ChangePassword from "../AuthComponents/ChangePassword/ChangePassword";
 import SignUp from "../AuthComponents/SignUp/SignUp";
 import SignOut from "../AuthComponents/SignOut/SignOut";
 import SignIn from "../AuthComponents/SignIn/SignIn";
-import CreateThread from "../ThreadComponents/CreateThread/CreateThread";
-import IndexThreads from "../ThreadComponents/IndexThreads/IndexThreads";
-import Icon from "../ThreadComponents/Icon/Icon";
-import ShowUserThreads from "../ThreadComponents/ShowUserThreads/ShowUserThreads";
-import "./App.css";
-import Footer from "../ThreadComponents/Footer/Footer";
-import Threadify from "../VectorShape/Threadify";
-import UserInfo from "../ThreadComponents/UserInfo/UserInfo";
 import AboutApp from "../AboutApp/AboutApp";
-
-// import ImageUploader from "../ThreadComponents/ImageUploader/ImageUploader";
+import Footer from "../Footer/Footer";
+import LandingPage from "../LandingPage/LandingPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -44,7 +37,8 @@ function App() {
         <div className="content">
           <HashRouter>
             <Routes>
-              <Route path="/" element={<Threadify to="/" />} />
+              {/* <Route path="/" element={<Example to="/" />} /> */}
+              <Route path="/" element={<LandingPage />} />
               <Route path="/about-app" element={<AboutApp />} />
               <Route
                 path="/sign-up"
@@ -72,27 +66,26 @@ function App() {
                   element={<ChangePassword msgAlert={msgAlert} user={null} />}
                 />
               )}
-              <Route path="/home" element={<Icon />} />
+              {/* <Route path="/home" element={<Icon />} /> */}
               <Route
                 path="/threads"
-                element={<IndexThreads msgAlert={msgAlert} user={user} />}
+                // element={<IndexExample msgAlert={msgAlert} user={user} />}
               />
               <Route
                 path="/post"
-                element={<CreateThread msgAlert={msgAlert} user={user} />}
+                // element={<CreateExample msgAlert={msgAlert} user={user} />}
               />
               <Route
                 path="/userthreads"
-                element={<ShowUserThreads msgAlert={msgAlert} user={user} />}
+                // element={<ShowUserExample msgAlert={msgAlert} user={user} />}
               />
               <Route
                 path="/userinfo"
-                element={<UserInfo msgAlert={msgAlert} user={user} />}
+                // element={<UserInfo msgAlert={msgAlert} user={user} />}
               />
             </Routes>
           </HashRouter>
         </div>
-
         <Footer />
       </div>
     </Fragment>

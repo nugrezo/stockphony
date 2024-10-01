@@ -1,8 +1,8 @@
 {
-  "name": "threadify-client",
+  "name": "stockphony",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://nugrezo.github.io/threadify-client/",
+  "homepage": "http://localhost:3000/stockphony/",
   "description": "react",
   "main": "index.js",
   "scripts": {

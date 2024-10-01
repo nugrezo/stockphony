@@ -4,7 +4,7 @@
 
    - [Project Name](#project-name)
    - [Description](#description)
-   - [Why Threadify](#why-Threadify)
+   - [Why Stockphony](#why-Stockphony)
    - [Key Aims](#key-aims)
    - [Inspiration from Twitter](#inspiration-from-twitter)
    - [Beyond Expectations](#beyond-expectations)
@@ -72,47 +72,47 @@
 
 ### Project Name
 
-Threadify
+Stockphony
 
 ### Description
 
-This is the frontend repo of the project. Please find backend backend repo : https://github.com/nugrezo/threadify-server
+This is the frontend repo of the project. Please find backend backend repo : "will be aded once it is created"
 
-Threadify is a dynamic and user-centric web application, focusing on fostering meaningful discussions and interactions. Inspired by the concise nature of Threads app.
+Stockphony is a dynamic and user-centric web application, focusing on fostering meaningful discussions and interactions. Inspired by the concise nature of Threads app.
 
-### Why Threadify
+### Why Stockphony
 
-In a digital age marked by information sharing, the Threadify provides a platform for users to engage in open dialogue, share insights, and connect with like-minded individuals. It serves as a hub for diverse perspectives, facilitating the exchange of ideas and knowledge.
+Will be added soon
 
 ### Key Aims
 
 1.  **Community Engagement**
 
-The Threadify aims to bring people together by providing a space for community engagement and collaboration. Users can discuss various topics, share experiences, and build connections in a virtual environment.
+Will be added soon
 
 2. **Knowledge Sharing**
 
-As a knowledge-sharing platform, the Threadify encourages users to contribute their expertise and insights. This collaborative approach promotes continuous learning and the dissemination of valuable information.
+Will be added soon
 
 #### 3 - Inspiration from Threads:
 
-Taking inspiration from the concise and real-time nature of Threads, the Threads adapts these qualities to foster quick and meaningful interactions. The platform aims to capture the essence of dynamic discussions in a more expansive and collaborative setting.
+Will be added soon
 
 ### Beyond Expectations
 
-While the Threadify caters to conventional forum functionalities, it also introduces innovative features that transcend expectations. From intuitive user interfaces to novel ways of content discovery, the application strives to redefine the forum experience.
+Will be added soon
 
-Embrace the Threadify as not just a digital meeting place but a dynamic space where ideas flourish, connections form, and users actively shape the narrative. Join the conversation and explore the limitless possibilities within the Threadify.
+Will be added soon
 
 ## 2 - Installation Instructions
 
-To set up the Threadify front-end application developed with React, follow these simple steps:
+Will be added soon
 
 1. **Clone the Repository**
 
-git clone https://github.com/nugrezo/Threadify-client.git
+git clone <repo>
 
-cd threadify-client
+cd <repo>
 
 2. **Install Dependencies**
 
@@ -124,9 +124,9 @@ npm start
 
 4. **Access the Application**
 
-Open your browser and navigate to http://localhost:3000 to view the Threadify.
+Open your browser and navigate to http://localhost:3000 to view the Stockphony.
 
-That's it! You've successfully installed and launched the Threadify front-end application. Dive into the world of dynamic discussions and collaborative interactions.
+That's it! You've successfully installed and launched the Stockphony front-end application. Dive into the world of dynamic discussions and collaborative interactions.
 
 ## 3 - Deployment
 
@@ -140,21 +140,11 @@ it runs successfully.
 
 ## 4 - Usage
 
-The Threadify front-end application is designed to offer a seamless and engaging experience for users. Here's how you can make the most of its features:
+The Stockphony front-end application is designed to offer a seamless and engaging experience for users. Here's how you can make the most of its features:
 
-1. **Navigate through Threads**
+1. **Navigate through Stockphony**
 
-Explore diverse discussions by navigating through threads created by users. Click on the comments button of each thread to delve into the conversations and discover a wealth of topics.
-
-2. **Contribute to Discussions**
-
-Engage actively by creating your own threads. Share your thoughts, experiences, or questions to initiate meaningful discussions within the community.
-
-3. **Interact with Posts**
-
-Like and comment on posts to express appreciation or contribute to ongoing conversations. The Threadify encourages interaction, fostering a vibrant and collaborative environment.
-
-## 5 - Technologies Used
+Will be added soon
 
 1. **React**
 
@@ -163,22 +153,6 @@ Leveraging the power of React, the application achieves a responsive and dynamic
 2. **Axios**
 
 Axios is used to make the HTTP client request for the below api end points.
-
-| Verb   | URI Pattern           | #Action                  |
-| ------ | --------------------- | ------------------------ |
-| POST   | `/threads`            | `thread#create`          |
-| GET    | `/threads`            | `thread#showall`         |
-| DELETE | `/threads/id/`        | `threads#delete`         |
-| PATCH  | `/threads/id/`        | `threads#update`         |
-| GET    | `/threads/id/`        | `threads#show  `         |
-| POST   | `/threads/id/comment` | `threads#comment`        |
-| POST   | `/threads/id/like`    | `threads#like  `         |
-| POST   | `/sign-up`            | `auth#sign-up  `         |
-| POST   | `/sign-in`            | `auth#sign-in  `         |
-| PATCH  | `/change-password`    | `auth#change-password  ` |
-| GET    | `/users/id`           | `auths#userinfo  `       |
-| PATCH  | `/change-username/id` | `auth#userinfo  `        |
-| PATCH  | `/change-email/id`    | `auth#userinfo  `        |
 
 3. **CSS**
 
@@ -190,7 +164,7 @@ Bootstrap is used for responsive designed for buttons and forms and alert user m
 
 5. **JavaScript**
 
-JavaScript is employed for adding interactivity and functionality to the application. From handling user interactions to managing asynchronous requests, JavaScript enhances the overall responsiveness of the Threadify.
+JavaScript is employed for adding interactivity and functionality to the application. From handling user interactions to managing asynchronous requests, JavaScript enhances the overall responsiveness of the Stockphony.
 
 ## 6 - Features
 
@@ -257,39 +231,39 @@ make it easier to make changes at the component level.
 
 1. **Secure Account Creation and Authentication**
 
-Users can securely create accounts using a unique username, email, and password. The Threadify employs robust authentication mechanisms to ensure the privacy and security of user information.
+Users can securely create accounts using a unique username, email, and password. The Stockphony employs robust authentication mechanisms to ensure the privacy and security of user information.
 
 2. **Effortless Account Login and Logout**
 
 Once registered, users can seamlessly log in to their accounts, providing a personalized and secure experience. The logout feature ensures a secure session termination, prioritizing user privacy.
 
-3. **Thread Creation and Interaction**
+3. **Creation and Interaction**
 
-Users are empowered to create threads, fostering a diverse range of discussions. They can actively engage with other users by liking and commenting on threads, contributing to a dynamic and collaborative forum environment.
+Will be added soon
 
-4. **Personalized Thread Management**
+4. **Personalized Management**
 
-The Threadify offers users the ability to create, comment on, and like threads. Each user can manage and interact with the threads they've created, enhancing a sense of ownership and contribution within the community.
+Will be added soon
 
-5. **Thread Exploration and Interaction**
+5. **Exploration and Interaction**
 
-Users can explore and interact with threads created by others. The platform promotes a vibrant community atmosphere, encouraging users to read, like, and comment on threads contributed by their peers.
+Will be added soon
 
 6. **Secure Sign-Out Functionality**
 
 Users can securely sign out of their accounts to ensure the protection of their personal information. The sign-out feature guarantees a complete and secure session closure.
 
-These features collectively provide users with a comprehensive and secure experience within the Threadify. From account creation to active participation in discussions, the platform prioritizes user privacy, engagement, and seamless interaction.
+These features collectively provide users with a comprehensive and secure experience within the Stockphony. From account creation to active participation in discussions, the platform prioritizes user privacy, engagement, and seamless interaction.
 
 ## 7 - Upcoming features
 
 1. **Account Management**
 
-Users will have the capability to manage their accounts, allowing them to modify email addresses and update passwords. This feature enhances user control and customization within the Threadify.
+Users will have the capability to manage their accounts, allowing them to modify email addresses and update passwords. This feature enhances user control and customization within the Stockphony.
 
 2. **Contributions Count and Thread History**
 
-Users can track their contributions through a contributions count, providing insights into their active participation within the forum. Additionally, users will be able to view a history of their previous threads, creating a comprehensive overview of their engagement.
+Will be added soon
 
 3. **User Levels and Rewards**
 
@@ -297,85 +271,49 @@ Introducing a tiered user level system, including levels such as Blue, Gold, Sil
 
 4. **Advantages for Each Level**
 
-Users at different levels will receive exclusive benefits, though the specific details of these advantages are yet to be decided. This upcoming feature aims to enhance user experience and engagement, providing incentives for active participation.
-
-As these features are implemented, the Threadify will evolve into a more dynamic and rewarding platform, encouraging sustained user interaction and fostering a strong sense of community within each level.
+Will be added soon
 
 5. **Enhanced User Control**
 
-In addition to the upcoming features, users will soon gain the ability to manage their content more effectively with the introduction of a post deletion feature. This empowers users with greater control over their contributions, allowing them to curate and refine their presence within the forum. The deletion feature aligns with the Threadify's commitment to providing users with a personalized and customizable experience, ensuring that their engagement with the platform remains in their hands.
+Will be added soon
 
 6. **Upcoming Features: CSS Enhancements**
 
 **Custom Styling Options:**
 
-- Explore upcoming features that offer users the ability to apply custom styling to their threads and comments. Tailor the appearance of your contributions to express your unique style within the Threadify.
+- Explore upcoming features that offer users the ability to apply custom styling to their threads and comments. Tailor the appearance of your contributions to express your unique style within the Stockpony.
 
 **Theme Customization:**
 
-- Soon, users will have the opportunity to personalize their forum experience further by choosing from a variety of themes. Whether it's a light or dark theme, customization options will be at your fingertips.
+Will be added soon
 
 **Responsive Design Improvements:**
 
-- Stay tuned for CSS enhancements aimed at refining the responsive design of the Threadify. The upcoming improvements will ensure a consistent and user-friendly experience across various devices.
+Will be added soon
 
 **User Profile Customization:**
 
-- Users will soon be able to enhance the visual appeal of their profiles by customizing the appearance through CSS. Showcase your personality and preferences within the community with unique profile styles.
-
-As we continually work on enhancing the CSS features of the Threadify, we are committed to providing users with a visually appealing and customizable platform. Keep an eye out for updates as we strive to create an even more engaging and aesthetically pleasing forum experience.
+Will be added soon
 
 ## 8 - Screenshots or GIFs
 
 **Login account View screenshot**
 
-![Login account screenshot](src/media/Landing-Page.png)
-
-**Create account View screenshot**
-
-![create account screenshot](src/media/Sign-Up.png)
-
-**Sign-In account View screenshot**
-
-![create account screenshot](src/media/Sign-In.png)
-
-**Create Thread View screenshot**
-
-![create thread screenshot](src/media/Create-Thread.png)
-
-**Comment Thread View screenshot**
-
-![comment thread screenshot](src/media/Add-Comment.png)
-
-**Replied Thread View screenshot**
-
-![index threads view screenshot](src/media/Index-Threads.png)
-
-**User Thread View screenshot**
-
-![user thread view screenshot](src/media/User-Thread.png)
-
-**Delete Thread View screenshot**
-
-![delete thread view screenshot](src/media/Delete-Thread.png)
-
-**Edit Thread View screenshot**
-
-![edit thread view screenshot](src/media/Edit-Thread.png)
+Will be added soon
 
 ## 9 - Contributing Guidelines
 
-I appreciate your interest in contributing to the Threadify project. Your contributions play a vital role in enhancing the overall experience for our users. Before you get started, please take a moment to review the following guidelines:
+Will be added soon
 
 Fork the Repository:
 
-Fork the Threadify repository to your GitHub account.
+Fork the stockphony repository to your GitHub account.
 
 Clone the Repository:
 
 Clone the forked repository to your local machine using the following command:
 
-git clone https://github.com/nugrezo/threadify-client
+git clone https://github.com/nugrezo/stockphony
 
 Create a Branch:
 
@@ -409,19 +347,16 @@ Merge Pull Request:
 
 Once your pull request is approved, it will be merged into the main repository.
 
-Thank you for your contributions! Your efforts contribute to the growth and improvement of the Threadify project.
+Thank you for your contributions! Your efforts contribute to the growth and improvement of the Stockphony project.
 
 ## 10 - License
 
-The Threadify project is licensed under the Threadify_joz]. This license grants users the freedom to use, modify, and distribute the software within the terms specified in the license document.
+The Stockphony project is licensed under the Stockphony_team. This license grants users the freedom to use, modify, and distribute the software within the terms specified in the license document.
 
 ## 11 - Acknowledgments
 
-I would like to express my gratitude to individuals and organizations that have contributed directly or indirectly to the development and success of the Threadify project. Their support and inspiration have played a crucial role in shaping the project into what it is today.
+I would like to express my gratitude to individuals and organizations that have contributed directly or indirectly to the development and success of the Stockphony project. Their support and inspiration have played a crucial role in shaping the project into what it is today.
 
 Special thanks to:
 
-**Sam Williams**: Inspired me throughout the project and gave me an ultimate guide to build front-end and back-end guides.
-
-Your commitment and contributions are highly appreciated, and I extend my sincere thanks to everyone who has been part of this journey. The collaborative spirit of the community has made the Threadify project possible and continues to drive its growth and success.
-.
+will be added soon

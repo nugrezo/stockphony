@@ -1,0 +1,21 @@
+.footer {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  font-size: 14px;
+  font-weight: 300;
+  z-index: 10;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid green;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    font-size: 12px;
+    padding: 8px 0;
+  }
+}

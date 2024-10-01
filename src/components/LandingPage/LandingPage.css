@@ -1,0 +1,111 @@
+/* Full screen layout */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url("https://wallpapers.com/images/hd/investment-1920-x-1080-picture-hmw47cjbpux8vz9j.jpg")
+    no-repeat center center;
+  background-size: cover;
+  animation: slideUp 5s linear infinite;
+
+  overflow: hidden;
+}
+
+@keyframes slideUp {
+  0% {
+    background-position: center bottom;
+  }
+  100% {
+    background-position: center top;
+  }
+}
+
+.content-landingpage {
+  z-index: 2;
+  text-align: center;
+  color: white;
+  padding: 50px 20px;
+}
+
+/* Large welcome text */
+.large-text {
+  font-size: 4rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  background-color: rgba(66, 202, 244, 0.7);
+}
+
+/* Word animation section */
+.animated-text {
+  font-size: 3rem;
+  color: white;
+  height: 50px;
+  margin-top: 20px;
+  position: relative;
+}
+
+/* Hide all words initially */
+.word {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: wordFade 8s infinite;
+}
+
+/* Define word animations */
+.word:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.word:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.word:nth-child(3) {
+  animation-delay: 4s;
+}
+
+.word:nth-child(4) {
+  animation-delay: 6s;
+}
+
+/* Word fade animation */
+@keyframes wordFade {
+  0%,
+  20% {
+    opacity: 0;
+  }
+  30%,
+  50% {
+    opacity: 1;
+  }
+  60%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Background image animation - sliding up */
+@keyframes slideUp {
+  0% {
+    background-position: center bottom;
+  }
+  100% {
+    background-position: center top;
+  }
+}

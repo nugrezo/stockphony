@@ -1,94 +1,104 @@
-* {
-  padding: 0;
-  margin: 0;
-  border-radius: border-box;
-}
+/* General container for AboutApp */
 
-.what-is-threadfy {
-  text-align: center;
-  color: #495057;
-}
-
-.about-app-container p {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #495057;
+.wrapper-about {
+  background-color: black;
 }
 
 .about-app-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 1rem;
-  padding-left: 3rem;
-  line-height: 2rem;
-  padding-right: 3rem;
-  color: #495057;
-  width: 40%;
   justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 40%;
+  padding: 2rem;
+  background-color: #000;
+  color: #fff;
   margin: 0 auto;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+  text-align: center;
+}
+
+.about-icons {
+  width: "76px";
+  height: "76px";
+  margin-top: "0 auto";
+  margin-bottom: 1rem;
+  display: "block";
 }
 
 h2 {
-  color: #b41cda;
-  text-align: center;
-  margin-top: 2rem;
-  font-weight: normal;
-}
-
-h5 {
-  text-align: center;
-  margin: 0 auto;
+  font-size: 36px;
+  font-weight: 600;
+  color: #2b8a3e;
   margin-bottom: 2rem;
-  color: #b41cda;
-  font-weight: normal;
 }
 
-.account-creation {
-  display: block;
-  margin: 0 auto;
-  width: 50px;
-  height: 50px;
-  stroke-opacity: 0.8;
-}
-
-.navigate-signUp {
-  background-color: #fff0f6;
-  border: 1px solid #b41cda;
-  padding: 0.5rem;
-  color: #b41cda;
-  cursor: pointer;
-  border-radius: 50px;
-  text-transform: uppercase;
-  font-weight: bold;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
+.what-is-stockphony {
+  margin-bottom: 2rem;
   font-size: 18px;
+  font-weight: 100;
+  line-height: 1.5;
+}
+
+.about-app-container h5 {
+  font-size: 22px;
+  margin-bottom: 1rem;
+  color: #2b8a3e;
+}
+
+.about-app-container img {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  display: block;
+}
+
+.about-app-container p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+/* Button Styling */
+.navigate-signUp {
+  width: 200px;
+  padding: 15px;
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #2b8a3e;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: background-color 0.3s ease;
 }
 
 .navigate-signUp:hover {
-  background-color: #ffdeeb;
+  background-color: #2b8a3e;
+  color: white;
 }
 
-.navigate-signUp:active {
-  background-color: #fcc2d7;
-}
-
-@media (max-width: 414px) {
+/* Responsive Design */
+@media (max-width: 768px) {
   .about-app-container {
     width: 100%;
-    padding: 0.5rem;
-    margin: 0 auto;
-    font-size: 18px;
+    padding: 1rem;
   }
 
-  .account-creation {
-    width: 60px;
-    height: 60px;
+  h2 {
+    font-size: 28px;
   }
+
+  .what-is-stockphony {
+    font-size: 16px;
+  }
+
   .navigate-signUp {
-    padding: 12px;
-    margin-bottom: 1rem;
+    width: 100%;
   }
 }
