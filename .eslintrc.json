@@ -1,0 +1,30 @@
+{
+  "extends": ["plugin:react/recommended", "standard", "prettier"],
+  "root": true,
+  "parser": "@babel/eslint-parser",
+  "settings": {
+    "react": {
+      "version": "16.4.2"
+    }
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    }
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "browser": true
+  },
+  "rules": {
+    "prefer-const": "error",
+    "no-var": "error",
+    "semi": ["error", "always"],
+    "quotes": ["error", "double"],
+    "indent": ["error", 2],
+    "react/prop-types": [0]
+  }
+}

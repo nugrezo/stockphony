@@ -1,0 +1,14 @@
+.like--btn {
+  border-radius: 50%;
+}
+
+.like--btn {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.07);
+}

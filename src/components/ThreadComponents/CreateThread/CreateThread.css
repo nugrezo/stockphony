@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.create-thread-form {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-thread--form {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-thread--input {
+  flex-grow: 2;
+  border-radius: 50px;
+  padding: 10px 15px;
+}
+
+.create-thread--btn {
+  font-weight: bold;
+  width: 80px;
+  height: auto;
+  padding: 12px;
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.1);
+  background-color: #cc5de8;
+  color: #f8f0fc;
+  cursor: pointer;
+}
+
+.create-thread--btn:hover {
+  background-color: #be4bdb;
+  font-weight: bold;
+  color: #fff;
+}
+
+.create-thread--btn:active {
+  color: #fff !important;
+}
+
+.btn-primary {
+  --bs-btn-active-bg: #9c36b5;
+  font-weight: bold;
+}
+
+@media (max-width: 414px) {
+  .create-thread--form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  .create-thread--input {
+    width: 100%;
+  }
+  .create-thread--btn {
+    font-size: 18px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 50%;
+  }
+}

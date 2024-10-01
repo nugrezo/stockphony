@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  width: 100%;
+  background: linear-gradient(to right, #862e9c, #862e9c);
+  display: flex;
+  height: auto;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 1;
+  margin: 0;
+  padding: 0;
+  padding-right: 0.5rem;
+}
+
+.collapse {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.ml-auto {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar-text {
+  background-color: #cc5de8;
+  padding: 8px;
+  border-radius: 16px;
+  color: #f3d9fa;
+}
+
+.login-icon {
+  color: #a61e4d;
+  padding-left: 2px;
+  margin: 0 auto;
+  width: 36px;
+  height: 36px;
+}
+
+.sign-up,
+.sign-out,
+.about-app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 60px;
+  height: 60px;
+  background-color: #faa2c1;
+  border: none;
+  box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.sign-up:hover,
+.sign-out:hover,
+.about-app:hover {
+  background-color: #f783ac;
+  color: #ffdeeb;
+  font-weight: bold;
+}
+
+.sign-up:hover .login-icon,
+.sign-out:hover .signout-icon,
+.about-app:hover .about-icon {
+  stroke: #ffdeeb;
+}
+
+.sign-up:active,
+.sign-out:active,
+.about-app:active {
+  background-color: #f06595;
+  stroke: #ffdeeb;
+  font-weight: bold;
+}
+
+.brand {
+  padding: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.brand:hover {
+  color: #ffec99;
+}
+
+.signout-icon {
+  width: 32px;
+  height: 32px;
+  stroke: #a61e4d;
+}
+
+.about-icon {
+  width: 36px;
+  height: 36px;
+  stroke: #a61e4d;
+}
+
+@media (max-width: 414px) {
+  .navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  .ml-auto {
+    display: flex;
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "name": "threadify-client",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://nugrezo.github.io/threadify-client/",
+  "description": "react",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "eject": "react-scripts eject"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.23.10",
+    "@babel/eslint-plugin": "^7.23.5",
+    "@babel/preset-react": "^7.24.1",
+    "babel-eslint": "^10.1.0",
+    "dependency": "^0.0.1",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
+    "gh-pages": "^6.1.1",
+    "grunt": "^1.6.1",
+    "nodemon": "^3.1.0",
+    "react-scripts": "^5.0.1"
+  },
+  "dependencies": {
+    "@cloudinary/react": "^1.13.0",
+    "@cloudinary/url-gen": "^1.19.0",
+    "axios": "^1.6.7",
+    "bootstrap": "^5.3.3",
+    "cloudinary": "^2.2.0",
+    "cors": "^2.8.5",
+    "firebase": "^10.12.2",
+    "react-bootstrap": "^2.10.1",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.1",
+    "redirect": "^0.2.0",
+    "sass": "^1.71.1",
+    "start": "^5.1.0",
+    "web-vitals": "^3.5.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
