@@ -52,6 +52,25 @@ const SignIn = ({ msgAlert, setUser }) => {
 
   const { email, password } = formData;
 
+  const bubbles = Array.from({ length: 120 }, (_, index) => index + 1);
+
+  const getRandomStyle = () => {
+    const size = Math.floor(Math.random() * 50) + 20;
+    const top = Math.random() * 100;
+    const left = Math.random() * 100;
+    const backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    const animationDuration = `${Math.random() * 5 + 5}s`;
+
+    return {
+      width: `${size}px`,
+      height: `${size}px`,
+      top: `${top}%`,
+      left: `${left}%`,
+      backgroundColor,
+      animationDuration,
+    };
+  };
+
   return (
     <div className="sign-in-container">
       <div className="left-section">
@@ -93,26 +112,9 @@ const SignIn = ({ msgAlert, setUser }) => {
         </div>
       </div>
       <div className="right-section">
-        <div className="circle circle1 s1"></div>
-        <div className="circle circle2 s2"></div>
-        <div className="circle circle3 s3"></div>
-        <div className="circle circle4 s4"></div>
-        <div className="circle circle5 s5"></div>
-        <div className="circle circle6 s6"></div>
-        <div className="circle circle7 s7"></div>
-        <div className="circle circle8 s8"></div>
-        <div className="circle circle9 s9"></div>
-        <div className="circle circle10 s10"></div>
-        <div className="circle circle11 s11"></div>
-        <div className="circle circle12 s12"></div>
-        <div className="circle circle13 s13"></div>
-        <div className="circle circle14 s14"></div>
-        <div className="circle circle15 s15"></div>
-        <div className="circle circle16 s16"></div>
-        <div className="circle circle17 s17"></div>
-        <div className="circle circle18 s18"></div>
-        <div className="circle circle19 s19"></div>
-        <div className="circle circle20 s20"></div>
+        {bubbles.map((bubble) => (
+          <div key={bubble} className="circle" style={getRandomStyle()}></div>
+        ))}
       </div>
     </div>
   );

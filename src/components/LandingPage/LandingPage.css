@@ -17,8 +17,8 @@ html {
   height: 100vh;
   background: url("https://wallpapers.com/images/hd/investment-1920-x-1080-picture-hmw47cjbpux8vz9j.jpg")
     no-repeat center center;
-  background-size: cover;
-  animation: slideUp 5s linear infinite;
+  background-size: auto 200%;
+  animation: slideUp 15s linear infinite;
 
   overflow: hidden;
 }
@@ -73,15 +73,11 @@ html {
 }
 
 .word:nth-child(2) {
-  animation-delay: 2s;
+  animation-delay: 3s;
 }
 
 .word:nth-child(3) {
-  animation-delay: 4s;
-}
-
-.word:nth-child(4) {
-  animation-delay: 6s;
+  animation-delay: 5s;
 }
 
 /* Word fade animation */
