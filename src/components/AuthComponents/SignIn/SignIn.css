@@ -83,22 +83,118 @@
   }
 }
 
-.circle.small {
+.circle.s1 {
+  width: 5px;
+  height: 5px;
+  animation-duration: 5s, 5s; /* Different durations for X and Y movements */
+}
+
+.circle.s2 {
+  width: 90px;
+  height: 90px;
+  animation-duration: 90s, 90s;
+}
+
+.circle.s3 {
+  width: 85px;
+  height: 85px;
+  animation-duration: 85s, 85s; /* Different durations for X and Y movements */
+}
+
+.circle.s4 {
+  width: 80px;
+  height: 80px;
+  animation-duration: 80s, 80s; /* Different durations for X and Y movements */
+}
+
+.circle.s5 {
+  width: 70px;
+  height: 70px;
+  animation-duration: 70s, 70s; /* Different durations for X and Y movements */
+}
+
+.circle.s6 {
+  width: 65px;
+  height: 65px;
+  animation-duration: 65s, 65s; /* Different durations for X and Y movements */
+}
+
+.circle.s7 {
+  width: 75px;
+  height: 75px;
+  animation-duration: 75s, 75s; /* Different durations for X and Y movements */
+}
+
+.circle.s9 {
+  width: 40px;
+  height: 40px;
+  animation-duration: 40s, 40s; /* Different durations for X and Y movements */
+}
+
+.circle.s10 {
+  width: 45px;
+  height: 45px;
+  animation-duration: 45s, 45s; /* Different durations for X and Y movements */
+}
+
+.circle.s11 {
   width: 50px;
   height: 50px;
-  animation-duration: 10s, 15s; /* Different durations for X and Y movements */
+  animation-duration: 50s, 50s; /* Different durations for X and Y movements */
 }
 
-.circle.medium {
-  width: 100px;
-  height: 100px;
-  animation-duration: 12s, 18s; /* Different durations for X and Y movements */
+.circle.s12 {
+  width: 55px;
+  height: 55px;
+  animation-duration: 55s, 55s; /* Different durations for X and Y movements */
 }
 
-.circle.large {
-  width: 150px;
-  height: 150px;
-  animation-duration: 15s, 20s; /* Different durations for X and Y movements */
+.circle.s13 {
+  width: 60px;
+  height: 60px;
+  animation-duration: 60s, 60s; /* Different durations for X and Y movements */
+}
+
+.circle.s14 {
+  width: 65px;
+  height: 65px;
+  animation-duration: 65s, 65s; /* Different durations for X and Y movements */
+}
+
+.circle.s15 {
+  width: 75px;
+  height: 75px;
+  animation-duration: 75s, 75s; /* Different durations for X and Y movements */
+  width: 30px;
+  height: 30px;
+  animation-duration: 30s, 30s; /* Different durations for X and Y movements */
+}
+
+.circle.s16 {
+  width: 25px;
+  height: 25px;
+  animation-duration: 25s, 25s; /* Different durations for X and Y movements */
+}
+
+.circle.s17 {
+  width: 20px;
+  height: 20px;
+  animation-duration: 20s, 20s; /* Different durations for X and Y movements */
+}
+.circle.s18 {
+  width: 15px;
+  height: 15px;
+  animation-duration: 15s, 15s; /* Different durations for X and Y movements */
+}
+.circle.s19 {
+  width: 10px;
+  height: 10px;
+  animation-duration: 10s, 10s; /* Different durations for X and Y movements */
+}
+.circle.s20 {
+  width: 95px;
+  height: 95px;
+  animation-duration: 95s, 95s; /* Different durations for X and Y movements */
 }
 
 /* Specific positions for each circle */

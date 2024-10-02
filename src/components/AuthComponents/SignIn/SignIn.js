@@ -93,26 +93,26 @@ const SignIn = ({ msgAlert, setUser }) => {
         </div>
       </div>
       <div className="right-section">
-        <div className="circle circle1 small"></div>
-        <div className="circle circle2 medium"></div>
-        <div className="circle circle3 medium"></div>
-        <div className="circle circle4 large"></div>
-        <div className="circle circle5 small"></div>
-        <div className="circle circle6 medium"></div>
-        <div className="circle circle7 small"></div>
-        <div className="circle circle8 large"></div>
-        <div className="circle circle9 medium"></div>
-        <div className="circle circle10 small"></div>
-        <div className="circle circle11 large"></div>
-        <div className="circle circle12 medium"></div>
-        <div className="circle circle13 small"></div>
-        <div className="circle circle14 large"></div>
-        <div className="circle circle15 medium"></div>
-        <div className="circle circle16 small"></div>
-        <div className="circle circle17 large"></div>
-        <div className="circle circle18 small"></div>
-        <div className="circle circle19 medium"></div>
-        <div className="circle circle20 large"></div>
+        <div className="circle circle1 s1"></div>
+        <div className="circle circle2 s2"></div>
+        <div className="circle circle3 s3"></div>
+        <div className="circle circle4 s4"></div>
+        <div className="circle circle5 s5"></div>
+        <div className="circle circle6 s6"></div>
+        <div className="circle circle7 s7"></div>
+        <div className="circle circle8 s8"></div>
+        <div className="circle circle9 s9"></div>
+        <div className="circle circle10 s10"></div>
+        <div className="circle circle11 s11"></div>
+        <div className="circle circle12 s12"></div>
+        <div className="circle circle13 s13"></div>
+        <div className="circle circle14 s14"></div>
+        <div className="circle circle15 s15"></div>
+        <div className="circle circle16 s16"></div>
+        <div className="circle circle17 s17"></div>
+        <div className="circle circle18 s18"></div>
+        <div className="circle circle19 s19"></div>
+        <div className="circle circle20 s20"></div>
       </div>
     </div>
   );
