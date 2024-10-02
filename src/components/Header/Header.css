@@ -31,6 +31,7 @@
   padding: 0.5rem 1rem;
   margin-left: 10px;
   transition: background-color 0.3s ease;
+  border-color: #2b8a3e;
 }
 
 .sign-out-btn:hover,

@@ -23,7 +23,12 @@ const unauthenticatedOptions = (
     </Nav.Link>
     <Nav.Link className="sign-up" href="#sign-up">
       <Button variant="outline-light" className="sign-up-btn">
-        Login
+        Admin Login
+      </Button>
+    </Nav.Link>
+    <Nav.Link className="sign-up" href="#sign-up">
+      <Button variant="outline-light" className="sign-up-btn">
+        User Login
       </Button>
     </Nav.Link>
   </Fragment>
