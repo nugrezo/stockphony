@@ -35,7 +35,7 @@ const SignIn = ({ msgAlert, setUser }) => {
           variant: "success",
         })
       )
-      .then(() => navigate("/threads"))
+      .then(() => navigate("/examples"))
       .catch((error) => {
         setLoading(false);
         setFormData({

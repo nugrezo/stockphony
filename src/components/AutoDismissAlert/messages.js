@@ -9,15 +9,14 @@ export default {
   changePasswordSuccess: "Password changed successfully!",
   changePasswordFailure:
     "Failed to change passwords. Check your old password and try again.",
-  createThreadSucess: "Click home page icon to wiew your thread.",
+  createExampleSucess: "Click home page icon to wiew your example.",
   createCommentSucess: "Comment is created successfully",
   createCommentFailure: "Comment is not created. Failure",
-  displayUserThreadsSuccess: "Displaying all my threads.",
-  displayUserThreadsFailure: "Can`t be displayed for the moment",
-  deleteThreadSuccess: "Thread is deleted sucessfully.",
-  updateThreadSuccess: "Thread is updated successfully.",
-  likeThreadSuccess: "You liked the thread!",
-  unlikeThreadSuccess: "You unliked the thread!",
+  displayUserExamplesSuccess: "Displaying all my examples.",
+  displayUserExamplesFailure: "Can`t be displayed for the moment",
+  deleteExampleSuccess: "Example is deleted sucessfully.",
+  updateExampleSuccess: "Example is updated successfully.",
+
   displayUserInfoSuccess:
     "My account information is being displayed successfully",
   displayUserInfoFailure:

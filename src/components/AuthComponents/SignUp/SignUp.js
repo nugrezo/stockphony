@@ -149,7 +149,7 @@ const SignUp = ({ msgAlert, setUser }) => {
         message: messages.signUpSuccess,
         variant: "success",
       });
-      navigate("/threads");
+      navigate("/examples");
     } catch (error) {
       setLoading(false);
       setFormData({

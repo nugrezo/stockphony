@@ -68,7 +68,7 @@ function App() {
               )}
               {/* <Route path="/home" element={<Icon />} /> */}
               <Route
-                path="/threads"
+                path="/examples"
                 // element={<IndexExample msgAlert={msgAlert} user={user} />}
               />
               <Route
@@ -76,7 +76,7 @@ function App() {
                 // element={<CreateExample msgAlert={msgAlert} user={user} />}
               />
               <Route
-                path="/userthreads"
+                path="/userexamples"
                 // element={<ShowUserExample msgAlert={msgAlert} user={user} />}
               />
               <Route

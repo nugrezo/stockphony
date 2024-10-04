@@ -20,7 +20,7 @@
 
 4. [Usage](#4---usage)
 
-   - [Navigate through Threads](#1-navigate-through-threads)
+   - [Navigate through Stockphony](#1-navigate-through-Stockphony)
    - [Contribute to Discussions](#2-contribute-to-discussions)
    - [Interact with Posts](#3-interact-with-posts)
 
@@ -78,7 +78,7 @@ Stockphony
 
 This is the frontend repo of the project. Please find backend backend repo : "will be aded once it is created"
 
-Stockphony is a dynamic and user-centric web application, focusing on fostering meaningful discussions and interactions. Inspired by the concise nature of Threads app.
+Stockphony is a dynamic and user-centric web application, focusing on fostering meaningful discussions and interactions. Inspired by the concise nature of Stockphony app.
 
 ### Why Stockphony
 
@@ -94,7 +94,7 @@ Will be added soon
 
 Will be added soon
 
-#### 3 - Inspiration from Threads:
+#### 3 - Inspiration from Stockphony:
 
 Will be added soon
 
@@ -281,7 +281,7 @@ Will be added soon
 
 **Custom Styling Options:**
 
-- Explore upcoming features that offer users the ability to apply custom styling to their threads and comments. Tailor the appearance of your contributions to express your unique style within the Stockpony.
+- Explore upcoming features that offer users the ability to apply custom styling to their Stockphony and comments. Tailor the appearance of your contributions to express your unique style within the Stockpony.
 
 **Theme Customization:**
 

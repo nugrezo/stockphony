@@ -7,6 +7,7 @@ export const signUp = (credentials) => {
     url: apiUrl + "/sign-up",
     data: {
       credentials: {
+        fullName: credentials.fullName,
         email: credentials.email,
         username: credentials.username,
         password: credentials.password,
