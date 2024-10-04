@@ -36,15 +36,15 @@
 
    - [Secure Account Creation and Authentication](#1-secure-account-creation-and-authentication)
    - [Effortless Account Login and Logout](#2-effortless-account-login-and-logout)
-   - [Thread Creation and Interaction](#3-thread-creation-and-interaction)
-   - [Personalized Thread Management](#4-personalized-thread-management)
-   - [Thread Exploration and Interaction](#5-thread-exploration-and-interaction)
+   - [Stockphony Creation and Interaction](#3-Stockphony-creation-and-interaction)
+   - [Personalized Stockphony Management](#4-personalized-Stockphony-management)
+   - [Stockphony Exploration and Interaction](#5-Stockphony-exploration-and-interaction)
    - [Secure Sign-Out Functionality](#6-secure-sign-out-functionality)
 
 7. [Upcoming Features](#7---upcoming-features)
 
    - [Account Management](#1-account-management)
-   - [Contributions Count and Thread History](#2-contributions-count-and-thread-history)
+   - [Contributions Count and Stockphony History](#2-contributions-count-and-Stockphony-history)
    - [User Levels and Rewards](#3-user-levels-and-rewards)
    - [Advantages for Each Level](#4-advantages-for-each-level)
    - [Enhanced User Control](#5-enhanced-user-control)
@@ -261,7 +261,7 @@ These features collectively provide users with a comprehensive and secure experi
 
 Users will have the capability to manage their accounts, allowing them to modify email addresses and update passwords. This feature enhances user control and customization within the Stockphony.
 
-2. **Contributions Count and Thread History**
+2. **Contributions Count and Stockphony History**
 
 Will be added soon
 
