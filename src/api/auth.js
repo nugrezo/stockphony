@@ -30,6 +30,22 @@ export const signIn = (credentials) => {
   });
 };
 
+// admin adminSignIn (Admin Login)
+
+export const adminSignIn = (credentials) => { 
+  return axios ({
+    url: apiUrl + "/adminSignin",
+    method: "POST", 
+    data: {
+      credentials: {
+        email: credentials.email,
+        username: credentials.username,
+        password: credentials.password,
+      },
+    },
+  });
+};
+
 export const signOut = (user) => {
   return axios({
     url: apiUrl + "/sign-out",
