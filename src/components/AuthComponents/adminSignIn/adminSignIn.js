@@ -111,7 +111,7 @@ const adminSignIn = ({ msgAlert, setUser }) => {
           </Form>
         </div>
       </div>
-      <div className="right-section">
+      <div className="right-section"> 
         {bubbles.map((bubble) => (
           <div key={bubble} className="circle" style={getRandomStyle()}></div>
         ))}
@@ -119,5 +119,5 @@ const adminSignIn = ({ msgAlert, setUser }) => {
     </div>
   );
 };
-
+// fast
 export default adminSignIn;
