@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import "./SignIn.css";
@@ -14,8 +14,16 @@ const SignIn = ({ msgAlert, setUser }) => {
     email: "",
     password: "",
   });
-
+  const [bubbles, setBubbles] = useState([]);
+  const [bubbleStyles, setBubbleStyles] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const newBubbles = Array.from({ length: 120 }, (_, index) => index + 1);
+    setBubbles(newBubbles);
+    const newBubbleStyles = newBubbles.map(() => getRandomStyle());
+    setBubbleStyles(newBubbleStyles);
+  }, []);
 
   const handleChange = (event) =>
     setFormData({
@@ -51,8 +59,6 @@ const SignIn = ({ msgAlert, setUser }) => {
   };
 
   const { email, password } = formData;
-
-  const bubbles = Array.from({ length: 120 }, (_, index) => index + 1);
 
   const getRandomStyle = () => {
     const size = Math.floor(Math.random() * 50) + 20;
@@ -112,8 +118,12 @@ const SignIn = ({ msgAlert, setUser }) => {
         </div>
       </div>
       <div className="right-section">
-        {bubbles.map((bubble) => (
-          <div key={bubble} className="circle" style={getRandomStyle()}></div>
+        {bubbles.map((bubble, index) => (
+          <div
+            key={bubble}
+            className="circle"
+            style={bubbleStyles[index]}
+          ></div>
         ))}
       </div>
     </div>
