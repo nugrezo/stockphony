@@ -48,13 +48,23 @@ const alwaysOptions = <Fragment></Fragment>;
 
 const Header = ({ user, admin }) => (
   <Navbar className="navbar" expand="md">
-    <Navbar.Brand className="brand" href="#">
-      <img
-        src={`${process.env.PUBLIC_URL}/logo.png`}
-        className="App-logo"
-        alt="logo"
-      />
-    </Navbar.Brand>
+    {user || admin ? (
+      <Navbar.Brand className="brand">
+        <img
+          src={`${process.env.PUBLIC_URL}/logo.png`}
+          className="App-logo"
+          alt="logo"
+        />
+      </Navbar.Brand>
+    ) : (
+      <Navbar.Brand className="brand" href="#">
+        <img
+          src={`${process.env.PUBLIC_URL}/logo.png`}
+          className="App-logo"
+          alt="logo"
+        />
+      </Navbar.Brand>
+    )}
     <Nav className="ml-auto">
       {user && (
         <span className="navbar-text mr-2">
