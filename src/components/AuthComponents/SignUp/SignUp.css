@@ -1,13 +1,13 @@
 /* General container */
 .sign-up-container {
   display: flex;
-  height: 100vh;
   font-family: "Arial", sans-serif;
+  min-height: 100vh;
 }
 
-.left-section {
+.left-section-sign-up {
   width: 50%;
-  background-color: #2d2d2d;
+  background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,12 +15,12 @@
 }
 
 .chart-image {
-  width: 100%;
+  width: 80%;
   height: 100%;
   object-fit: cover;
 }
 
-.right-section {
+.right-section-sign-up {
   position: relative;
   width: 50%;
   background-color: #000;
@@ -62,12 +62,14 @@
   width: 80%;
   max-width: 400px;
   text-align: center;
+  padding: 1rem;
 }
 
 .sign-up--title {
   font-size: 28px;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .sign-up--form {
@@ -111,11 +113,6 @@
   background-color: #2b8a3e; /* Change to green color like in the header */
   color: white;
   transition: background-color 0.3s ease;
-}
-
-/* Sign-in Link Styling */
-.navigate-sign-in {
-  margin-top: 20px;
 }
 
 .navigate-sign-in p {

@@ -15,6 +15,11 @@
   width: 500px;
   height: auto;
 }
+
+.admin-sign-up-form .form-label {
+  color: #fff;
+}
+
 .admin-sign-up-form .form-label {
   color: #fff;
 }
@@ -22,7 +27,6 @@
 .admin-image {
   width: 48px;
   height: 48px;
-  margin-bottom: 2rem;
 }
 
 input {
@@ -66,10 +70,10 @@ button:hover {
 }
 
 .navigate--admin-sign-in:hover {
-  color: #fff;
   background-color: #0abde3;
-  border-radius: 12px;
   text-decoration: none;
+  color: #fff;
+  border-radius: 12px;
 }
 
 input:focus {

@@ -1,11 +1,11 @@
 /* General container */
 .sign-in-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   font-family: "Arial", sans-serif;
 }
 
-.left-section {
+.left-section-sign-in {
   width: 50%;
   background-color: #000;
   display: flex;
@@ -19,7 +19,7 @@
   object-fit: cover;
 }
 
-.right-section {
+.right-section-sign-in {
   position: relative;
   width: 50%;
   background-color: #000;

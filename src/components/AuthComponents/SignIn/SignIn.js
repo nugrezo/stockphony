@@ -79,7 +79,7 @@ const SignIn = ({ msgAlert, setUser }) => {
 
   return (
     <div className="sign-in-container">
-      <div className="left-section">
+      <div className="left-section-sign-in">
         <div className="sign-in-form">
           <h3 className="sign-in--title">Sign In to your Account</h3>
           <Form className="sign-in--form" onSubmit={onSignIn}>
@@ -117,7 +117,7 @@ const SignIn = ({ msgAlert, setUser }) => {
           </Form>
         </div>
       </div>
-      <div className="right-section">
+      <div className="right-section-sign-in">
         {bubbles.map((bubble, index) => (
           <div
             key={bubble}

@@ -50,6 +50,7 @@ function App() {
                 path="/sign-in"
                 element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
               />
+
               <Route
                 path="/admin-sign-up"
                 element={<AdminSignUp msgAlert={msgAlert} setUser={setUser} />}

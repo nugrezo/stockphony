@@ -169,14 +169,14 @@ const SignUp = ({ msgAlert, setUser }) => {
 
   return (
     <div className="sign-up-container">
-      <div className="left-section">
+      <div className="left-section-sign-up">
         <img
           src={imageArray[currentImageIndex]}
           alt="Stock chart"
           className="chart-image"
         />
       </div>
-      <div className="right-section">
+      <div className="right-section-sign-up">
         <div className="circle circle1"></div>
         <div className="circle circle2"></div>
         <div className="sign-up-form">
