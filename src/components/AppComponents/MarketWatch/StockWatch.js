@@ -50,21 +50,24 @@ const StockWatch = () => {
 
     try {
       const response = await axios.request(options);
-      console.log("Full Response Data:", response.data); // Log the full response structure
-
-      // Try logging the data array as well
+      console.log("Full Response Data:", response.data);
       console.log("Data Array:", response.data.data);
 
       if (
         response.data &&
         response.data.data &&
-        response.data.data.length > 0
+        response.data.data[0] &&
+        response.data.data[0].quotes
       ) {
-        // You might need to dive into response.data.data[0] or further
         const stockData = response.data.data[0].quotes.map((stock) => ({
           symbol: stock.symbol,
           price: stock.regularMarketPrice,
           previousPrice: stock.regularMarketPreviousClose,
+          change: stock.regularMarketChange, // New Column: Change
+          changePercent: stock.regularMarketChangePercent, // New Column: % Change
+          dayHigh: stock.regularMarketDayHigh, // New Column: Day High
+          dayLow: stock.regularMarketDayLow, // New Column: Day Low
+          marketCap: stock.marketCap, // New Column: Market Cap
         }));
 
         setStocks(stockData); // Update stock data with API results
@@ -105,6 +108,11 @@ const StockWatch = () => {
                 <th>Stock Symbol</th>
                 <th>Price</th>
                 <th>Change</th>
+                <th>% Change</th>
+                <th>Day High</th>
+                <th>Day Low</th>
+                <th>Market Cap</th>
+                <th>Change Indicator</th> {/* New Column for Arrows */}
                 <th>Actions</th>
               </tr>
             </thead>
@@ -114,17 +122,38 @@ const StockWatch = () => {
                   <td>{stock.symbol}</td>
                   <td>{stock.price ? `$${stock.price.toFixed(2)}` : "N/A"}</td>
                   <td>
-                    {/* Always display N/A when the market is closed */}
+                    {stock.change ? `$${stock.change.toFixed(2)}` : "N/A"}
+                  </td>
+                  <td>
+                    {stock.changePercent
+                      ? `${stock.changePercent.toFixed(2)}%`
+                      : "N/A"}
+                  </td>
+                  <td>
+                    {stock.dayHigh ? `$${stock.dayHigh.toFixed(2)}` : "N/A"}
+                  </td>
+                  <td>
+                    {stock.dayLow ? `$${stock.dayLow.toFixed(2)}` : "N/A"}
+                  </td>
+                  <td>
+                    {stock.marketCap
+                      ? `$${(stock.marketCap / 1e9).toFixed(2)}B`
+                      : "N/A"}
+                  </td>
+
+                  {/* Arrow Logic: Showing Up/Down Arrows */}
+                  <td>
                     {marketClosed ? (
                       "-"
                     ) : stock.price > stock.previousPrice ? (
-                      <span className="up-arrow">&#9650;</span> // Up arrow symbol
+                      <span className="up-arrow">&#9650;</span> // Up arrow
                     ) : stock.price < stock.previousPrice ? (
-                      <span className="down-arrow">&#9660;</span> // Down arrow symbol
+                      <span className="down-arrow">&#9660;</span> // Down arrow
                     ) : (
                       "-"
                     )}
                   </td>
+
                   <td className="actions-column">
                     <div className="actions-btn">
                       <button className="stock-btn buy-btn">Buy</button>
