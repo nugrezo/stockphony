@@ -106,3 +106,40 @@ h1 {
   color: #dc3545; /* Red color for down arrow */
   font-size: 20px;
 }
+
+/* Flashing green animation for positive changes */
+.flash-green {
+  animation: flashGreen 1s ease-in-out 3; /* Flashes green 3 times */
+}
+
+/* Green flash for positive changes */
+.flash-green {
+  background-color: #28a745;
+  animation: flash-green-animation 1s ease-in-out infinite alternate;
+}
+
+/* Red flash for negative changes */
+.flash-red {
+  background-color: #dc3545;
+  animation: flash-red-animation 1s ease-in-out infinite alternate;
+}
+
+/* Keyframes for green flashing effect */
+@keyframes flash-green-animation {
+  0% {
+    background-color: #28a745;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* Keyframes for red flashing effect */
+@keyframes flash-red-animation {
+  0% {
+    background-color: #dc3545;
+  }
+  100% {
+    background-color: transparent;
+  }
+}

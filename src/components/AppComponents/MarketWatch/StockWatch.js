@@ -85,10 +85,53 @@ const StockWatch = () => {
   useEffect(() => {
     fetchStockData(); // Fetch data initially
 
-    const intervalId = setInterval(fetchStockData, 10 * 60 * 1000); // Fetch data every 10 minutes
+    const intervalId = setInterval(fetchStockData, 60 * 60 * 1000); // Fetch data every 60 minutes
 
     return () => clearInterval(intervalId); // Clear interval on component unmount
   }, []); // Empty dependencies so it only runs on mount
+
+  const stockRows = stocks.map((stock) => {
+    const changeClass =
+      stock.change > 0 ? "flash-green" : stock.change < 0 ? "flash-red" : "";
+
+    return (
+      <tr key={stock.symbol}>
+        <td>{stock.symbol}</td>
+        <td>{stock.price ? `$${stock.price.toFixed(2)}` : "N/A"}</td>
+        <td className={changeClass}>
+          {stock.change ? `$${stock.change.toFixed(2)}` : "N/A"}
+        </td>
+        <td>
+          {stock.changePercent ? `${stock.changePercent.toFixed(2)}%` : "N/A"}
+        </td>
+        <td>{stock.dayHigh ? `$${stock.dayHigh.toFixed(2)}` : "N/A"}</td>
+        <td>{stock.dayLow ? `$${stock.dayLow.toFixed(2)}` : "N/A"}</td>
+        <td>
+          {stock.marketCap ? `$${(stock.marketCap / 1e9).toFixed(2)}B` : "N/A"}
+        </td>
+
+        {/* Arrow Logic: Showing Up/Down Arrows */}
+        <td>
+          {marketClosed ? (
+            "-"
+          ) : stock.price > stock.previousPrice ? (
+            <span className="up-arrow">&#9650;</span> // Up arrow
+          ) : stock.price < stock.previousPrice ? (
+            <span className="down-arrow">&#9660;</span> // Down arrow
+          ) : (
+            "-"
+          )}
+        </td>
+
+        <td className="actions-column">
+          <div className="actions-btn">
+            <button className="stock-btn buy-btn">Buy</button>
+            <button className="stock-btn sell-btn">Sell</button>
+          </div>
+        </td>
+      </tr>
+    );
+  });
 
   return (
     <div className="stock-watch-container">
@@ -116,53 +159,7 @@ const StockWatch = () => {
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
-              {stocks.map((stock) => (
-                <tr key={stock.symbol}>
-                  <td>{stock.symbol}</td>
-                  <td>{stock.price ? `$${stock.price.toFixed(2)}` : "N/A"}</td>
-                  <td>
-                    {stock.change ? `$${stock.change.toFixed(2)}` : "N/A"}
-                  </td>
-                  <td>
-                    {stock.changePercent
-                      ? `${stock.changePercent.toFixed(2)}%`
-                      : "N/A"}
-                  </td>
-                  <td>
-                    {stock.dayHigh ? `$${stock.dayHigh.toFixed(2)}` : "N/A"}
-                  </td>
-                  <td>
-                    {stock.dayLow ? `$${stock.dayLow.toFixed(2)}` : "N/A"}
-                  </td>
-                  <td>
-                    {stock.marketCap
-                      ? `$${(stock.marketCap / 1e9).toFixed(2)}B`
-                      : "N/A"}
-                  </td>
-
-                  {/* Arrow Logic: Showing Up/Down Arrows */}
-                  <td>
-                    {marketClosed ? (
-                      "-"
-                    ) : stock.price > stock.previousPrice ? (
-                      <span className="up-arrow">&#9650;</span> // Up arrow
-                    ) : stock.price < stock.previousPrice ? (
-                      <span className="down-arrow">&#9660;</span> // Down arrow
-                    ) : (
-                      "-"
-                    )}
-                  </td>
-
-                  <td className="actions-column">
-                    <div className="actions-btn">
-                      <button className="stock-btn buy-btn">Buy</button>
-                      <button className="stock-btn sell-btn">Sell</button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            <tbody>{stockRows}</tbody>
           </table>
         </>
       )}

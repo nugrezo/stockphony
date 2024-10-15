@@ -79,10 +79,12 @@ function App() {
                 />
               )}
               {/* <Route path="/home" element={<Icon />} /> */}
-              <Route
-                path="/stock-watch"
-                element={<StockWatch msgAlert={msgAlert} user={user} />}
-              />
+              {user && (
+                <Route
+                  path="/stock-watch"
+                  element={<StockWatch msgAlert={msgAlert} user={user} />}
+                />
+              )}
               <Route
                 path="/post"
                 // element={<CreateExample msgAlert={msgAlert} user={user} />}
