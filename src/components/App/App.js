@@ -13,6 +13,7 @@ import Footer from "../Footer/Footer";
 import LandingPage from "../LandingPage/LandingPage";
 import AdminSignUp from "../AuthComponents/AdminSignUp/AdminSignUp";
 import AdminSignIn from "../AuthComponents/AdminSingIn/AdminSignIn";
+import StockWatch from "../AppComponents/MarketWatch/StockWatch";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -79,8 +80,8 @@ function App() {
               )}
               {/* <Route path="/home" element={<Icon />} /> */}
               <Route
-                path="/examples"
-                // element={<IndexExample msgAlert={msgAlert} user={user} />}
+                path="/stock-watch"
+                element={<StockWatch msgAlert={msgAlert} user={user} />}
               />
               <Route
                 path="/post"

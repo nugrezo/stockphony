@@ -31,6 +31,35 @@ export const signIn = (credentials) => {
   });
 };
 
+export const adminSignUp = (credentials) => {
+  return axios({
+    method: "POST",
+    url: apiUrl + "/admin-sign-up",
+    data: {
+      credentials: {
+        fullName: credentials.fullName,
+        email: credentials.email,
+        adminID: credentials.adminID,
+        password: credentials.password,
+        password_confirmation: credentials.passwordConfirmation,
+      },
+    },
+  });
+};
+
+export const adminSignIn = (credentials) => {
+  return axios({
+    url: apiUrl + "/admin-sign-in",
+    method: "POST",
+    data: {
+      credentials: {
+        adminID: credentials.adminID,
+        password: credentials.password,
+      },
+    },
+  });
+};
+
 export const signOut = (user) => {
   return axios({
     url: apiUrl + "/sign-out",

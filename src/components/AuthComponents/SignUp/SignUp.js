@@ -149,7 +149,7 @@ const SignUp = ({ msgAlert, setUser }) => {
         message: messages.signUpSuccess,
         variant: "success",
       });
-      navigate("/examples");
+      navigate("/stock-watch");
     } catch (error) {
       setLoading(false);
       setFormData({

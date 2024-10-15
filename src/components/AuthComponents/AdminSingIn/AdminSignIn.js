@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import "./AdminSignIn.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { signIn } from "../../../api/auth";
+import { adminSignIn } from "../../../api/auth";
 import messages from "../../AutoDismissAlert/messages";
 import DotsLoader from "../../DotsLoader/DotsLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,14 +17,14 @@ const AdminSignIn = ({ msgAlert, setUser }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: "",
+    adminID: "",
     password: "",
   });
   const [adminIDIsValid, setAdminIDIsValid] = useState(true);
 
   useEffect(() => {
     setFormData({
-      username: "",
+      adminID: "",
       password: "",
     });
     setAdminIDIsValid(true);
@@ -35,12 +35,12 @@ const AdminSignIn = ({ msgAlert, setUser }) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
 
-    if (name === "username") {
+    if (name === "adminID") {
       setAdminIDIsValid(validAdminIds.includes(value));
     }
   };
 
-  const onSignIn = async (event) => {
+  const onAdminSignIn = async (event) => {
     event.preventDefault();
     if (!adminIDIsValid) {
       return;
@@ -48,7 +48,7 @@ const AdminSignIn = ({ msgAlert, setUser }) => {
 
     try {
       setLoading(true);
-      const response = await signIn(formData);
+      const response = await adminSignIn(formData);
       setUser(response.data.user);
       msgAlert({
         heading: "Sign In Success",
@@ -59,7 +59,7 @@ const AdminSignIn = ({ msgAlert, setUser }) => {
     } catch (error) {
       setLoading(false);
       setFormData({
-        username: "",
+        adminID: "",
         password: "",
       });
       msgAlert({
@@ -78,22 +78,22 @@ const AdminSignIn = ({ msgAlert, setUser }) => {
           alt="admin-png"
           className="admin-image"
         />
-        <Form className="admin-sign-in--form" onSubmit={onSignIn}>
-          <Form.Group controlId="username">
+        <Form className="admin-sign-in--form" onSubmit={onAdminSignIn}>
+          <Form.Group controlId="adminID">
             <Form.Label>Admin ID</Form.Label>
             <div className="input-wrapper">
               <Form.Control
                 required
-                type="username"
-                name="username"
-                value={formData.username}
+                type="adminID"
+                name="adminID"
+                value={formData.adminID}
                 placeholder="Enter your Admin ID"
                 onChange={handleChange}
                 style={{
                   backgroundColor: adminIDIsValid ? "" : "#ffc9c9",
                 }}
               />
-              {adminIDIsValid && formData.username.length > 0 && (
+              {adminIDIsValid && formData.adminID.length > 0 && (
                 <FontAwesomeIcon
                   icon={faCheckCircle}
                   className="check-icon"
@@ -101,7 +101,7 @@ const AdminSignIn = ({ msgAlert, setUser }) => {
                 />
               )}
             </div>
-            {!adminIDIsValid && formData.username.length > 0 && (
+            {!adminIDIsValid && formData.adminID.length > 0 && (
               <Form.Text className="text-danger">
                 Admin ID is not correct
               </Form.Text>

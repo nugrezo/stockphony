@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import "./AdminSignUp.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { signIn, signUp } from "../../../api/auth";
+import { adminSignIn, adminSignUp } from "../../../api/auth";
 import messages from "../../AutoDismissAlert/messages";
 import DotsLoader from "../../DotsLoader/DotsLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -52,7 +52,7 @@ const AdminSignUp = ({ msgAlert, setUser }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    username: "",
+    adminID: "",
     password: "",
     passwordConfirmation: "",
   });
@@ -70,7 +70,7 @@ const AdminSignUp = ({ msgAlert, setUser }) => {
     setFormData({
       fullName: "",
       email: "",
-      username: "",
+      adminID: "",
       password: "",
       passwordConfirmation: "",
     });
@@ -87,11 +87,10 @@ const AdminSignUp = ({ msgAlert, setUser }) => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
 
     if (name === "fullName") {
-      // Changed to check userName
       setFullNameIsValid(validateFullName(value));
     } else if (name === "email") {
       setEmailIsValid(validateEmail(value));
-    } else if (name === "username") {
+    } else if (name === "adminID") {
       setAdminIDIsValid(validAdminIds.includes(value));
     } else if (name === "password") {
       setPasswordIsValid(validatePassword(value));
@@ -100,7 +99,7 @@ const AdminSignUp = ({ msgAlert, setUser }) => {
     }
   };
 
-  const onSignUp = async (event) => {
+  const onAdminSignUp = async (event) => {
     event.preventDefault();
     if (
       !fullNameIsValid ||
@@ -113,8 +112,8 @@ const AdminSignUp = ({ msgAlert, setUser }) => {
 
     try {
       setLoading(true);
-      await signUp(formData);
-      const response = await signIn(formData);
+      await adminSignUp(formData);
+      const response = await adminSignIn(formData);
       setUser(response.data.user);
       msgAlert({
         heading: "Sign Up Success",
@@ -128,7 +127,7 @@ const AdminSignUp = ({ msgAlert, setUser }) => {
         fullName: "",
         email: "",
         password: "",
-        username: "",
+        adminID: "",
         passwordConfirmation: "",
       });
       msgAlert({
@@ -143,22 +142,22 @@ const AdminSignUp = ({ msgAlert, setUser }) => {
     <div className="admin-sign-up-container">
       <div className="admin-sign-up-form">
         <img src={image} alt="admin-png" className="admin-image" />
-        <Form className="admin-sign-up--form" onSubmit={onSignUp}>
-          <Form.Group controlId="username">
+        <Form className="admin-sign-up--form" onSubmit={onAdminSignUp}>
+          <Form.Group controlId="adminID">
             <Form.Label>Admin ID</Form.Label>
             <div className="input-wrapper">
               <Form.Control
                 required
-                type="username"
-                name="username"
-                value={formData.username}
+                type="adminID"
+                name="adminID"
+                value={formData.adminID}
                 placeholder="Enter your Admin ID"
                 onChange={handleChange}
                 style={{
                   backgroundColor: adminIDIsValid ? "" : "#ffc9c9",
                 }}
               />
-              {adminIDIsValid && formData.username.length > 0 && (
+              {adminIDIsValid && formData.adminID.length > 0 && (
                 <FontAwesomeIcon
                   icon={faCheckCircle}
                   className="check-icon"
@@ -166,7 +165,7 @@ const AdminSignUp = ({ msgAlert, setUser }) => {
                 />
               )}
             </div>
-            {!adminIDIsValid && formData.username.length > 0 && (
+            {!adminIDIsValid && formData.adminID.length > 0 && (
               <Form.Text className="text-danger">
                 Admin ID is not correct
               </Form.Text>

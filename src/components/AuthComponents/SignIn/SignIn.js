@@ -43,7 +43,7 @@ const SignIn = ({ msgAlert, setUser }) => {
           variant: "success",
         })
       )
-      .then(() => navigate("/examples"))
+      .then(() => navigate("/stock-watch"))
       .catch((error) => {
         setLoading(false);
         setFormData({

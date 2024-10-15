@@ -2,15 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #1b1f38;
+  box-sizing: border-box;
+  padding: 2rem;
 }
 
 .admin-sign-up-form {
-  background-color: #20253f;
   padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
   text-align: center;
   width: 500px;
   height: auto;

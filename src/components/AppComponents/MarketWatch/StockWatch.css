@@ -1,0 +1,98 @@
+/* Container for the stock watch page */
+.stock-watch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000;
+  min-height: 100vh;
+  padding: 2rem;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+/* Page header styling */
+h1 {
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Table styling */
+.stock-table {
+  width: 80%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  color: #fff;
+}
+
+/* Table header styling */
+.stock-table th {
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  background-color: #2b2f4c;
+  text-align: center;
+}
+
+/* Table cell styling */
+.stock-table td {
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  background-color: #000;
+  text-align: center;
+}
+
+/* Button container to hold Buy and Sell buttons side by side */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Add gap between buttons */
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.actions-column {
+  width: 150px; /* Set a fixed width for the Actions column */
+}
+
+/* Common button styling */
+.stock-btn {
+  background-color: #0abde3;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 80px; /* Fixed width for consistency */
+  text-align: center; /* Center the text inside the buttons */
+}
+
+/* Hover effect for the buttons */
+.stock-btn:hover {
+  background-color: #00a1d3;
+}
+
+/* Buy button specific styling */
+.buy-btn {
+  background-color: #28a745; /* Green color for Buy */
+}
+
+/* Hover effect for Buy button */
+.buy-btn:hover {
+  background-color: #218838;
+}
+
+/* Sell button specific styling */
+.sell-btn {
+  background-color: #dc3545; /* Red color for Sell */
+}
+
+/* Hover effect for Sell button */
+.sell-btn:hover {
+  background-color: #c82333;
+}
