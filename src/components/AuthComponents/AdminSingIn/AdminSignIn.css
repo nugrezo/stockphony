@@ -1,0 +1,101 @@
+/* Sign In CSS */
+.admin-sign-in-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #2e3348; /* Lighter background color */
+}
+
+.admin-sign-in-form {
+  background-color: #384057; /* Lighter form background */
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 500px;
+  height: auto;
+}
+
+.admin-sign-in-form .form-label {
+  color: #fff;
+}
+
+.admin-image {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 2rem;
+}
+
+input {
+  border: none;
+  border-bottom: 2px solid #1abc9c; /* Lighter accent color */
+  background-color: transparent;
+  color: #ffffff;
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+
+input::placeholder {
+  color: #cfd9e6; /* Lighter placeholder color */
+}
+
+button {
+  background-color: #1abc9c; /* Lighter button color */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #16a085;
+}
+
+.have-account {
+  color: #ffffff;
+  margin-top: 20px;
+}
+
+.navigate--admin-sign-up {
+  color: #1abc9c;
+  text-decoration: none;
+  border-radius: 12px;
+}
+
+.navigate--admin-sign-up:hover {
+  color: #fff;
+  background-color: #1abc9c;
+  border-radius: 12px;
+  text-decoration: none;
+}
+
+input:focus {
+  outline: none;
+  border-bottom-color: #16a085;
+}
+
+.check-icon {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.text-danger {
+  color: #ff7675;
+  font-size: 12px;
+}
+
+.admin-no-account {
+  margin-top: 1rem;
+  color: #fff;
+}

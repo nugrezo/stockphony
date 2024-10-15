@@ -11,6 +11,8 @@ import SignIn from "../AuthComponents/SignIn/SignIn";
 import AboutApp from "../AboutApp/AboutApp";
 import Footer from "../Footer/Footer";
 import LandingPage from "../LandingPage/LandingPage";
+import AdminSignUp from "../AuthComponents/AdminSignUp/AdminSignUp";
+import AdminSignIn from "../AuthComponents/AdminSingIn/AdminSignIn";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -47,6 +49,14 @@ function App() {
               <Route
                 path="/sign-in"
                 element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
+              />
+              <Route
+                path="/admin-sign-up"
+                element={<AdminSignUp msgAlert={msgAlert} setUser={setUser} />}
+              />
+              <Route
+                path="/admin-sign-in"
+                element={<AdminSignIn msgAlert={msgAlert} setUser={setUser} />}
               />
               {user && (
                 <Route
