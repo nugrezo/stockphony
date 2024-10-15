@@ -70,6 +70,16 @@ export const signOut = (user) => {
   });
 };
 
+export const adminSignOut = (admin) => {
+  return axios({
+    url: apiUrl + "/admin-sign-out",
+    method: "DELETE",
+    headers: {
+      Authorization: `Token token=${admin.token}`,
+    },
+  });
+};
+
 export const changePassword = (passwords, user) => {
   return axios({
     url: apiUrl + "/change-password",

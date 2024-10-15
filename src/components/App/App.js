@@ -17,9 +17,11 @@ import StockWatch from "../AppComponents/MarketWatch/StockWatch";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
   const [msgAlerts, setMsgAlerts] = useState([]);
 
   const clearUser = () => setUser(null);
+  const clearAdmin = () => setAdmin(null);
 
   const msgAlert = ({ heading, message, variant }) => {
     setMsgAlerts([...msgAlerts, { heading, message, variant }]);
@@ -28,7 +30,7 @@ function App() {
   return (
     <Fragment>
       <div className="App">
-        <Header user={user} />
+        <Header user={user} admin={admin} />
         {msgAlerts.map((msgAlert, index) => (
           <AutoDismissAlert
             key={index}
@@ -54,11 +56,15 @@ function App() {
 
               <Route
                 path="/admin-sign-up"
-                element={<AdminSignUp msgAlert={msgAlert} setUser={setUser} />}
+                element={
+                  <AdminSignUp msgAlert={msgAlert} setAdmin={setAdmin} />
+                }
               />
               <Route
                 path="/admin-sign-in"
-                element={<AdminSignIn msgAlert={msgAlert} setUser={setUser} />}
+                element={
+                  <AdminSignIn msgAlert={msgAlert} setAdmin={setAdmin} />
+                }
               />
               {user && (
                 <Route
@@ -68,6 +74,18 @@ function App() {
                       msgAlert={msgAlert}
                       clearUser={clearUser}
                       user={user}
+                    />
+                  }
+                />
+              )}
+              {admin && (
+                <Route
+                  path="/admin-sign-out"
+                  element={
+                    <SignOut
+                      msgAlert={msgAlert}
+                      clearUser={clearAdmin}
+                      admin={admin}
                     />
                   }
                 />

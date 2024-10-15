@@ -4,11 +4,21 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import "./Header.css";
 
-const authenticatedOptions = (
+const authenticatedUserOptions = (
   <Fragment>
     <Nav.Link className="sign-out" href="#sign-out">
       <Button variant="outline-light" className="sign-out-btn">
         Logout
+      </Button>
+    </Nav.Link>
+  </Fragment>
+);
+
+const authenticatedAdminOptions = (
+  <Fragment>
+    <Nav.Link className="sign-out" href="#admin-sign-out">
+      <Button variant="outline-light" className="sign-out-btn">
+        Admin Logout
       </Button>
     </Nav.Link>
   </Fragment>
@@ -36,7 +46,7 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = <Fragment></Fragment>;
 
-const Header = ({ user }) => (
+const Header = ({ user, admin }) => (
   <Navbar className="navbar" expand="md">
     <Navbar.Brand className="brand" href="#">
       <img
@@ -51,8 +61,22 @@ const Header = ({ user }) => (
           Welcome, <strong>{user.username}</strong>
         </span>
       )}
+      {admin && (
+        <span className="navbar-text mr-2">
+          Admin Panel for <strong>{admin.adminID}</strong>
+        </span>
+      )}
       {alwaysOptions}
-      {user ? authenticatedOptions : unauthenticatedOptions}
+
+      {(() => {
+        if (user) {
+          return authenticatedUserOptions;
+        } else if (admin) {
+          return authenticatedAdminOptions;
+        } else {
+          return unauthenticatedOptions;
+        }
+      })()}
     </Nav>
   </Navbar>
 );

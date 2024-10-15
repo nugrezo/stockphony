@@ -13,7 +13,7 @@ import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const validAdminIds = ["Ruvier0", "Ergun1", "Austin2"];
 
-const AdminSignIn = ({ msgAlert, setUser }) => {
+const AdminSignIn = ({ msgAlert, setAdmin }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -49,7 +49,7 @@ const AdminSignIn = ({ msgAlert, setUser }) => {
     try {
       setLoading(true);
       const response = await adminSignIn(formData);
-      setUser(response.data.user);
+      setAdmin(response.data.admin);
       msgAlert({
         heading: "Sign In Success",
         message: messages.signInSuccess,

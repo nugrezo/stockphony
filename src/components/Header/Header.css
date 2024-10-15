@@ -12,6 +12,11 @@
   position: relative;
 }
 
+.navbar .ml-auto {
+  display: flex;
+  align-items: center; /* Vertically aligns content in the center */
+}
+
 /* Brand/logo styling */
 .brand img {
   width: 60px;
@@ -22,6 +27,7 @@
 .navbar-text {
   color: #fff; /* White text for the username */
   font-size: 18px;
+  padding-top: 2.5rem;
 }
 
 /* Button Styling */
@@ -48,7 +54,8 @@
     padding: 1rem;
   }
 
-  .navbar-text {
+  .navbar-text .mr-2 {
+    padding-top: 2.5 rem;
     font-size: 16px;
   }
 
