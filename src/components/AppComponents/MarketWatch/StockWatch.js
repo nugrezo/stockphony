@@ -2,30 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./StockWatch.css";
 
-const API_KEY = "BK715QRUZE5GRMG7"; // Replace with your actual API key
-const STOCK_SYMBOLS = [
-  "AAPL",
-  "GOOGL",
-  "AMZN",
-  "MSFT",
-  "TSLA",
-  "NVDA",
-  "PFE",
-  "NFLX",
-  "GE",
-  "META",
-  "DIS",
-];
+// Replace with your actual RapidAPI key
+const RAPIDAPI_KEY = "34ebffca19msh856070ba16f9837p18b350jsn8d23f09aa127";
 
 const StockWatch = () => {
   // Pre-fill the stock state with symbols and N/A prices
-  const [stocks, setStocks] = useState(
-    STOCK_SYMBOLS.map((symbol) => ({
-      symbol,
-      price: "N/A",
-      previousPrice: "N/A",
-    }))
-  );
+  const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [marketClosed, setMarketClosed] = useState(false);
 
@@ -41,7 +23,7 @@ const StockWatch = () => {
     return isWeekday && isInMarketHours;
   };
 
-  // Function to fetch stock data
+  // Function to fetch stock data from Yahoo Finance API
   const fetchStockData = async () => {
     if (!isMarketOpen()) {
       console.log("Market is closed, skipping data fetch.");
@@ -50,34 +32,50 @@ const StockWatch = () => {
       return;
     }
 
+    setMarketClosed(false); // Market is open
+
+    const options = {
+      method: "GET",
+      url: "https://yahoo-finance-api-data.p.rapidapi.com/search/list-detail",
+      params: {
+        id: "a4f8a58b-e458-44fe-b304-04af382a364e", // Correct id
+        limit: "10",
+        offset: "0",
+      },
+      headers: {
+        "x-rapidapi-key": RAPIDAPI_KEY,
+        "x-rapidapi-host": "yahoo-finance-api-data.p.rapidapi.com",
+      },
+    };
+
     try {
-      const stockData = await Promise.all(
-        STOCK_SYMBOLS.map(async (symbol) => {
-          const response = await axios.get(
-            `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${API_KEY}`
-          );
+      const response = await axios.request(options);
+      console.log("Full Response Data:", response.data); // Log the full response structure
 
-          if (
-            response.data["Time Series (5min)"] &&
-            response.data["Meta Data"]
-          ) {
-            const timeSeries = response.data["Time Series (5min)"];
-            const lastRefreshed =
-              response.data["Meta Data"]["3. Last Refreshed"];
-            const currentPrice = timeSeries[lastRefreshed]["1. open"];
+      // Try logging the data array as well
+      console.log("Data Array:", response.data.data);
 
-            return { symbol, price: currentPrice, previousPrice: "N/A" }; // Update stock with current price
-          } else {
-            console.error(`No valid data for ${symbol}`);
-            return { symbol, price: "N/A", previousPrice: "N/A" };
-          }
-        })
-      );
+      if (
+        response.data &&
+        response.data.data &&
+        response.data.data.length > 0
+      ) {
+        // You might need to dive into response.data.data[0] or further
+        const stockData = response.data.data[0].quotes.map((stock) => ({
+          symbol: stock.symbol,
+          price: stock.regularMarketPrice,
+          previousPrice: stock.regularMarketPreviousClose,
+        }));
 
-      setStocks(stockData); // Update stock data with API results
+        setStocks(stockData); // Update stock data with API results
+      } else {
+        console.error("No valid data in the API response");
+      }
+
       setLoading(false);
     } catch (error) {
       console.error("Error fetching stock data", error);
+      setLoading(false);
     }
   };
 
@@ -114,7 +112,7 @@ const StockWatch = () => {
               {stocks.map((stock) => (
                 <tr key={stock.symbol}>
                   <td>{stock.symbol}</td>
-                  <td>{stock.price}</td>
+                  <td>{stock.price ? `$${stock.price.toFixed(2)}` : "N/A"}</td>
                   <td>
                     {/* Always display N/A when the market is closed */}
                     {marketClosed ? (
