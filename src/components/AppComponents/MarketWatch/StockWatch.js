@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./StockWatch.css";
 
 // Replace with your actual RapidAPI key
-const RAPIDAPI_KEY = "34ebffca19msh856070ba16f9837p18b350jsn8d23f09aa127";
+const RAPIDAPI_KEY = "42b8a3f448msh52f478828a02e41p1d326ajsn880f471afcec";
 
 const StockWatch = () => {
   const [stocks, setStocks] = useState([]);

@@ -6,6 +6,11 @@ import "./Header.css";
 
 const authenticatedUserOptions = (
   <Fragment>
+    <Nav.Link className="sign-up" href="#stock-watch">
+      <Button variant="outline-light" className="sign-up-btn">
+        Stock Watch
+      </Button>
+    </Nav.Link>
     <Nav.Link className="sign-out" href="#sign-out">
       <Button variant="outline-light" className="sign-out-btn">
         Logout
