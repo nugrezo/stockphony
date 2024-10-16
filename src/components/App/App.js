@@ -14,6 +14,7 @@ import LandingPage from "../LandingPage/LandingPage";
 import AdminSignUp from "../AuthComponents/AdminSignUp/AdminSignUp";
 import AdminSignIn from "../AuthComponents/AdminSingIn/AdminSignIn";
 import StockWatch from "../AppComponents/MarketWatch/StockWatch";
+import StockDetail from "../AppComponents/StockDetail/StockDetail";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -103,10 +104,7 @@ function App() {
                   element={<StockWatch msgAlert={msgAlert} user={user} />}
                 />
               )}
-              <Route
-                path="/post"
-                // element={<CreateExample msgAlert={msgAlert} user={user} />}
-              />
+              <Route path="/stocks/:symbol" element={<StockDetail />} />
               <Route
                 path="/userexamples"
                 // element={<ShowUserExample msgAlert={msgAlert} user={user} />}

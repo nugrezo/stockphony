@@ -1,0 +1,106 @@
+/* Container for the stock detail page */
+.stock-detail-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #000;
+  min-height: 100vh;
+  padding: 2rem;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+/* Left half for stock details */
+.stock-details {
+  width: 45%; /* Adjust for left-side content */
+  padding-right: 1rem;
+}
+
+/* Right half for graph and news */
+.stock-extra {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Upper part for the graph */
+.stock-graph {
+  height: 50%; /* Adjust as needed */
+  background-color: #2b2f4c;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Lower part for the news section */
+.stock-news {
+  height: 50%; /* Adjust as needed */
+  background-color: #2b2f4c;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+/* Table styling for stock details */
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  color: #fff;
+}
+
+.stock-table th,
+.stock-table td {
+  padding: 10px 20px;
+  border: 1px solid #2b8a3e;
+  text-align: left;
+}
+
+.stock-table th {
+  background-color: #2b2f4c;
+  font-weight: bold;
+  color: #0abde3;
+}
+
+.stock-table td {
+  background-color: #000;
+}
+
+/* Headings */
+h1 {
+  color: #d5ff00;
+  margin-bottom: 20px;
+}
+
+/* Table row alternate coloring */
+.stock-table tr:nth-child(even) {
+  background-color: #2b2f4c;
+}
+
+/* Style for the graph and news containers */
+.stock-graph h2,
+.stock-news h2 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/* News section styling */
+.news-article {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #000;
+  border: 1px solid #2b8a3e;
+  border-radius: 5px;
+}
+
+.news-article h3 {
+  color: #0abde3;
+  margin-bottom: 0.5rem;
+}
+
+.news-article p {
+  font-size: 14px;
+  line-height: 1.5;
+}

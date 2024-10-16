@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./StockWatch.css";
 
 // Replace with your actual RapidAPI key
 const RAPIDAPI_KEY = "34ebffca19msh856070ba16f9837p18b350jsn8d23f09aa127";
 
 const StockWatch = () => {
-  // Pre-fill the stock state with symbols and N/A prices
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [marketClosed, setMarketClosed] = useState(false);
 
-  // Helper to check if the market is currently open (9:30 AM to 4:00 PM ET)
   const isMarketOpen = () => {
     const now = new Date();
     const currentHour = now.getUTCHours();
@@ -23,22 +22,19 @@ const StockWatch = () => {
     return isWeekday && isInMarketHours;
   };
 
-  // Function to fetch stock data from Yahoo Finance API
   const fetchStockData = async () => {
     if (!isMarketOpen()) {
-      console.log("Market is closed, skipping data fetch.");
-      setMarketClosed(true); // Set the marketClosed state to true
-      setLoading(false); // Stop showing loading spinner
-      return;
+      console.log("Market is closed, fetching last available data.");
+      setMarketClosed(true);
+    } else {
+      setMarketClosed(false);
     }
-
-    setMarketClosed(false); // Market is open
 
     const options = {
       method: "GET",
       url: "https://yahoo-finance-api-data.p.rapidapi.com/search/list-detail",
       params: {
-        id: "a4f8a58b-e458-44fe-b304-04af382a364e", // Correct id
+        id: "a4f8a58b-e458-44fe-b304-04af382a364e",
         limit: "10",
         offset: "0",
       },
@@ -51,8 +47,6 @@ const StockWatch = () => {
     try {
       const response = await axios.request(options);
       console.log("Full Response Data:", response.data);
-      console.log("Data Array:", response.data.data);
-
       if (
         response.data &&
         response.data.data &&
@@ -63,14 +57,14 @@ const StockWatch = () => {
           symbol: stock.symbol,
           price: stock.regularMarketPrice,
           previousPrice: stock.regularMarketPreviousClose,
-          change: stock.regularMarketChange, // New Column: Change
-          changePercent: stock.regularMarketChangePercent, // New Column: % Change
-          dayHigh: stock.regularMarketDayHigh, // New Column: Day High
-          dayLow: stock.regularMarketDayLow, // New Column: Day Low
-          marketCap: stock.marketCap, // New Column: Market Cap
+          change: stock.regularMarketChange,
+          changePercent: stock.regularMarketChangePercent,
+          dayHigh: stock.regularMarketDayHigh,
+          dayLow: stock.regularMarketDayLow,
+          marketCap: stock.marketCap,
         }));
 
-        setStocks(stockData); // Update stock data with API results
+        setStocks(stockData);
       } else {
         console.error("No valid data in the API response");
       }
@@ -83,12 +77,11 @@ const StockWatch = () => {
   };
 
   useEffect(() => {
-    fetchStockData(); // Fetch data initially
+    fetchStockData();
+    const intervalId = setInterval(fetchStockData, 60 * 60 * 1000);
 
-    const intervalId = setInterval(fetchStockData, 60 * 60 * 1000); // Fetch data every 60 minutes
-
-    return () => clearInterval(intervalId); // Clear interval on component unmount
-  }, []); // Empty dependencies so it only runs on mount
+    return () => clearInterval(intervalId);
+  }, []);
 
   const stockRows = stocks.map((stock) => {
     const changeClass =
@@ -96,7 +89,9 @@ const StockWatch = () => {
 
     return (
       <tr key={stock.symbol}>
-        <td>{stock.symbol}</td>
+        <td>
+          <Link to={`/stocks/${stock.symbol}`}>{stock.symbol}</Link>
+        </td>
         <td>{stock.price ? `$${stock.price.toFixed(2)}` : "N/A"}</td>
         <td className={changeClass}>
           {stock.change ? `$${stock.change.toFixed(2)}` : "N/A"}
@@ -109,20 +104,17 @@ const StockWatch = () => {
         <td>
           {stock.marketCap ? `$${(stock.marketCap / 1e9).toFixed(2)}B` : "N/A"}
         </td>
-
-        {/* Arrow Logic: Showing Up/Down Arrows */}
         <td>
           {marketClosed ? (
             "-"
           ) : stock.price > stock.previousPrice ? (
-            <span className="up-arrow">&#9650;</span> // Up arrow
+            <span className="up-arrow">&#9650;</span>
           ) : stock.price < stock.previousPrice ? (
-            <span className="down-arrow">&#9660;</span> // Down arrow
+            <span className="down-arrow">&#9660;</span>
           ) : (
             "-"
           )}
         </td>
-
         <td className="actions-column">
           <div className="actions-btn">
             <button className="stock-btn buy-btn">Buy</button>
@@ -155,7 +147,7 @@ const StockWatch = () => {
                 <th>Day High</th>
                 <th>Day Low</th>
                 <th>Market Cap</th>
-                <th>Change Indicator</th> {/* New Column for Arrows */}
+                <th>Change Indicator</th>
                 <th>Actions</th>
               </tr>
             </thead>
