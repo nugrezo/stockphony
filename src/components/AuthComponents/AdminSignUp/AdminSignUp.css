@@ -3,18 +3,41 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #325e3b;
+  background-color: #186028;
   box-sizing: border-box;
   padding: 2rem;
+}
+
+/* Circle Animation */
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #182802;
+}
+
+.circle1 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: 5%;
+}
+
+.circle2 {
+  width: 200px;
+  height: 200px;
+  bottom: 20%;
+  right: 10%;
 }
 
 .admin-sign-up-form {
   padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 30px rgba(20, 16, 16, 0.5);
   text-align: center;
   width: 500px;
   height: auto;
+  outline-style: groove;
 }
 
 .admin-sign-up-form .form-label {
