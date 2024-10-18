@@ -7,6 +7,8 @@ import Button from "react-bootstrap/Button";
 import { signIn } from "../../../api/auth";
 import messages from "../../AutoDismissAlert/messages";
 import DotsLoader from "../../DotsLoader/DotsLoader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const SignIn = ({ msgAlert, setUser }) => {
   const [loading, setLoading] = useState(false);
@@ -16,6 +18,8 @@ const SignIn = ({ msgAlert, setUser }) => {
   });
   const [bubbles, setBubbles] = useState([]);
   const [bubbleStyles, setBubbleStyles] = useState([]);
+  const [emailIsValid, setEmailIsValid] = useState(true);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,12 +29,19 @@ const SignIn = ({ msgAlert, setUser }) => {
     setBubbleStyles(newBubbleStyles);
   }, []);
 
-  const handleChange = (event) =>
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
+  const validateEmail = (email) => {
+    const emailRegex = /^\S+@\S+\.\S{2,}$/;
+    return emailRegex.test(email);
+  };
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+
+    if (name === "email") {
+      setEmailIsValid(validateEmail(value));
+    }
+  };
   const onSignIn = (event) => {
     event.preventDefault();
     setLoading(true);
@@ -85,15 +96,33 @@ const SignIn = ({ msgAlert, setUser }) => {
           <Form className="sign-in--form" onSubmit={onSignIn}>
             <Form.Group controlId="email">
               <Form.Label>Email address</Form.Label>
-              <Form.Control
-                required
-                type="email"
-                name="email"
-                value={email}
-                placeholder="Enter your email"
-                onChange={handleChange}
-              />
+              <div className="input-wrapper">
+                <Form.Control
+                  required
+                  type="email"
+                  name="email"
+                  value={email}
+                  placeholder="Enter your email"
+                  onChange={handleChange}
+                  style={{
+                    backgroundColor: emailIsValid ? "" : "#ffc9c9", // Red highlight if invalid
+                  }}
+                />
+                {emailIsValid && email.length > 0 && (
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    className="check-icon"
+                    style={{ color: "green" }}
+                  />
+                )}
+              </div>
+              {!emailIsValid && email.length > 0 && (
+                <Form.Text className="text-danger">
+                  Invalid email format
+                </Form.Text>
+              )}
             </Form.Group>
+
             <Form.Group controlId="password">
               <Form.Label>Password</Form.Label>
               <Form.Control
