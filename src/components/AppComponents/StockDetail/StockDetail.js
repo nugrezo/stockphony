@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import "./StockDetail.css";
 import StockGraph from "../StockGraph/StockGraph";
 
-const RAPIDAPI_KEY = "42b8a3f448msh52f478828a02e41p1d326ajsn880f471afcec";
+const RAPIDAPI_KEY = "ab82c2d418msh930303db1916df5p195d71jsn14f6a800ea84";
 
 const StockDetail = () => {
   const { symbol } = useParams(); // Get stock symbol from the URL

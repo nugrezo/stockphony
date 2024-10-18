@@ -29,7 +29,7 @@ const StockGraph = ({ symbol }) => {
         },
         headers: {
           "x-rapidapi-key":
-            "42b8a3f448msh52f478828a02e41p1d326ajsn880f471afcec",
+            "ab82c2d418msh930303db1916df5p195d71jsn14f6a800ea84",
           "x-rapidapi-host": "yahoo-finance-api-data.p.rapidapi.com",
         },
       };
