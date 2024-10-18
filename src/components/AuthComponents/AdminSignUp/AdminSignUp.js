@@ -140,6 +140,8 @@ const AdminSignUp = ({ msgAlert, setUser }) => {
 
   return (
     <div className="admin-sign-up-container">
+      <div className="circle circle1"></div>
+      <div className="circle circle2"></div>
       <div className="admin-sign-up-form">
         <img src={image} alt="admin-png" className="admin-image" />
         <Form className="admin-sign-up--form" onSubmit={onAdminSignUp}>
