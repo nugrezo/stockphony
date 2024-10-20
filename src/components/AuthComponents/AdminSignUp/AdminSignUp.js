@@ -46,7 +46,7 @@ const validatePassword = (password) => {
 
 const validAdminIds = ["Ruvier0", "Ergun1", "Austin2"];
 
-const AdminSignUp = ({ msgAlert, setUser }) => {
+const AdminSignUp = ({ msgAlert, setAdmin }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -114,13 +114,13 @@ const AdminSignUp = ({ msgAlert, setUser }) => {
       setLoading(true);
       await adminSignUp(formData);
       const response = await adminSignIn(formData);
-      setUser(response.data.user);
+      setAdmin(response.data.admin);
       msgAlert({
-        heading: "Sign Up Success",
+        heading: "Admin Sign Up Success",
         message: messages.signUpSuccess,
         variant: "success",
       });
-      navigate("/examples");
+      navigate("/example");
     } catch (error) {
       setLoading(false);
       setFormData({
@@ -131,7 +131,7 @@ const AdminSignUp = ({ msgAlert, setUser }) => {
         passwordConfirmation: "",
       });
       msgAlert({
-        heading: "Sign Up Failed with error: " + error.message,
+        heading: "Admin Sign Up Failed with error: " + error.message,
         message: messages.signUpFailure,
         variant: "danger",
       });

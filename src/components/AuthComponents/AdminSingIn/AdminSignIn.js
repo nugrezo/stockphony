@@ -51,7 +51,7 @@ const AdminSignIn = ({ msgAlert, setAdmin }) => {
       const response = await adminSignIn(formData);
       setAdmin(response.data.admin);
       msgAlert({
-        heading: "Sign In Success",
+        heading: "Admin Sign In Success",
         message: messages.signInSuccess,
         variant: "success",
       });
@@ -63,7 +63,7 @@ const AdminSignIn = ({ msgAlert, setAdmin }) => {
         password: "",
       });
       msgAlert({
-        heading: "Sign In Failed with error: " + error.message,
+        heading: "Admin Sign In Failed with error: " + error.message,
         message: messages.signInFailure,
         variant: "danger",
       });

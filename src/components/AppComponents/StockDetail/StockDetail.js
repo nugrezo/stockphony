@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import "./StockDetail.css";
 import StockGraph from "../StockGraph/StockGraph";
 
-const RAPIDAPI_KEY = "42b8a3f448msh52f478828a02e41p1d326ajsn880f471afcec";
+// Use your Finnhub API key
+const FINNHUB_API_KEY = "csa9d79r01qsm2oanoc0csa9d79r01qsm2oanocg";
 
 const StockDetail = () => {
   const { symbol } = useParams(); // Get stock symbol from the URL
@@ -15,37 +16,28 @@ const StockDetail = () => {
   useEffect(() => {
     const fetchCompanyProfile = async () => {
       try {
-        const options = {
-          method: "GET",
-          url: "https://yahoo-finance-api-data.p.rapidapi.com/search/list-detail",
-          params: {
-            id: "a4f8a58b-e458-44fe-b304-04af382a364e",
-            limit: "10",
-            offset: "0",
-          },
-          headers: {
-            "x-rapidapi-key": RAPIDAPI_KEY,
-            "x-rapidapi-host": "yahoo-finance-api-data.p.rapidapi.com",
-          },
+        // Fetch company profile and stock data from Finnhub API
+        const companyProfileResponse = await axios.get(
+          "https://finnhub.io/api/v1/stock/profile2",
+          {
+            params: { symbol, token: FINNHUB_API_KEY },
+          }
+        );
+
+        const stockPriceResponse = await axios.get(
+          "https://finnhub.io/api/v1/quote",
+          {
+            params: { symbol, token: FINNHUB_API_KEY },
+          }
+        );
+
+        // Combine company profile and stock data
+        const companyInfo = {
+          ...companyProfileResponse.data,
+          ...stockPriceResponse.data,
         };
 
-        const response = await axios.request(options);
-
-        if (
-          response.data &&
-          response.data.data &&
-          Array.isArray(response.data.data[0].quotes)
-        ) {
-          const companyInfo = response.data.data[0].quotes.find(
-            (quote) => quote.symbol === symbol
-          );
-          if (companyInfo) {
-            setCompanyData(companyInfo); // Save the company info to state
-          } else {
-            console.error("No matching company found for the provided symbol.");
-          }
-        }
-
+        setCompanyData(companyInfo); // Save the company info to state
         setLoading(false); // Set loading to false after fetching data
       } catch (error) {
         console.error("Error fetching company profile:", error);
@@ -66,8 +58,8 @@ const StockDetail = () => {
             {/* Left half: Stock details */}
             <div className="stock-details">
               <h1>
-                {companyData.longName ||
-                  companyData.symbol ||
+                {companyData.name ||
+                  companyData.ticker ||
                   "Company Name Not Available"}{" "}
                 Company Profile
               </h1>
@@ -77,69 +69,51 @@ const StockDetail = () => {
                 <tbody>
                   <tr>
                     <th>Symbol:</th>
-                    <td>{companyData.symbol || "N/A"}</td>
+                    <td>{companyData.ticker || "N/A"}</td>
                   </tr>
                   <tr>
                     <th>Market Cap:</th>
                     <td>
-                      {companyData.marketCap
-                        ? `$${(companyData.marketCap / 1e9).toFixed(2)}B`
+                      {companyData.marketCapitalization
+                        ? `$${(companyData.marketCapitalization / 1e9).toFixed(
+                            2
+                          )}B`
                         : "N/A"}
                     </td>
                   </tr>
                   <tr>
                     <th>Stock Price:</th>
                     <td>
-                      {companyData.regularMarketPrice
-                        ? `$${companyData.regularMarketPrice.toFixed(2)}`
-                        : "N/A"}
+                      {companyData.c ? `$${companyData.c.toFixed(2)}` : "N/A"}
                     </td>
                   </tr>
                   <tr>
                     <th>Price Change (%):</th>
                     <td>
-                      {companyData.regularMarketChangePercent
-                        ? `${companyData.regularMarketChangePercent.toFixed(
-                            2
-                          )}%`
-                        : "N/A"}
+                      {companyData.dp ? `${companyData.dp.toFixed(2)}%` : "N/A"}
                     </td>
                   </tr>
                   <tr>
-                    <th>52-Week Range:</th>
-                    <td>{companyData.fiftyTwoWeekRange || "N/A"}</td>
-                  </tr>
-                  <tr>
-                    <th>Dividend Yield:</th>
+                    <th>Day High:</th>
                     <td>
-                      {companyData.dividendYield
-                        ? `${companyData.dividendYield.toFixed(2)}%`
-                        : "N/A"}
+                      {companyData.h ? `$${companyData.h.toFixed(2)}` : "N/A"}
                     </td>
                   </tr>
                   <tr>
-                    <th>PE Ratio (Trailing):</th>
+                    <th>Day Low:</th>
                     <td>
-                      {companyData.trailingPE
-                        ? companyData.trailingPE.toFixed(2)
-                        : "N/A"}
+                      {companyData.l ? `$${companyData.l.toFixed(2)}` : "N/A"}
                     </td>
                   </tr>
                   <tr>
-                    <th>50-Day Moving Average:</th>
+                    <th>PE Ratio:</th>
                     <td>
-                      {companyData.fiftyDayAverage
-                        ? `$${companyData.fiftyDayAverage.toFixed(2)}`
-                        : "N/A"}
+                      {companyData.pe ? companyData.pe.toFixed(2) : "N/A"}
                     </td>
                   </tr>
                   <tr>
-                    <th>200-Day Moving Average:</th>
-                    <td>
-                      {companyData.twoHundredDayAverage
-                        ? `$${companyData.twoHundredDayAverage.toFixed(2)}`
-                        : "N/A"}
-                    </td>
+                    <th>Industry:</th>
+                    <td>{companyData.finnhubIndustry || "N/A"}</td>
                   </tr>
                 </tbody>
               </table>

@@ -15,6 +15,7 @@ import AdminSignUp from "../AuthComponents/AdminSignUp/AdminSignUp";
 import AdminSignIn from "../AuthComponents/AdminSingIn/AdminSignIn";
 import StockWatch from "../AppComponents/MarketWatch/StockWatch";
 import StockDetail from "../AppComponents/StockDetail/StockDetail";
+import AdminSignOut from "../AuthComponents/AdminSignOut/AdminSignOut";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -83,9 +84,9 @@ function App() {
                 <Route
                   path="/admin-sign-out"
                   element={
-                    <SignOut
+                    <AdminSignOut
                       msgAlert={msgAlert}
-                      clearUser={clearAdmin}
+                      clearAdmin={clearAdmin}
                       admin={admin}
                     />
                   }

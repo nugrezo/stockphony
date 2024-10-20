@@ -3,8 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./StockWatch.css";
 
-// Replace with your actual RapidAPI key
-const RAPIDAPI_KEY = "42b8a3f448msh52f478828a02e41p1d326ajsn880f471afcec";
+// Use your Finnhub API key
+const FINNHUB_API_KEY = "csa9d79r01qsm2oanoc0csa9d79r01qsm2oanocg";
 
 const StockWatch = () => {
   const [stocks, setStocks] = useState([]);
@@ -30,45 +30,29 @@ const StockWatch = () => {
       setMarketClosed(false);
     }
 
-    const options = {
-      method: "GET",
-      url: "https://yahoo-finance-api-data.p.rapidapi.com/search/list-detail",
-      params: {
-        id: "a4f8a58b-e458-44fe-b304-04af382a364e",
-        limit: "10",
-        offset: "0",
-      },
-      headers: {
-        "x-rapidapi-key": RAPIDAPI_KEY,
-        "x-rapidapi-host": "yahoo-finance-api-data.p.rapidapi.com",
-      },
-    };
+    const stocksToFetch = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"]; // Add your desired stocks
 
     try {
-      const response = await axios.request(options);
-      console.log("Full Response Data:", response.data);
-      if (
-        response.data &&
-        response.data.data &&
-        response.data.data[0] &&
-        response.data.data[0].quotes
-      ) {
-        const stockData = response.data.data[0].quotes.map((stock) => ({
-          symbol: stock.symbol,
-          price: stock.regularMarketPrice,
-          previousPrice: stock.regularMarketPreviousClose,
-          change: stock.regularMarketChange,
-          changePercent: stock.regularMarketChangePercent,
-          dayHigh: stock.regularMarketDayHigh,
-          dayLow: stock.regularMarketDayLow,
-          marketCap: stock.marketCap,
-        }));
+      const stockDataPromises = stocksToFetch.map((symbol) => {
+        return axios.get("https://finnhub.io/api/v1/quote", {
+          params: { symbol, token: FINNHUB_API_KEY },
+        });
+      });
 
-        setStocks(stockData);
-      } else {
-        console.error("No valid data in the API response");
-      }
+      const stockDataResponses = await Promise.all(stockDataPromises);
+      const stockData = stockDataResponses.map((response, index) => {
+        const data = response.data;
+        return {
+          symbol: stocksToFetch[index],
+          price: data.c, // Current price
+          dayHigh: data.h, // High price
+          dayLow: data.l, // Low price
+          change: data.d, // Change from previous close
+          changePercent: data.dp, // Change percentage
+        };
+      });
 
+      setStocks(stockData);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching stock data", error);
@@ -78,7 +62,7 @@ const StockWatch = () => {
 
   useEffect(() => {
     fetchStockData();
-    const intervalId = setInterval(fetchStockData, 60 * 60 * 1000);
+    const intervalId = setInterval(fetchStockData, 24 * 60 * 60 * 1000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -102,14 +86,11 @@ const StockWatch = () => {
         <td>{stock.dayHigh ? `$${stock.dayHigh.toFixed(2)}` : "N/A"}</td>
         <td>{stock.dayLow ? `$${stock.dayLow.toFixed(2)}` : "N/A"}</td>
         <td>
-          {stock.marketCap ? `$${(stock.marketCap / 1e9).toFixed(2)}B` : "N/A"}
-        </td>
-        <td>
           {marketClosed ? (
             "-"
-          ) : stock.price > stock.previousPrice ? (
+          ) : stock.change > 0 ? (
             <span className="up-arrow">&#9650;</span>
-          ) : stock.price < stock.previousPrice ? (
+          ) : stock.change < 0 ? (
             <span className="down-arrow">&#9660;</span>
           ) : (
             "-"
@@ -146,7 +127,6 @@ const StockWatch = () => {
                 <th>% Change</th>
                 <th>Day High</th>
                 <th>Day Low</th>
-                <th>Market Cap</th>
                 <th>Change Indicator</th>
                 <th>Actions</th>
               </tr>

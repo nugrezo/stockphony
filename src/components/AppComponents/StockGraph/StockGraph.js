@@ -10,6 +10,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+const POLYGON_API_KEY = "1MiNYlVeAeCfTKgS1Hs_d5hcaGNm2T8p"; // Use the API key you provided
+
 const StockGraph = ({ symbol }) => {
   const [graphData, setGraphData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,46 +19,31 @@ const StockGraph = ({ symbol }) => {
 
   useEffect(() => {
     const fetchGraphData = async () => {
-      const options = {
-        method: "GET",
-        url: "https://yahoo-finance-api-data.p.rapidapi.com/chart/advanced-chart",
-        params: {
-          symbol,
-          limit: "10",
-          from: "1516393361", // Unix timestamp for the "from" date
-          to: "1721421317", // Unix timestamp for the "to" date
-          range: "1d",
-        },
-        headers: {
-          "x-rapidapi-key":
-            "42b8a3f448msh52f478828a02e41p1d326ajsn880f471afcec",
-          "x-rapidapi-host": "yahoo-finance-api-data.p.rapidapi.com",
-        },
-      };
+      const fromDate = "2020-01-01"; // Adjust the date range as needed
+      const toDate = "2024-10-31"; // Fetch data for January 2024 as an example
 
       try {
-        const response = await axios.request(options);
-        console.log("Full API Response:", response.data);
+        // Fetch historical stock data from Polygon.io Aggregates API
+        const response = await axios.get(
+          `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/${fromDate}/${toDate}`,
+          {
+            params: { apiKey: POLYGON_API_KEY },
+          }
+        );
 
-        // Extract relevant data from response
-        const data = response.data.data[0];
-        const timestamps = data.timestamp;
-        const closingPrices = data.indicators.quote[0].close; // Extracting close prices
+        const data = response.data.results; // Get the results from the response
 
         // Format data for Recharts
-        const formattedData = timestamps.map((time, index) => ({
-          date: new Date(time * 1000).toLocaleDateString(), // Formatting date
-          price: closingPrices[index], // Use close prices for the Y-axis
+        const formattedData = data.map((item) => ({
+          date: new Date(item.t).toLocaleDateString(), // Convert timestamp to date string
+          price: item.c, // Use the closing price for the Y-axis
         }));
 
-        setGraphData(formattedData);
-        setLoading(false);
+        setGraphData(formattedData); // Set graph data for rendering
+        setLoading(false); // Stop loading spinner
       } catch (error) {
-        console.error(
-          "Error fetching stock graph data:",
-          error.response ? error.response.data : error.message
-        );
-        setError(error);
+        console.error("Error fetching stock graph data:", error);
+        setError(error); // Handle error
         setLoading(false);
       }
     };
@@ -79,10 +66,10 @@ const StockGraph = ({ symbol }) => {
         <LineChart data={graphData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" /> {/* X-axis shows the date */}
-          <YAxis dataKey="price" /> {/* Y-axis shows the price */}
+          <YAxis dataKey="price" /> {/* Y-axis shows the closing price */}
           <Tooltip />
           <Line type="monotone" dataKey="price" stroke="#8884d8" />{" "}
-          {/* Display close prices */}
+          {/* Line for closing prices */}
         </LineChart>
       </ResponsiveContainer>
     </div>
