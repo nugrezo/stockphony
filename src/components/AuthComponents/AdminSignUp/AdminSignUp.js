@@ -120,7 +120,7 @@ const AdminSignUp = ({ msgAlert, setAdmin }) => {
         message: messages.signUpSuccess,
         variant: "success",
       });
-      navigate("/example");
+      navigate("/admin-operations");
     } catch (error) {
       setLoading(false);
       setFormData({

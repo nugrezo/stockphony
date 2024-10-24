@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-// import AuthenticatedRoute from "../AuthenticatedRoute/AuthenticatedRoute";
+import { StockProvider } from "../AppComponents/AdminOperations/StockContext"; // Import StockProvider
 import AutoDismissAlert from "../AutoDismissAlert/AutoDismissAlert";
 import Header from "../Header/Header";
 import ChangePassword from "../AuthComponents/ChangePassword/ChangePassword";
@@ -16,6 +16,9 @@ import AdminSignIn from "../AuthComponents/AdminSingIn/AdminSignIn";
 import StockWatch from "../AppComponents/MarketWatch/StockWatch";
 import StockDetail from "../AppComponents/StockDetail/StockDetail";
 import AdminSignOut from "../AuthComponents/AdminSignOut/AdminSignOut";
+import AdminOperations from "../AppComponents/AdminOperations/AdminOperations";
+import SetMarketSchedule from "../AppComponents/AdminOperations/SetMarketSchedule";
+import AddStock from "../AppComponents/AdminOperations/AddStock";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -42,80 +45,84 @@ function App() {
           />
         ))}
         <div className="content">
-          <HashRouter>
-            <Routes>
-              {/* <Route path="/" element={<Example to="/" />} /> */}
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/about-app" element={<AboutApp />} />
-              <Route
-                path="/sign-up"
-                element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
-              />
-              <Route
-                path="/sign-in"
-                element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
-              />
+          <StockProvider user={user}>
+            {" "}
+            {/* Wrap routes with StockProvider */}
+            <HashRouter>
+              <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/about-app" element={<AboutApp />} />
+                <Route
+                  path="/sign-up"
+                  element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
+                />
+                <Route
+                  path="/sign-in"
+                  element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
+                />
 
-              <Route
-                path="/admin-sign-up"
-                element={
-                  <AdminSignUp msgAlert={msgAlert} setAdmin={setAdmin} />
-                }
-              />
-              <Route
-                path="/admin-sign-in"
-                element={
-                  <AdminSignIn msgAlert={msgAlert} setAdmin={setAdmin} />
-                }
-              />
-              {user && (
                 <Route
-                  path="/sign-out"
+                  path="/admin-sign-up"
                   element={
-                    <SignOut
-                      msgAlert={msgAlert}
-                      clearUser={clearUser}
-                      user={user}
-                    />
+                    <AdminSignUp msgAlert={msgAlert} setAdmin={setAdmin} />
                   }
                 />
-              )}
-              {admin && (
                 <Route
-                  path="/admin-sign-out"
+                  path="/admin-sign-in"
                   element={
-                    <AdminSignOut
-                      msgAlert={msgAlert}
-                      clearAdmin={clearAdmin}
-                      admin={admin}
-                    />
+                    <AdminSignIn msgAlert={msgAlert} setAdmin={setAdmin} />
                   }
                 />
-              )}
-              {user && (
+                {user && (
+                  <Route
+                    path="/sign-out"
+                    element={
+                      <SignOut
+                        msgAlert={msgAlert}
+                        clearUser={clearUser}
+                        user={user}
+                      />
+                    }
+                  />
+                )}
+                {admin && (
+                  <Route
+                    path="/admin-sign-out"
+                    element={
+                      <AdminSignOut
+                        msgAlert={msgAlert}
+                        clearAdmin={clearAdmin}
+                        admin={admin}
+                      />
+                    }
+                  />
+                )}
                 <Route
-                  path="/change-password"
-                  element={<ChangePassword msgAlert={msgAlert} user={null} />}
+                  path="/admin-operations"
+                  element={<AdminOperations admin={admin} />}
                 />
-              )}
-              {/* <Route path="/home" element={<Icon />} /> */}
-              {user && (
                 <Route
-                  path="/stock-watch"
-                  element={<StockWatch msgAlert={msgAlert} user={user} />}
+                  path="/set-market-schedule"
+                  element={<SetMarketSchedule admin={admin} />}
                 />
-              )}
-              <Route path="/stocks/:symbol" element={<StockDetail />} />
-              <Route
-                path="/userexamples"
-                // element={<ShowUserExample msgAlert={msgAlert} user={user} />}
-              />
-              <Route
-                path="/userinfo"
-                // element={<UserInfo msgAlert={msgAlert} user={user} />}
-              />
-            </Routes>
-          </HashRouter>
+
+                {user && (
+                  <Route
+                    path="/change-password"
+                    element={<ChangePassword msgAlert={msgAlert} user={user} />}
+                  />
+                )}
+                {user && (
+                  <Route
+                    path="/stock-watch"
+                    element={<StockWatch msgAlert={msgAlert} user={user} />}
+                  />
+                )}
+                <Route path="/stocks/:symbol" element={<StockDetail />} />
+                <Route path="/add-stock" element={<AddStock admin={admin} />} />
+              </Routes>
+            </HashRouter>
+          </StockProvider>
         </div>
         <Footer />
       </div>

@@ -21,6 +21,11 @@ const authenticatedUserOptions = (
 
 const authenticatedAdminOptions = (
   <Fragment>
+    <Nav.Link className="admin-operations" href="#admin-operations">
+      <Button variant="outline-light" className="sign-out-btn">
+        Admin Operations
+      </Button>
+    </Nav.Link>
     <Nav.Link className="sign-out" href="#admin-sign-out">
       <Button variant="outline-light" className="sign-out-btn">
         Admin Logout

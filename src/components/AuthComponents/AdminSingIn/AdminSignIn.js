@@ -55,7 +55,7 @@ const AdminSignIn = ({ msgAlert, setAdmin }) => {
         message: messages.signInSuccess,
         variant: "success",
       });
-      navigate("/dashboard");
+      navigate("/admin-operations");
     } catch (error) {
       setLoading(false);
       setFormData({

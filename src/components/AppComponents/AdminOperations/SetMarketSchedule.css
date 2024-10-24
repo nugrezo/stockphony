@@ -1,0 +1,94 @@
+/* Container for the market schedule form */
+.set-market-schedule-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form heading */
+.set-market-schedule-container h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form group container */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Labels for input fields */
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Time and text input fields */
+input[type="time"],
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #696969bb;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+/* Add focus style to inputs */
+input[type="time"]:focus,
+input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
+  color: #696969bb;
+}
+
+/* Submit button */
+button.submit-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+/* Submit button hover state */
+button.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Success message styling */
+.success-message {
+  color: green;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Styling for any additional text under the form */
+.form-text {
+  font-size: 14px;
+  color: #888;
+  margin-top: 8px;
+}
