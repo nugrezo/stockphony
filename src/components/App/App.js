@@ -115,7 +115,7 @@ function App() {
                 {user && (
                   <Route
                     path="/stock-watch"
-                    element={<StockWatch msgAlert={msgAlert} user={user} />}
+                    element={<StockWatch msgAlert={msgAlert} />}
                   />
                 )}
                 <Route path="/stocks/:symbol" element={<StockDetail />} />

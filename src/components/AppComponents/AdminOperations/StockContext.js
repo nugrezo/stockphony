@@ -1,15 +1,16 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { fetchAllStocksApi } from "../../../api/stockApi"; // Import the fetch API
+import { fetchAllStocksApi } from "../../../api/stockApi";
+import { fetchMarketScheduleApi } from "../../../api/marketScheduleApi"; // Import the fetch API for market schedule
 
 // Create the StockContext
 const StockContext = createContext();
 
-// StockProvider to manage the global stock state
+// StockProvider to manage the global stock and market schedule state
 export const StockProvider = ({ children, user }) => {
-  // Pass user here
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [marketSchedule, setMarketSchedule] = useState(null); // Add market schedule state
 
   const addStock = (newStock) => {
     setStocks((prevStocks) => [...prevStocks, newStock]);
@@ -19,9 +20,8 @@ export const StockProvider = ({ children, user }) => {
   const fetchAllStocks = async () => {
     try {
       if (user) {
-        // Only fetch if user exists
         setLoading(true);
-        const backendStocks = await fetchAllStocksApi(user); // Pass the entire user object
+        const backendStocks = await fetchAllStocksApi(user);
         setStocks(backendStocks);
         setLoading(false);
       }
@@ -32,16 +32,41 @@ export const StockProvider = ({ children, user }) => {
     }
   };
 
-  // Fetch all stocks when the user is signed in
+  // Fetch market schedule (admin-configured)
+  const fetchMarketSchedule = async () => {
+    try {
+      if (user) {
+        console.log("Fetching market schedule..."); // Log to track function call
+        const schedule = await fetchMarketScheduleApi(user); // Fetch schedule from the API
+        setMarketSchedule(schedule);
+        setError(null);
+        console.log("Fetched Market Schedule:", schedule);
+      }
+    } catch (err) {
+      console.error("Failed to fetch market schedule:", err);
+      setError("Failed to fetch market schedule.");
+    }
+  };
+
+  // Fetch all stocks and market schedule when the user is signed in
   useEffect(() => {
     if (user) {
       fetchAllStocks();
+      fetchMarketSchedule(); // Fetch the market schedule when the user is logged in
     }
   }, [user]);
 
   return (
     <StockContext.Provider
-      value={{ stocks, loading, error, fetchAllStocks, addStock }}
+      value={{
+        stocks,
+        loading,
+        error,
+        marketSchedule, // Pass market schedule to context
+        fetchAllStocks,
+        fetchMarketSchedule,
+        addStock,
+      }}
     >
       {children}
     </StockContext.Provider>

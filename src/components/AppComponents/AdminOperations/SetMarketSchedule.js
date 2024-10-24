@@ -1,38 +1,74 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { setMarketScheduleApi } from "../../../api/marketScheduleApi"; // Import the API function
 import "./SetMarketSchedule.css"; // Add styling for this component
 
-const SetMarketSchedule = () => {
-  // State for market open/close times and holidays
-  const [marketOpenTime, setMarketOpenTime] = useState("");
-  const [marketCloseTime, setMarketCloseTime] = useState("");
-  const [holidays, setHolidays] = useState(""); // Use a string or array depending on the format you want for holidays
+const SetMarketSchedule = ({ admin }) => {
+  const [formData, setFormData] = useState({
+    openTime: "",
+    closeTime: "",
+    holidays: "",
+  });
+
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Clear previous messages
     setMessage("");
     setError("");
 
+    const { openTime, closeTime, holidays } = formData;
+
     // Input validation
-    if (!marketOpenTime || !marketCloseTime) {
+    if (!openTime || !closeTime) {
       setError("Please specify both market open and close times.");
       return;
     }
 
-    try {
-      // Make API request to update market schedule
-      const response = await axios.post("/api/set-market-schedule", {
-        openTime: marketOpenTime,
-        closeTime: marketCloseTime,
-        holidays: holidays.split(",").map((holiday) => holiday.trim()), // Assuming holidays are input as a comma-separated string
-      });
+    console.log("Admin Token:", admin.token); // Log admin token for debugging
 
-      setMessage(response.data.message);
+    try {
+      // Call the API to set the market schedule
+      const response = await setMarketScheduleApi(
+        {
+          openTime,
+          closeTime,
+          holidays: holidays.split(",").map((holiday) => holiday.trim()), // Split and trim holidays string
+        },
+        admin.token // Pass the admin token for authorization
+      );
+
+      console.log("API Response:", response); // Log API response
+
+      // Instead of checking for `response.status`, check if the response contains a message
+      if (response.message) {
+        setMessage("Market schedule updated successfully!");
+
+        // Clear success message after 3 seconds
+        setTimeout(() => {
+          setMessage("");
+        }, 3000);
+
+        // Reset the form fields after successful submission
+        setFormData({
+          openTime: "",
+          closeTime: "",
+          holidays: "",
+        });
+      } else {
+        setError("Unexpected response from server. Please try again.");
+      }
     } catch (error) {
+      console.error("API Error:", error); // Log the error in detail
+
       setError("Failed to update market schedule. Please try again.");
     }
   };
@@ -42,23 +78,25 @@ const SetMarketSchedule = () => {
       <h1>Set Market Schedule</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="marketOpenTime">Market Open Time (UTC):</label>
+          <label htmlFor="openTime">Market Open Time (UTC):</label>
           <input
             type="time"
-            id="marketOpenTime"
-            value={marketOpenTime}
-            onChange={(e) => setMarketOpenTime(e.target.value)}
+            id="openTime"
+            name="openTime"
+            value={formData.openTime}
+            onChange={handleChange}
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="marketCloseTime">Market Close Time (UTC):</label>
+          <label htmlFor="closeTime">Market Close Time (UTC):</label>
           <input
             type="time"
-            id="marketCloseTime"
-            value={marketCloseTime}
-            onChange={(e) => setMarketCloseTime(e.target.value)}
+            id="closeTime"
+            name="closeTime"
+            value={formData.closeTime}
+            onChange={handleChange}
             required
           />
         </div>
@@ -70,8 +108,10 @@ const SetMarketSchedule = () => {
           <input
             type="text"
             id="holidays"
-            value={holidays}
-            onChange={(e) => setHolidays(e.target.value)}
+            name="holidays"
+            placeholder="e.g., 2024-12-25, 2024-01-01"
+            value={formData.holidays}
+            onChange={handleChange}
           />
         </div>
 
