@@ -3,18 +3,19 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import "./Header.css";
+import HamburgerMenu from "../AppComponents/HamburgerMenu/HamburgerMenu";
 
 const authenticatedUserOptions = (
   <Fragment>
     <Nav.Link className="sign-up" href="#stock-watch">
-      <Button variant="outline-light" className="sign-up-btn">
+      {/* <Button variant="outline-light" className="sign-up-btn">
         Stock Watch
-      </Button>
+      </Button> */}
     </Nav.Link>
     <Nav.Link className="sign-out" href="#sign-out">
-      <Button variant="outline-light" className="sign-out-btn">
+      {/* <Button variant="outline-light" className="sign-out-btn">
         Logout
-      </Button>
+      </Button> */}
     </Nav.Link>
   </Fragment>
 );
@@ -58,26 +59,26 @@ const alwaysOptions = <Fragment></Fragment>;
 
 const Header = ({ user, admin }) => (
   <Navbar className="navbar" expand="md">
-    {user || admin ? (
-      <Navbar.Brand className="brand">
-        <img
-          src={`${process.env.PUBLIC_URL}/logo.png`}
-          className="App-logo"
-          alt="logo"
-        />
-      </Navbar.Brand>
-    ) : (
-      <Navbar.Brand className="brand" href="#">
-        <img
-          src={`${process.env.PUBLIC_URL}/logo.png`}
-          className="App-logo"
-          alt="logo"
-        />
-      </Navbar.Brand>
-    )}
-    <Nav className="ml-auto">
+    <div>
+      {user || admin ? (
+        <Navbar.Brand className="brand">
+          <img
+            src={`${process.env.PUBLIC_URL}/logo.png`}
+            className="App-logo"
+            alt="logo"
+          />
+        </Navbar.Brand>
+      ) : (
+        <Navbar.Brand className="brand" href="#">
+          <img
+            src={`${process.env.PUBLIC_URL}/logo.png`}
+            className="App-logo"
+            alt="logo"
+          />
+        </Navbar.Brand>
+      )}
       {user && (
-        <span className="navbar-text mr-2">
+        <span className="navbar-text mr-1">
           Welcome, <strong>{user.username}</strong>
         </span>
       )}
@@ -86,6 +87,10 @@ const Header = ({ user, admin }) => (
           Admin Panel for <strong>{admin.adminID}</strong>
         </span>
       )}
+    </div>
+
+    <Nav className="ml-auto">
+      {user && <HamburgerMenu />}
       {alwaysOptions}
 
       {(() => {

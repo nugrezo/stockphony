@@ -1,0 +1,73 @@
+.hamburger-btn {
+  font-size: 48px;
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.menu-container {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 250px;
+  height: 100%;
+  background-color: #2e3348;
+  transition: left 0.4s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.menu-container.open {
+  left: 0;
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.menu-item {
+  color: #cfd9e6;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 15px 0;
+  transition: color 0.3s ease;
+}
+
+.menu-item:hover {
+  color: #18610b;
+  background-color: azure;
+  border-radius: 4px;
+}
+
+.menu-item.active {
+  background-color: azure; /* Background color when selected */
+  color: #18610b; /* Optional: Change text color when active */
+  border-radius: 4px; /* Ensure rounded corners */
+}
+
+.menu-icon {
+  margin-right: 10px; /* Add space between icon and text */
+  font-size: 20px; /* Adjust icon size */
+}
+
+.sign-out-btn {
+  margin-top: auto;
+  color: #ff7675;
+}
+
+.sign-out-btn:hover {
+  color: #e74c3c;
+  background-color: black;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: block;
+  }
+}
