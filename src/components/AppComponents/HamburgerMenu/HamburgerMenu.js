@@ -8,6 +8,8 @@ import {
   FaHistory,
   FaUserAlt,
   FaSignOutAlt,
+  FaChartLine, // Add icon for Investments
+  FaUniversity,
 } from "react-icons/fa";
 import "./HamburgerMenu.css";
 
@@ -58,6 +60,15 @@ const HamburgerMenu = () => {
             <FaEye className="menu-icon" /> Stock Watch
           </Nav.Link>
           <Nav.Link
+            href="#investments"
+            className={`menu-item ${
+              activeItem === "investments" ? "active" : ""
+            }`}
+            onClick={() => handleItemClick("investments")}
+          >
+            <FaChartLine className="menu-icon" /> Investments
+          </Nav.Link>
+          <Nav.Link
             href="#my-watchlist"
             className={`menu-item ${
               activeItem === "my-watchlist" ? "active" : ""
@@ -65,6 +76,15 @@ const HamburgerMenu = () => {
             onClick={() => handleItemClick("my-watchlist")}
           >
             <FaListAlt className="menu-icon" /> My Watchlist
+          </Nav.Link>
+          <Nav.Link
+            href="#bank-info"
+            className={`menu-item ${
+              activeItem === "bank-info" ? "active" : ""
+            }`}
+            onClick={() => handleItemClick("bank-info")}
+          >
+            <FaUniversity className="menu-icon" /> Bank Info
           </Nav.Link>
           <Nav.Link
             href="#transfer-funds"

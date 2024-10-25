@@ -19,6 +19,9 @@ import AdminSignOut from "../AuthComponents/AdminSignOut/AdminSignOut";
 import AdminOperations from "../AppComponents/AdminOperations/AdminOperations";
 import SetMarketSchedule from "../AppComponents/AdminOperations/SetMarketSchedule";
 import AddStock from "../AppComponents/AdminOperations/AddStock";
+import TransferFunds from "../AppComponents/TransferFunds/TransferFunds";
+import AccountInfo from "../AppComponents/AccountInfo/AccountInfo";
+import BankInfoForm from "../AppComponents/AccountInfo/BankInfoForm";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -116,6 +119,24 @@ function App() {
                   <Route
                     path="/stock-watch"
                     element={<StockWatch msgAlert={msgAlert} />}
+                  />
+                )}
+                {user && (
+                  <Route
+                    path="/transfer-funds"
+                    element={<TransferFunds msgAlert={msgAlert} />}
+                  />
+                )}
+                {user && (
+                  <Route
+                    path="/account-info"
+                    element={<AccountInfo user={user} msgAlert={msgAlert} />}
+                  />
+                )}
+                {user && (
+                  <Route
+                    path="/bank-info"
+                    element={<BankInfoForm user={user} msgAlert={msgAlert} />}
                   />
                 )}
                 <Route path="/stocks/:symbol" element={<StockDetail />} />

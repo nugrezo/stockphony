@@ -59,6 +59,7 @@ export const StockProvider = ({ children, user }) => {
   return (
     <StockContext.Provider
       value={{
+        user,
         stocks,
         loading,
         error,
