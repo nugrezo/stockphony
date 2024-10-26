@@ -2,7 +2,7 @@
 .sign-up-container {
   display: flex;
   font-family: "Arial", sans-serif;
-  min-height: 100vh;
+  min-height: 80vh;
 }
 
 .left-section-sign-up {
