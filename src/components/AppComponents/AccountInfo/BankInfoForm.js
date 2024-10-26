@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { getBankInfo, updateBankInfo } from "../../../api/accountApi"; // Import the API functions
+import {
+  getBankInfo,
+  updateBankInfo as updateBankInfoApi,
+} from "../../../api/accountApi"; // Import the API functions
+import { useStocks } from "../AdminOperations/StockContext"; // Import useStocks to access context
 import "./BankInfoForm.css"; // Import the CSS for styling
 
 const BankInfoForm = ({ user, msgAlert }) => {
+  const { updateBankInfo } = useStocks(); // Access updateBankInfo from context
+
   const [bankName, setBankName] = useState("");
   const [routingNumber, setRoutingNumber] = useState("");
   const [bankAccountNumber, setBankAccountNumber] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isFetching, setIsFetching] = useState(true); // State to check if fetching
+  const [isFetching, setIsFetching] = useState(true);
 
   // Fetch existing bank info when the component mounts
   useEffect(() => {
@@ -18,7 +24,6 @@ const BankInfoForm = ({ user, msgAlert }) => {
         setIsFetching(true); // Set loading state
         const response = await getBankInfo(user.token); // Fetch bank info from API
 
-        // Log the response to ensure correct data structure is received
         console.log("Fetched Bank Info:", response.data);
 
         // Destructure the bank info data and set the state
@@ -29,9 +34,12 @@ const BankInfoForm = ({ user, msgAlert }) => {
         setRoutingNumber(routingNumber || "");
         setBankAccountNumber(bankAccountNumber || "");
 
+        // Update context with fetched bank info
+        updateBankInfo({ bankName, routingNumber, bankAccountNumber });
+
         setIsFetching(false); // Turn off loading state
       } catch (error) {
-        console.error("Error fetching bank info:", error); // Log the error for debugging
+        console.error("Error fetching bank info:", error);
         setIsFetching(false);
         msgAlert({
           heading: "Error",
@@ -69,18 +77,23 @@ const BankInfoForm = ({ user, msgAlert }) => {
         routingNumber,
         bankAccountNumber,
       };
-      setBankName("");
-      setRoutingNumber("");
-      setBankAccountNumber("");
 
       // Make API call to update bank info
-      await updateBankInfo(user.token, bankInfo);
+      await updateBankInfoApi(user.token, bankInfo);
+
+      // Update context with the newly submitted bank info
+      updateBankInfo(bankInfo);
 
       msgAlert({
         heading: "Success",
         message: "Bank information updated successfully!",
         variant: "success",
       });
+
+      // Optionally clear the form fields after successful submission
+      setBankName("");
+      setRoutingNumber("");
+      setBankAccountNumber("");
     } catch (error) {
       msgAlert({
         heading: "Update Failed",

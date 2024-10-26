@@ -2,105 +2,81 @@
 .transfer-funds {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Move everything up */
+  justify-content: flex-start;
   align-items: center;
-  min-height: 70vh; /* Reduce height to bring the form closer to the header */
-  padding-top: 1.5rem; /* Reduce padding from the top */
+  min-height: 70vh;
+  margin: auto;
+  padding-top: 1.5rem;
   background-color: #000;
   color: #fff;
   font-family: "Arial", sans-serif;
 }
 
-/* Form container */
+/* Form container with border */
 .transfer-funds-container {
-  width: 100%; /* Full width container */
-  max-width: 500px; /* Ensure consistent max width */
-  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  padding: 1rem;
   background-color: #000;
   color: #fff;
-  border: 1px solid #2b8a3e;
   border-radius: 10px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Spacing between form groups */
+.transfer-funds-form-group {
+  margin-bottom: 1.5rem; /* Adjust the margin as needed for desired spacing */
 }
 
 /* Title styling */
 .transfer-funds h2 {
   font-size: 28px;
   font-weight: 600;
-  margin-bottom: 2rem; /* Add space below the title */
+  margin-bottom: 2rem;
   text-align: center;
 }
 
-/* Form field spacing */
+/* Form field styling */
 .transfer-funds .form-group {
-  width: 100%; /* Ensure all form fields are the same width */
-  margin-bottom: 2.25rem; /* Increased space between fields */
+  width: 100%;
+  margin-bottom: 1.5rem; /* Add more space between fields */
 }
 
 /* Label Styling */
 .transfer-funds .form-label {
   font-weight: 600;
   color: #fff;
+  margin-bottom: 0.5rem;
 }
 
 /* Dropdown select styling */
 .transfer-funds .form-select {
-  width: 100%; /* Full width for consistency */
+  width: 100%;
   background-color: #000;
-  color: #1abc9c; /* Green text color */
+  color: #1abc9c;
   border: 1px solid #2b8a3e;
   border-radius: 5px;
   padding: 10px;
   font-size: 16px;
-  appearance: none; /* Remove default dropdown appearance */
-  -webkit-appearance: none; /* For Safari */
-  -moz-appearance: none; /* For Firefox */
+  appearance: none;
   transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
 }
 
-/* Dropdown option styling */
-.transfer-funds .form-select option {
-  background-color: #1a1a1a; /* Dark background for dropdown options */
-  color: #fff; /* White text for better readability */
-}
-
-/* Dropdown hover and focus styling */
-.transfer-funds .form-select:hover,
-.transfer-funds .form-select:focus {
-  background-color: #2b2b2b; /* Slightly lighter background on hover/focus */
-  color: #1abc9c; /* Green text color on hover/focus */
-  border-color: #1abc9c; /* Green border on hover/focus */
-  box-shadow: 0 0 5px rgba(43, 138, 62, 0.5);
-  outline: none;
-}
-
 /* Input fields styling */
 .transfer-funds .form-control {
-  width: 100%; /* Full width for consistency */
+  width: 100%;
   background-color: #000;
-  color: #1abc9c; /* Same green text color as dropdown */
+  color: #1abc9c;
   border: 1px solid #2b8a3e;
   border-radius: 5px;
   padding: 10px;
   font-size: 16px;
-}
-
-/* Placeholder text color in input fields */
-.transfer-funds .form-control::placeholder {
-  color: #555; /* Darker grey for placeholders */
-}
-
-/* Input field focus state */
-.transfer-funds .form-control:focus {
-  border-color: #1abc9c;
-  box-shadow: 0 0 5px rgba(43, 138, 62, 0.5); /* Green shadow on focus */
-  outline: none;
 }
 
 /* Button styling */
@@ -111,7 +87,7 @@
   font-size: 16px;
   font-weight: 600;
   padding: 15px;
-  width: 100%; /* Full width for the button */
+  width: 100%;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -122,4 +98,45 @@
 .transfer-funds .btn-primary:hover {
   background-color: #2b8a3e;
   color: white;
+}
+
+/* Bank details container styling */
+.bank-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #2b8a3e;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: #1a1a1a;
+}
+
+/* Bank details headers row */
+.bank-details .bank-item.header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  padding: 10px 0;
+  width: 100%;
+  color: #1abc9c;
+  border-bottom: 1px solid #2b8a3e;
+}
+
+/* Bank details values row */
+.bank-details .bank-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 0;
+}
+
+/* Center-align and add padding to each span in bank details */
+.bank-details .bank-item span {
+  flex: 1;
+  text-align: center;
+  color: #fff;
+  padding: 0 10px;
 }

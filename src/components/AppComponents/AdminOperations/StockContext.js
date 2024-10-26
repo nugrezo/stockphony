@@ -11,9 +11,23 @@ export const StockProvider = ({ children, user }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [marketSchedule, setMarketSchedule] = useState(null); // Add market schedule state
+  const [buyingPower, setBuyingPower] = useState(0); // New buying power state
+  const [bankInfo, setBankInfo] = useState(null);
 
   const addStock = (newStock) => {
     setStocks((prevStocks) => [...prevStocks, newStock]);
+  };
+
+  const increaseBuyingPower = (amount) => {
+    setBuyingPower((prev) => prev + amount);
+  };
+
+  const decreaseBuyingPower = (amount) => {
+    setBuyingPower((prev) => Math.max(0, prev - amount));
+  };
+
+  const updateBankInfo = (info) => {
+    setBankInfo(info);
   };
 
   // Fetch all stocks (backend + any other sources like APIs)
@@ -64,9 +78,14 @@ export const StockProvider = ({ children, user }) => {
         loading,
         error,
         marketSchedule, // Pass market schedule to context
+        buyingPower, // Provide buying power in context
+        bankInfo,
+        updateBankInfo,
         fetchAllStocks,
         fetchMarketSchedule,
         addStock,
+        increaseBuyingPower, // Provide functions to adjust buying power
+        decreaseBuyingPower,
       }}
     >
       {children}

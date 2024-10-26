@@ -22,6 +22,7 @@ import AddStock from "../AppComponents/AdminOperations/AddStock";
 import TransferFunds from "../AppComponents/TransferFunds/TransferFunds";
 import AccountInfo from "../AppComponents/AccountInfo/AccountInfo";
 import BankInfoForm from "../AppComponents/AccountInfo/BankInfoForm";
+import Investments from "../AppComponents/Investments/Investments";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -137,6 +138,12 @@ function App() {
                   <Route
                     path="/bank-info"
                     element={<BankInfoForm user={user} msgAlert={msgAlert} />}
+                  />
+                )}
+                {user && (
+                  <Route
+                    path="/investments"
+                    element={<Investments user={user} msgAlert={msgAlert} />}
                   />
                 )}
                 <Route path="/stocks/:symbol" element={<StockDetail />} />

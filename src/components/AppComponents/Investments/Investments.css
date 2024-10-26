@@ -1,0 +1,82 @@
+/* Container for the Investments component */
+.investments-container {
+  color: white;
+  background-color: #121212;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+/* Graph styling */
+.investment-graph {
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+/* General styling for each section like Buying Power, Stock Investment, and Total Investment */
+.investment-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 1.1em;
+  border-bottom: 1px solid green;
+  cursor: pointer;
+}
+
+/* Styling for the Total Investment section */
+.investment-info.total {
+  border-top: 2px solid green;
+  padding-top: 15px;
+  margin-top: 15px;
+  cursor: default;
+}
+
+/* Bold label text */
+.label {
+  font-weight: bold;
+}
+
+/* Green-colored amount values */
+.amount {
+  color: green;
+}
+
+/* Container for the stock investments section */
+.stock-investments {
+  max-height: 500px;
+  overflow-y: auto;
+  transition: max-height 0.6s ease;
+}
+
+/* Styling each stock item row with grid layout */
+.stock-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; /* Six equal-width columns */
+  gap: 10px; /* Space between columns */
+  padding: 10px;
+  background: #1a1a1a;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+/* Header row styling */
+.stock-item.header {
+  font-weight: bold;
+  background: #333333;
+  padding: 10px 0;
+}
+
+/* Center align text in all cells and add padding */
+.stock-item span {
+  text-align: center;
+  white-space: nowrap;
+  padding: 5px 0;
+}
+
+/* Additional styling for header text */
+.stock-item.header span {
+  color: white;
+}
