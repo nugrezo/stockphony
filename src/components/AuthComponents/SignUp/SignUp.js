@@ -86,6 +86,7 @@ const SignUp = ({ msgAlert, setUser }) => {
     useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fullNameIsValid, setFullNameIsValid] = useState(true);
+  const [showFormGroups, setShowFormGroups] = useState(false);
 
   useEffect(() => {
     setFormData({
@@ -126,6 +127,10 @@ const SignUp = ({ msgAlert, setUser }) => {
     } else if (name === "passwordConfirmation") {
       setPasswordConfirmationIsValid(value === formData.password);
     }
+  };
+
+  const handleSignUpClick = () => {
+    setShowFormGroups(true);
   };
 
   const onSignUp = async (event) => {
@@ -182,7 +187,12 @@ const SignUp = ({ msgAlert, setUser }) => {
         <div className="sign-up-form">
           <h3 className="sign-up--title">Create an Account</h3>
           <Form className="sign-up--form" onSubmit={onSignUp}>
-            <Form.Group controlId="fullname">
+            <Form.Group
+              controlId="fullname"
+              className={
+                showFormGroups ? "form-group-visible" : "form-group-hidden"
+              }
+            >
               <Form.Label>Full Name</Form.Label>
               <div className="input-wrapper">
                 <Form.Control
@@ -210,7 +220,12 @@ const SignUp = ({ msgAlert, setUser }) => {
                 </Form.Text>
               )}
             </Form.Group>
-            <Form.Group controlId="email">
+            <Form.Group
+              controlId="email"
+              className={
+                showFormGroups ? "form-group-visible" : "form-group-hidden"
+              }
+            >
               <Form.Label>Email address</Form.Label>
               <div className="input-wrapper">
                 <Form.Control
@@ -239,7 +254,12 @@ const SignUp = ({ msgAlert, setUser }) => {
               )}
             </Form.Group>
 
-            <Form.Group controlId="username">
+            <Form.Group
+              controlId="username"
+              className={
+                showFormGroups ? "form-group-visible" : "form-group-hidden"
+              }
+            >
               <Form.Label>User Name</Form.Label>
               <div className="input-wrapper">
                 <Form.Control
@@ -268,7 +288,12 @@ const SignUp = ({ msgAlert, setUser }) => {
                 </Form.Text>
               )}
             </Form.Group>
-            <Form.Group controlId="password">
+            <Form.Group
+              controlId="password"
+              className={
+                showFormGroups ? "form-group-visible" : "form-group-hidden"
+              }
+            >
               <Form.Label>Password</Form.Label>
               <div className="input-wrapper">
                 <Form.Control
@@ -296,7 +321,12 @@ const SignUp = ({ msgAlert, setUser }) => {
                 </Form.Text>
               )}
             </Form.Group>
-            <Form.Group controlId="passwordConfirmation">
+            <Form.Group
+              controlId="passwordConfirmation"
+              className={
+                showFormGroups ? "form-group-visible" : "form-group-hidden"
+              }
+            >
               <Form.Label>Password Confirmation</Form.Label>
               <div className="input-wrapper">
                 <Form.Control
@@ -328,7 +358,11 @@ const SignUp = ({ msgAlert, setUser }) => {
                   </Form.Text>
                 )}
             </Form.Group>
-            <Button className="sign-up--btn" type="submit">
+            <Button
+              className="sign-up--btn"
+              type="submit"
+              onClick={handleSignUpClick}
+            >
               {loading ? <DotsLoader /> : "Sign Up"}
             </Button>
             <div className="navigate-sign-in">
