@@ -136,7 +136,7 @@ const AddStock = ({ admin }) => {
     <div className="add-stock-container">
       <h1>Add New Stock</h1>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="form-group-add-new-stock">
           <label htmlFor="companyName">Company Name:</label>
           <input
             type="text"
@@ -148,7 +148,7 @@ const AddStock = ({ admin }) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group-add-new-stock">
           <label htmlFor="stockTicker">Stock Ticker (Symbol):</label>
           <input
             type="text"
@@ -160,7 +160,7 @@ const AddStock = ({ admin }) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group-add-new-stock">
           <label htmlFor="stockVolume">Stock Volume (Shares Available):</label>
           <input
             type="number"
@@ -172,7 +172,7 @@ const AddStock = ({ admin }) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group-add-new-stock">
           <label htmlFor="initialPrice">Initial Price ($):</label>
           <input
             type="number"
@@ -184,7 +184,7 @@ const AddStock = ({ admin }) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group-add-new-stock">
           <label htmlFor="dayHigh">Day High ($):</label>
           <input
             type="number"
@@ -196,7 +196,7 @@ const AddStock = ({ admin }) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group-add-new-stock">
           <label htmlFor="dayLow">Day Low ($):</label>
           <input
             type="number"

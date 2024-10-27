@@ -77,7 +77,7 @@ const SetMarketSchedule = ({ admin }) => {
     <div className="set-market-schedule-container">
       <h1>Set Market Schedule</h1>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="form-group-set-market-schedule">
           <label htmlFor="openTime">Market Open Time (UTC):</label>
           <input
             type="time"
@@ -89,7 +89,7 @@ const SetMarketSchedule = ({ admin }) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group-set-market-schedule">
           <label htmlFor="closeTime">Market Close Time (UTC):</label>
           <input
             type="time"
@@ -101,7 +101,7 @@ const SetMarketSchedule = ({ admin }) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group-set-market-schedule">
           <label htmlFor="holidays">
             Set Holidays (comma-separated, e.g., 2024-12-25, 2024-01-01):
           </label>
@@ -115,7 +115,7 @@ const SetMarketSchedule = ({ admin }) => {
           />
         </div>
 
-        <button type="submit" className="submit-btn">
+        <button type="submit" className="submit-btn-set-market-schedule">
           Set Market Schedule
         </button>
       </form>

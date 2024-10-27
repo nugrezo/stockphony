@@ -3,7 +3,8 @@
   padding: 20px;
   max-width: 600px;
   margin: 40px auto;
-  background-color: #f9f9f9;
+  background-color: #000;
+  border: 1px solid #007bff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -13,7 +14,7 @@
   text-align: center;
   font-size: 28px;
   margin-bottom: 20px;
-  color: #333;
+  color: #007bff;
 }
 
 /* Form group container */
@@ -22,11 +23,14 @@
 }
 
 /* Labels for input fields */
-.form-group label {
+.form-group-set-market-schedule {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
-  color: #555;
+}
+
+.form-group-set-market-schedule label {
+  color: #007bff;
 }
 
 /* Time and text input fields */
@@ -38,9 +42,16 @@ input[type="text"] {
   border-radius: 5px;
   border: 1px solid #ccc;
   background-color: #fff;
-  color: #696969bb;
+  color: green;
   box-sizing: border-box;
   transition: border-color 0.3s;
+}
+
+#openTime,
+#closeTime,
+#holidays {
+  color: #000;
+  background-color: #fff;
 }
 
 /* Add focus style to inputs */
@@ -52,7 +63,7 @@ input[type="text"]:focus {
 }
 
 /* Submit button */
-button.submit-btn {
+.submit-btn-set-market-schedule {
   width: 100%;
   padding: 12px;
   font-size: 16px;
@@ -63,11 +74,6 @@ button.submit-btn {
   cursor: pointer;
   transition: background-color 0.3s;
   margin-top: 10px;
-}
-
-/* Submit button hover state */
-button.submit-btn:hover {
-  background-color: #0056b3;
 }
 
 /* Success message styling */

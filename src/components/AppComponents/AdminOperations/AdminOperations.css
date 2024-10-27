@@ -1,7 +1,5 @@
-html,
-body {
-  height: 100%;
-  margin: 0;
+.admin-operation {
+  min-height: 80vh;
 }
 
 .admin-operations-container {
@@ -9,36 +7,59 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   padding: 20px;
-  height: 100vh;
+  margin: 0 auto;
+}
+
+.admin-operations-header {
+  color: #d5ff00;
+  margin-top: 2rem;
 }
 
 .admin-operations-section h2 {
-  color: #007bff;
+  margin: 0; /* Remove any gap around h2 */
+  padding: 12px; /* Add padding for text */
+  border-top-left-radius: 10px; /* Match section's border radius */
+  border-top-right-radius: 10px; /* Match section's border radius */
+  color: #fff;
+  background-color: #007bff;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.admin-operations-section-add-stock h2 {
+  margin: 0; /* Remove any gap around h2 */
+  padding: 12px; /* Add padding for text */
+  border-top-left-radius: 10px; /* Match section's border radius */
+  border-top-right-radius: 10px; /* Match section's border radius */
+  color: #fff;
+  background-color: green;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .admin-operations-section {
-  width: 48%; /* Each section takes up almost half the space */
-  background-color: #f4f4f4;
-  padding: 20px;
+  width: 36%; /* Each section takes up almost half the space */
+  background-color: #000;
+  color: #007bff;
+  margin: auto;
   border-radius: 10px;
+  border: 1px solid #007bff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .admin-operations-section-add-stock {
-  width: 48%; /* Each section takes up almost half the space */
-  background-color: #f4f4f4;
-  padding: 20px;
+  width: 36%; /* Each section takes up almost half the space */
+  background-color: #000;
+  color: green;
+  margin: auto;
   border-radius: 10px;
+  border: 1px solid green;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.admin-operations-section-add-stock h2 {
-  color: #2b8a3e;
 }
 
 .admin-operation-btn {
   display: block;
-  width: 100%;
+  width: 80%;
   padding: 10px;
   font-size: 16px;
   color: white;
@@ -47,31 +68,43 @@ body {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
+  margin: auto;
+  margin-bottom: 2rem;
 }
 
 .admin-operation-btn-add-stock {
   display: block;
-  width: 100%;
+  width: 80%;
   padding: 10px;
   font-size: 16px;
   color: white;
-  background-color: #2b8a3e;
+  background-color: green;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
+  margin: auto;
+  margin-bottom: 2rem;
 }
 
 .admin-operation-btn:hover {
   background-color: #0056b3;
 }
 
-h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+.admin-operations-section p {
+  font-size: 16px;
+  margin: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  width: 80%;
+  padding: 10px;
 }
 
-p {
+.admin-operations-section-add-stock p {
   font-size: 16px;
-  margin-bottom: 20px;
+  margin: auto;
+  margin-top: 3.6rem;
+  margin-bottom: 3.6rem;
+  width: 80%;
+  padding: 10px;
 }
