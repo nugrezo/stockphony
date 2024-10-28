@@ -1,0 +1,85 @@
+/* SellPage.css */
+
+/* Main container styling for SellPage */
+.sell-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 500px;
+  justify-content: center;
+  background-color: #fde8e8; /* Light red background */
+  padding: 2rem;
+  min-height: 60vh;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+/* Header for SellPage */
+.sell-page-container h1 {
+  font-size: 2rem;
+  color: #dc3545; /* Red for Sell header */
+  margin-bottom: 1rem;
+}
+
+/* Labels for form inputs */
+.sell-page-container label {
+  font-weight: bold;
+  margin-top: 1rem;
+  display: block;
+  color: #000;
+}
+
+/* Input fields */
+.sell-page-container input[type="number"],
+.sell-page-container select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #dc3545;
+  border-radius: 5px;
+  color: #000;
+}
+
+/* Confirm Sell button */
+.sell-page-container .confirm-btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #dc3545;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.sell-page-container .confirm-btn:hover {
+  background-color: #c82333;
+}
+
+/* Cancel button */
+.sell-page-container .cancel-btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #28a745;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.sell-page-container .cancel-btn:hover {
+  background-color: #218838;
+}
+
+/* Input container for form elements */
+.sell-page-container .input-container {
+  max-width: 400px;
+  width: 100%;
+}

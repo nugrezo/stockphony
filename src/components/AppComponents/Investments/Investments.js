@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useStocks } from "../AdminOperations/StockContext"; // Import StockContext to access buyingPower
+import { useStocks } from "../AdminOperations/StockContext"; // Access StockContext to get investments and buying power
 import "./Investments.css";
 
 // Register required chart.js components
@@ -29,7 +29,7 @@ const sampleGraphData = {
   datasets: [
     {
       label: "Total Investment",
-      data: [1000, 1500, 1300, 1800, 2000],
+      data: [1000, 1500, 1300, 1800, 2000], // Example static data for now
       borderColor: "green",
       backgroundColor: "rgba(0, 128, 0, 0.2)",
       tension: 0.3,
@@ -37,31 +37,14 @@ const sampleGraphData = {
   ],
 };
 
-const sampleStockInvestments = [
-  {
-    name: "AAPL",
-    date: "2023-10-01",
-    shares: 10,
-    purchasePrice: 150,
-    avgCost: 160,
-  },
-  {
-    name: "TSLA",
-    date: "2023-08-15",
-    shares: 5,
-    purchasePrice: 700,
-    avgCost: 720,
-  },
-];
-
 const Investments = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Access buyingPower from StockContext
-  const { buyingPower } = useStocks();
+  // Access investments and buyingPower from StockContext
+  const { investments, buyingPower } = useStocks();
 
   // Calculate total stock investment amount
-  const totalStockInvestment = sampleStockInvestments.reduce(
+  const totalStockInvestment = investments.reduce(
     (total, stock) => total + stock.shares * stock.avgCost,
     0
   );
@@ -108,14 +91,19 @@ const Investments = () => {
             <span>Amount</span>
           </div>
 
-          {/* Stock Data */}
-          {sampleStockInvestments.map((stock, index) => (
+          {/* Dynamic Stock Data */}
+          {investments.map((stock, index) => (
             <div key={index} className="stock-item">
               <span>{stock.name}</span>
               <span>{stock.date}</span>
               <span>{stock.shares}</span>
-              <span>${stock.purchasePrice}</span>
-              <span>${stock.avgCost}</span>
+              <span>${stock.purchasePrice.toFixed(2)}</span>
+              <span>
+                $
+                {typeof stock.avgCost === "number"
+                  ? stock.avgCost.toFixed(2)
+                  : "N/A"}
+              </span>
               <span>${(stock.shares * stock.avgCost).toFixed(2)}</span>
             </div>
           ))}

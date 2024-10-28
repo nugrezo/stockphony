@@ -23,6 +23,10 @@ import TransferFunds from "../AppComponents/TransferFunds/TransferFunds";
 import AccountInfo from "../AppComponents/AccountInfo/AccountInfo";
 import BankInfoForm from "../AppComponents/AccountInfo/BankInfoForm";
 import Investments from "../AppComponents/Investments/Investments";
+import BuyPage from "../AppComponents/BuyPage/BuyPage";
+import SellPage from "../AppComponents/SellPage/SellPage";
+// import BuyPage from "../AppComponents/BuyPage/BuyPage";
+// import SellPage from "../AppComponents/SellPage/SellPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -122,6 +126,14 @@ function App() {
                     element={<StockWatch msgAlert={msgAlert} />}
                   />
                 )}
+                <Route
+                  path="/buy/:stockTicker"
+                  element={<BuyPage msgAlert={msgAlert} />}
+                />
+                <Route
+                  path="/sell/:stockTicker"
+                  element={<SellPage msgAlert={msgAlert} />}
+                />
                 {user && (
                   <Route
                     path="/transfer-funds"
@@ -146,6 +158,7 @@ function App() {
                     element={<Investments user={user} msgAlert={msgAlert} />}
                   />
                 )}
+
                 <Route path="/stocks/:symbol" element={<StockDetail />} />
                 <Route path="/add-stock" element={<AddStock admin={admin} />} />
               </Routes>

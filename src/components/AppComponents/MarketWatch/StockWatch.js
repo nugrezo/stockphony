@@ -1,19 +1,18 @@
+// StockWatch.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useStocks } from "../AdminOperations/StockContext";
 import "./StockWatch.css";
 
 const StockWatch = () => {
-  const { stocks, loading, error, marketSchedule } = useStocks(); // Get stocks and market schedule from the context
+  const { stocks, loading, error, marketSchedule } = useStocks();
+  const navigate = useNavigate();
 
-  const today = new Date().toISOString().split("T")[0]; // Get today's date in 'YYYY-MM-DD' format
-
-  // If no market schedule is set, treat the market as closed (no fallback to default times)
+  const today = new Date().toISOString().split("T")[0];
   const openTime = marketSchedule?.openTime || null;
   const closeTime = marketSchedule?.closeTime || null;
   const holidays = marketSchedule?.holidays || [];
 
-  // Get current time in 'America/New_York' timezone in 'HH:mm' format
   const currentTime = new Date().toLocaleTimeString("en-US", {
     timeZone: "America/New_York",
     hour12: false,
@@ -21,32 +20,19 @@ const StockWatch = () => {
     minute: "2-digit",
   });
 
-  // Debugging: Log the current time and open/close times
-  console.log("Current Time:", currentTime); // Log current time for debugging
-  console.log("Market Open Time:", openTime); // Log market open time
-  console.log("Market Close Time:", closeTime); // Log market close time
-
-  // Handle whether today is a holiday
   const isHoliday = holidays.includes(today);
-
-  // Handle market open/close logic, including cases when the market closes after midnight
   let isMarketOpen = false;
   let marketMessage = "";
 
   if (!openTime || !closeTime) {
-    // If there is no open or close time set by admin, consider the market as closed
     marketMessage = "The market schedule has not been set by the admin.";
   } else {
-    // Check if the market schedule spans over midnight
     const crossesMidnight = openTime > closeTime;
-
     if (crossesMidnight) {
-      // Market is open if the current time is after the openTime or before the closeTime (spanning midnight)
       isMarketOpen =
         (currentTime >= openTime && currentTime <= "23:59") ||
         (currentTime >= "00:00" && currentTime <= closeTime);
     } else {
-      // Regular market hours
       isMarketOpen = currentTime >= openTime && currentTime <= closeTime;
     }
 
@@ -59,16 +45,17 @@ const StockWatch = () => {
     }
   }
 
-  // Handle loading and error states
-  if (loading) {
-    return <p>Loading stocks...</p>;
-  }
+  const handleNavigate = (type, stock) => {
+    const path =
+      type === "buy"
+        ? `/buy/${stock.stockTicker}`
+        : `/sell/${stock.stockTicker}`;
+    navigate(path);
+  };
 
-  if (error) {
-    return <p>{error}</p>;
-  }
+  if (loading) return <p>Loading stocks...</p>;
+  if (error) return <p>{error}</p>;
 
-  // Render stock data
   const stockRows = stocks.map((stock) => {
     const changeClass =
       stock.change > 0 ? "flash-green" : stock.change < 0 ? "flash-red" : "";
@@ -100,8 +87,18 @@ const StockWatch = () => {
         </td>
         <td className="actions-column">
           <div className="actions-btn">
-            <button className="stock-btn buy-btn">Buy</button>
-            <button className="stock-btn sell-btn">Sell</button>
+            <button
+              className="stock-btn buy-btn"
+              onClick={() => handleNavigate("buy", stock)}
+            >
+              Buy
+            </button>
+            <button
+              className="stock-btn sell-btn"
+              onClick={() => handleNavigate("sell", stock)}
+            >
+              Sell
+            </button>
           </div>
         </td>
       </tr>
@@ -111,8 +108,7 @@ const StockWatch = () => {
   return (
     <div className="stock-watch-container">
       <h1>Stock Market Watch</h1>
-      <p>{marketMessage}</p> {/* Display market open/close/holiday messages */}
-      {/* Show table only if the market is open and it's not a holiday */}
+      <p>{marketMessage}</p>
       {isMarketOpen && !isHoliday && (
         <table className="stock-table">
           <thead>
