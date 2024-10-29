@@ -7,6 +7,7 @@ import "./TransferFunds.css";
 import { transferFundsApi } from "../../../api/transferFundsApi"; // Import transfer API
 import { useStocks } from "../AdminOperations/StockContext";
 import { updateBuyingPower } from "../../../api/buyingPowerApi"; // Direct import for updateBuyingPower
+import { createTransaction } from "../../../api/transactionsHistoryApi";
 
 const TransferFunds = ({ msgAlert }) => {
   const {
@@ -32,6 +33,7 @@ const TransferFunds = ({ msgAlert }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("Transfer Type on Submit:", transferType); // Log the type on submit
 
     if (!selectedBank) {
       msgAlert({
@@ -74,6 +76,20 @@ const TransferFunds = ({ msgAlert }) => {
 
       // Call transferFundsApi to process the transfer
       await transferFundsApi(transferData, user.token);
+      const transactionType =
+        transferType === "toStockphony" ? "deposit" : "withdrawal";
+      const transactionAmount =
+        transferType === "fromStockphony" ? -Math.abs(amount) : amount;
+
+      const transactionData = {
+        transactionType,
+        bankName: bankInfo.bankName,
+        routingNumber: bankInfo.routingNumber,
+        bankAccount: bankInfo.bankAccountNumber,
+        amount: transactionAmount,
+      };
+      await createTransaction(user, transactionData);
+      console.log("Transaction recorded successfully.");
 
       msgAlert({
         heading: "Transfer Success",

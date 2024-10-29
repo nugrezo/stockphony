@@ -8,10 +8,19 @@ const TransactionHistory = ({ user }) => {
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState(null);
 
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+    }).format(amount);
+  };
+
   useEffect(() => {
     const loadTransactions = async () => {
       try {
         const response = await fetchTransactionsHistory(user);
+        console.log("Fetched Transactions:", response.data.transactions);
 
         // Check if the response data is structured as { transactions: [...] }
         setTransactions(response.data.transactions || []);
@@ -56,7 +65,7 @@ const TransactionHistory = ({ user }) => {
                   transaction.amount >= 0 ? "positive" : "negative"
                 }`}
               >
-                ${Math.abs(transaction.amount).toFixed(2)}
+                {formatCurrency(transaction.amount)} {/* Format the amount */}
               </span>
             </div>
           ))}
