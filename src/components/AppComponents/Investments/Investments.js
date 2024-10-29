@@ -52,8 +52,18 @@ const Investments = () => {
   // Calculate total investment including buyingPower
   const totalInvestment = buyingPower + totalStockInvestment;
 
+  // Toggle expand/collapse for investment details
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
+  };
+
+  // Format dates to a readable format
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
   };
 
   return (
@@ -94,8 +104,8 @@ const Investments = () => {
           {/* Dynamic Stock Data */}
           {investments.map((stock, index) => (
             <div key={index} className="stock-item">
-              <span>{stock.name}</span>
-              <span>{stock.date}</span>
+              <span>{stock.stockTicker}</span>
+              <span>{formatDate(stock.date)}</span> {/* Format Date Here */}
               <span>{stock.shares}</span>
               <span>${stock.purchasePrice.toFixed(2)}</span>
               <span>

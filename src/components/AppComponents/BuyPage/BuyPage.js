@@ -1,41 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useStocks } from "../AdminOperations/StockContext";
-import "./BuyPage.css";
+import { createInvestment } from "../../../api/investmentApi";
+import "./BuyPage.css"; // Ensure CSS changes are here
 
-const BuyPage = ({ msgAlert }) => {
+const BuyPage = ({ msgAlert, user }) => {
   const { stockTicker } = useParams();
-  const { getStockPrice, buyingPower, decreaseBuyingPower, addInvestment } =
-    useStocks();
-
-  const [buyInType, setBuyInType] = useState("dollars");
-  const [limitOrderType, setLimitOrderType] = useState("market");
-  const [amount, setAmount] = useState("");
-  const [priceLimit, setPriceLimit] = useState("");
-  const [totalAmount, setTotalAmount] = useState("");
-  const [shares, setShares] = useState(""); // Track whole-number shares
+  const {
+    getStockPrice,
+    buyingPower,
+    decreaseBuyingPower,
+    addInvestment,
+    updateBuyingPower,
+  } = useStocks();
+  const [buyInType, setBuyInType] = useState("dollars"); // Choose between buying in dollars or shares
+  const [limitOrderType, setLimitOrderType] = useState("market"); // Choose market or limit order
+  const [amount, setAmount] = useState(""); // User input for amount to buy in dollars or shares
+  const [priceLimit, setPriceLimit] = useState(""); // User-defined price for limit order
+  const [totalAmount, setTotalAmount] = useState(""); // Total amount in dollars calculated based on shares or dollar input
+  const [shares, setShares] = useState(""); // Calculated shares to buy based on input amount
   const navigate = useNavigate();
 
   const marketPrice = getStockPrice(stockTicker);
 
+  // Automatically set the price limit to the market price when the order type is market
   useEffect(() => {
     if (limitOrderType === "market") {
       setPriceLimit(marketPrice);
     }
   }, [limitOrderType, marketPrice]);
 
+  // Update total amount and shares based on `buyInType`
   useEffect(() => {
     if (buyInType === "shares") {
-      setShares(Math.floor(amount)); // Ensure only whole number shares are bought
+      setShares(Math.floor(amount));
       setTotalAmount((Math.floor(amount) * marketPrice).toFixed(2));
     } else if (buyInType === "dollars" && amount) {
       const calculatedShares = Math.floor(amount / marketPrice);
-      setShares(calculatedShares); // Display the whole number shares based on dollar amount
+      setShares(calculatedShares);
       setTotalAmount((calculatedShares * marketPrice).toFixed(2));
     }
   }, [amount, marketPrice, buyInType]);
 
-  const handleBuy = () => {
+  const handleBuy = async () => {
     if (!amount || amount <= 0) {
       msgAlert({
         heading: "Invalid Input",
@@ -48,17 +55,14 @@ const BuyPage = ({ msgAlert }) => {
     let cost;
     let sharesToBuy;
 
-    // Calculate based on buying mode (dollars or shares)
     if (buyInType === "shares") {
-      sharesToBuy = Math.floor(amount); // Round shares to nearest whole
+      sharesToBuy = Math.floor(amount);
       cost = sharesToBuy * marketPrice;
     } else {
-      // Calculate shares to buy with given dollar amount and round down
       sharesToBuy = Math.floor(amount / marketPrice);
-      cost = sharesToBuy * marketPrice; // Total cost based on shares that can actually be bought
+      cost = sharesToBuy * marketPrice;
     }
 
-    // Check if buyingPower is sufficient for the actual cost
     if (cost > buyingPower) {
       msgAlert({
         heading: "Insufficient Funds",
@@ -68,24 +72,46 @@ const BuyPage = ({ msgAlert }) => {
       return;
     }
 
-    // Deduct actual cost from buying power
+    // Decrease locally
     decreaseBuyingPower(cost);
 
-    // Add the new investment
-    addInvestment({
-      name: stockTicker,
-      date: new Date().toISOString().split("T")[0],
+    // Sync with backend after local decrease
+    await updateBuyingPower(buyingPower - cost);
+
+    const investmentData = {
+      userId: user._id,
+      stockTicker,
       shares: sharesToBuy,
       purchasePrice: marketPrice,
       avgCost: marketPrice,
-    });
+      date: new Date().toISOString().split("T")[0],
+    };
 
+    try {
+      await createInvestment(investmentData, user.token);
+      addInvestment(investmentData);
+
+      msgAlert({
+        heading: "Buy Confirmation",
+        message: `Successfully bought ${sharesToBuy} shares of ${stockTicker} at the market price of $${marketPrice}. Total cost: $${cost}.`,
+        variant: "success",
+      });
+      navigate("/stock-watch");
+    } catch (error) {
+      msgAlert({
+        heading: "Transaction Error",
+        message: "Could not complete the transaction. Please try again later.",
+        variant: "danger",
+      });
+    }
+  };
+
+  const handleCancel = () => {
     msgAlert({
-      heading: "Buy Confirmation",
-      message: `Successfully bought ${sharesToBuy} shares of ${stockTicker} at the market price of $${marketPrice}. Total cost: $${cost}.`,
-      variant: "success",
+      heading: "Purchase Canceled",
+      message: `Purchase action for ${stockTicker} was canceled.`,
+      variant: "warning",
     });
-
     navigate("/stock-watch");
   };
 
@@ -125,29 +151,37 @@ const BuyPage = ({ msgAlert }) => {
           </>
         )}
 
-        <label>Amount to Buy ({buyInType}):</label>
-        <input
-          type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-
-        {/* Total Amount and Shares Display */}
-        {buyInType === "shares" && (
-          <>
-            <label>Total Amount:</label>
-            <input type="text" value={totalAmount} readOnly />
-          </>
-        )}
-        {buyInType === "dollars" && (
-          <>
+        {buyInType === "dollars" ? (
+          <div className="slide-down visible">
+            <label>Amount to Buy (Dollars):</label>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
             <label>Shares:</label>
             <input type="text" value={shares} readOnly />
-          </>
+            <label>Total Amount:</label>
+            <input type="text" value={totalAmount} readOnly />
+          </div>
+        ) : (
+          <div className="slide-down visible">
+            <label>Amount to Buy (Shares):</label>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+            <label>Total Amount:</label>
+            <input type="text" value={totalAmount} readOnly />
+          </div>
         )}
 
         <button className="confirm-btn" onClick={handleBuy}>
           Confirm Buy
+        </button>
+        <button className="cancel-btn" onClick={handleCancel}>
+          Cancel
         </button>
       </div>
     </div>

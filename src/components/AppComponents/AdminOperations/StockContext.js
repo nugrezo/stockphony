@@ -1,7 +1,14 @@
-/* eslint-disable indent */
+// StockContext.js
+
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { fetchAllStocksApi } from "../../../api/stockApi";
 import { fetchMarketScheduleApi } from "../../../api/marketScheduleApi";
+import { fetchInvestments } from "../../../api/investmentApi";
+import {
+  fetchBuyingPower,
+  updateBuyingPower as updateBuyingPowerApi,
+  createBuyingPower, // Import createBuyingPower API call
+} from "../../../api/buyingPowerApi";
 
 const StockContext = createContext();
 
@@ -10,77 +17,143 @@ export const StockProvider = ({ children, user }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [marketSchedule, setMarketSchedule] = useState(null);
-  const [buyingPower, setBuyingPower] = useState(10000); // Initial buying power, can be set dynamically
+  const [buyingPower, setBuyingPower] = useState(10000); // Default initial buying power
   const [bankInfo, setBankInfo] = useState(null);
-  const [investments, setInvestments] = useState([]); // State for holding investments
+  const [investments, setInvestments] = useState([]);
 
-  const addStock = (newStock) => {
+  // Add stock to the local state
+  const addStock = (newStock) =>
     setStocks((prevStocks) => [...prevStocks, newStock]);
-  };
 
-  const increaseBuyingPower = (amount) => {
+  const increaseBuyingPower = (amount) =>
     setBuyingPower((prev) => prev + amount);
+  const decreaseBuyingPower = (amount) =>
+    setBuyingPower((prev) => Math.max(0, prev - amount));
+
+  // Update buying power in both frontend and backend
+  const updateBuyingPower = async (newAmount) => {
+    try {
+      if (user) {
+        await updateBuyingPowerApi(user, newAmount);
+        setBuyingPower(newAmount);
+      }
+    } catch (error) {
+      console.error("Failed to update buying power:", error);
+    }
   };
 
-  const decreaseBuyingPower = (amount) => {
-    setBuyingPower((prev) => Math.max(0, prev - amount));
+  // Create initial buying power if it doesn't exist
+  const createInitialBuyingPower = async () => {
+    try {
+      if (user) {
+        const initialBuyingPower = await createBuyingPower(user);
+        setBuyingPower(initialBuyingPower);
+      }
+    } catch (error) {
+      console.error("Failed to create initial buying power:", error);
+    }
   };
 
   const addInvestment = (newInvestment) => {
     setInvestments((prevInvestments) => {
-      // Check if investment already exists for the same stock
       const existingInvestment = prevInvestments.find(
-        (inv) => inv.name === newInvestment.name
+        (inv) => inv.stockTicker === newInvestment.stockTicker
       );
 
       if (existingInvestment) {
-        // Update the investment by averaging the cost and updating shares
-        const totalShares =
-          parseFloat(existingInvestment.shares) +
-          parseFloat(newInvestment.shares);
+        const totalShares = existingInvestment.shares + newInvestment.shares;
         const avgCost = (
           (existingInvestment.shares * existingInvestment.avgCost +
             newInvestment.shares * newInvestment.purchasePrice) /
           totalShares
-        ).toFixed(2); // Keep 2 decimal places
+        ).toFixed(2);
 
-        // Return updated investments
         return prevInvestments.map((inv) =>
-          inv.name === newInvestment.name
+          inv.stockTicker === newInvestment.stockTicker
             ? { ...inv, shares: totalShares, avgCost: parseFloat(avgCost) }
             : inv
         );
       }
 
-      // Add new investment if it doesn't exist
-      return [
-        ...prevInvestments,
-        { ...newInvestment, avgCost: newInvestment.purchasePrice },
-      ];
+      return [...prevInvestments, newInvestment];
     });
   };
 
   const sellStock = (stockTicker, sharesToSell, price) => {
-    setInvestments(
-      (prevInvestments) =>
-        prevInvestments
-          .map((stock) => {
-            if (stock.name === stockTicker) {
-              const remainingShares = stock.shares - sharesToSell;
-              return remainingShares > 0
-                ? { ...stock, shares: remainingShares }
-                : null;
-            }
-            return stock;
-          })
-          .filter(Boolean) // Remove stocks with 0 shares
+    setInvestments((prevInvestments) =>
+      prevInvestments
+        .map((stock) => {
+          if (stock.stockTicker === stockTicker) {
+            const remainingShares = stock.shares - sharesToSell;
+            return remainingShares > 0
+              ? { ...stock, shares: remainingShares }
+              : null;
+          }
+          return stock;
+        })
+        .filter(Boolean)
     );
 
     setBuyingPower((prevBuyingPower) => prevBuyingPower + sharesToSell * price);
   };
 
-  const updateBankInfo = (info) => {
-    setBankInfo(info);
+  const updateBankInfo = (info) => setBankInfo(info);
+
+  // Fetch user's buying power from backend
+  const fetchUserBuyingPower = async () => {
+    console.log("Calling fetchUserBuyingPower"); // Log initiation
+    try {
+      if (user) {
+        console.log("Fetching buying power for user:", user._id); // Log user ID
+
+        const userBuyingPower = await fetchBuyingPower(user);
+        console.log("Setting buying power in context:", userBuyingPower); // Log fetched amount
+
+        setBuyingPower(userBuyingPower);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        await createInitialBuyingPower(); // Create buying power if not found
+      } else {
+        console.error("Failed to fetch buying power:", error);
+        setError("Failed to fetch buying power.");
+      }
+    }
+  };
+
+  // Fetch investments specific to the user
+  const fetchUserInvestments = async () => {
+    try {
+      if (user) {
+        const userInvestments = await fetchInvestments(user);
+
+        // Merge investments by stockTicker
+        const mergedInvestments = userInvestments.reduce((acc, investment) => {
+          const existing = acc.find(
+            (inv) => inv.stockTicker === investment.stockTicker
+          );
+          if (existing) {
+            // Update shares and average cost for duplicate entries
+            const totalShares = existing.shares + investment.shares;
+            const avgCost = (
+              (existing.shares * existing.avgCost +
+                investment.shares * investment.purchasePrice) /
+              totalShares
+            ).toFixed(2);
+            existing.shares = totalShares;
+            existing.avgCost = parseFloat(avgCost);
+          } else {
+            acc.push(investment); // Add new investment if it doesn't exist in the merged array
+          }
+          return acc;
+        }, []);
+
+        setInvestments(mergedInvestments);
+      }
+    } catch (error) {
+      console.error("Failed to fetch investments for user:", error);
+      setError("Failed to fetch investments.");
+    }
   };
 
   const fetchAllStocks = async () => {
@@ -111,10 +184,18 @@ export const StockProvider = ({ children, user }) => {
     }
   };
 
+  // Fetch user-specific data on login, and reset on logout
   useEffect(() => {
     if (user) {
       fetchAllStocks();
       fetchMarketSchedule();
+      fetchUserInvestments();
+      fetchUserBuyingPower();
+    } else {
+      setStocks([]);
+      setMarketSchedule(null);
+      setInvestments([]);
+      setBuyingPower(0);
     }
   }, [user]);
 
@@ -143,6 +224,7 @@ export const StockProvider = ({ children, user }) => {
         addInvestment,
         getStockPrice,
         sellStock,
+        updateBuyingPower,
       }}
     >
       {children}
@@ -151,6 +233,4 @@ export const StockProvider = ({ children, user }) => {
 };
 
 // Custom hook to use the StockContext
-export const useStocks = () => {
-  return useContext(StockContext);
-};
+export const useStocks = () => useContext(StockContext);

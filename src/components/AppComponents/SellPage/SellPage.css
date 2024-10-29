@@ -10,7 +10,8 @@
   margin-bottom: 2rem;
   width: 500px;
   justify-content: center;
-  background-color: #fde8e8; /* Light red background */
+  background-color: #000;
+  border: 1px solid #dc3545;
   padding: 2rem;
   min-height: 60vh;
   color: #333;
@@ -29,7 +30,7 @@
   font-weight: bold;
   margin-top: 1rem;
   display: block;
-  color: #000;
+  color: #dc3545;
 }
 
 /* Input fields */
@@ -40,7 +41,8 @@
   margin-top: 0.5rem;
   border: 1px solid #dc3545;
   border-radius: 5px;
-  color: #000;
+  color: #fff;
+  background-color: #000;
 }
 
 /* Confirm Sell button */
@@ -82,4 +84,16 @@
 .sell-page-container .input-container {
   max-width: 400px;
   width: 100%;
+}
+
+.slide-down.visible-sell input[type="number"],
+.slide-down.visible-sell input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  color: #fff;
+  background-color: #000;
+  border-color: #c82333;
 }

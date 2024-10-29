@@ -1,5 +1,3 @@
-/* BuyPage.css */
-
 /* Main container styling for BuyPage */
 .buy-page-container {
   display: flex;
@@ -11,7 +9,7 @@
   width: 500px;
   border: 1px solid green;
   justify-content: center;
-  background-color: #e6f7e6; /* Light green background */
+  background-color: #000; /* Background color */
   padding: 2rem;
   min-height: 60vh;
   color: #333;
@@ -30,18 +28,20 @@
   font-weight: bold;
   margin-top: 1rem;
   display: block;
-  color: #000;
+  color: green;
 }
 
-/* Input fields */
+/* Input fields - consistent style for all */
 .buy-page-container input[type="number"],
+.buy-page-container input[type="text"],
 .buy-page-container select {
   width: 100%;
   padding: 0.5rem;
   margin-top: 0.5rem;
   border: 1px solid #ced4da;
   border-radius: 5px;
-  color: #000;
+  color: #fff;
+  background-color: #000;
   border-color: #28a745;
 }
 
@@ -84,4 +84,39 @@
 .buy-page-container .input-container {
   max-width: 400px;
   width: 100%;
+}
+
+/* Slide-down effect for dynamically displayed inputs */
+.buy-page-container .slide-down {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Slide-down activated (visible) */
+.buy-page-container .slide-down.visible {
+  max-height: 300px; /* Adjusted to fit content */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Style adjustments for slide-down labels and inputs */
+.slide-down label {
+  font-weight: bold;
+  color: green;
+  margin-top: 0.75rem;
+}
+
+.slide-down input[type="number"],
+.slide-down input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  color: #fff;
+  background-color: #000; /* Same light green as container */
+  border-color: #28a745;
 }
