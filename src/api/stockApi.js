@@ -35,7 +35,6 @@ export const fetchAllStocksApi = async (user) => {
         Authorization: `Token token=${user.token}`,
       },
     });
-    console.log("Stocks fetched from API:", response.data.stocks); // Log the stocks here
     return response.data.stocks;
   } catch (error) {
     console.error("Failed to fetch stocks from backend:", error);

@@ -41,13 +41,6 @@ function App() {
     setMsgAlerts([...msgAlerts, { heading, message, variant }]);
   };
 
-  const transactions = [
-    { date: "2024-10-01", type: "Stock Purchased", amount: 500.0 },
-    { date: "2024-10-02", type: "Deposit", amount: 1000.0 },
-    { date: "2024-10-03", type: "Stock Sold", amount: -300.0 },
-    { date: "2024-10-04", type: "Withdrawal", amount: -200.0 },
-  ];
-
   return (
     <Fragment>
       <div className="App">
@@ -155,12 +148,7 @@ function App() {
                 {user && (
                   <Route
                     path="/transaction-history"
-                    element={
-                      <TransactionHistory
-                        user={user}
-                        transactions={transactions}
-                      />
-                    }
+                    element={<TransactionHistory user={user} />}
                   />
                 )}
                 {user && (

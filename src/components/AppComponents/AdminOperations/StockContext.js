@@ -19,15 +19,6 @@ const applyRandomPriceChange = (stock) => {
   const priceChange = newPrice - stock.initialPrice;
   const changePercent = (priceChange / stock.initialPrice) * 100;
 
-  console.log(
-    "Updating stock:",
-    stock.stockTicker,
-    "Old price:",
-    stock.initialPrice,
-    "New price:",
-    newPrice
-  );
-
   return {
     ...stock,
     initialPrice: newPrice,
@@ -47,11 +38,6 @@ export const StockProvider = ({ children, user }) => {
 
   // Add stock to the local state
   const addStock = (newStock) => {
-    console.log(
-      "Adding new stock with random price generator:",
-      newStock.randomPriceGenerator
-    );
-
     setStocks((prevStocks) => [...prevStocks, newStock]);
   };
 
@@ -131,13 +117,9 @@ export const StockProvider = ({ children, user }) => {
 
   // Fetch user's buying power from backend
   const fetchUserBuyingPower = async () => {
-    console.log("Calling fetchUserBuyingPower");
     try {
       if (user) {
-        console.log("Fetching buying power for user:", user._id);
-
         const userBuyingPower = await fetchBuyingPower(user);
-        console.log("Setting buying power in context:", userBuyingPower);
 
         setBuyingPower(userBuyingPower);
       }
@@ -214,30 +196,18 @@ export const StockProvider = ({ children, user }) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      console.log("Current stocks in interval update:", stocks); // Log to see current stocks
-
       setStocks((prevStocks) => {
-        // Filter for stocks with randomPriceGenerator set to "yes"
-        const stocksToUpdate = prevStocks.filter(
-          (stock) => stock.randomPriceGenerator === "yes"
-        );
-
-        // Log stocks that should be updated
-        console.log("Stocks marked for random price updates:", stocksToUpdate);
-
         const updatedStocks = prevStocks.map((stock) =>
           stock.randomPriceGenerator === "yes"
             ? applyRandomPriceChange(stock)
             : stock
         );
-
-        console.log("Updated stocks array:", updatedStocks);
         return updatedStocks;
       });
     }, 5000);
 
-    return () => clearInterval(intervalId); // Cleanup on unmount
-  }, []);
+    return () => clearInterval(intervalId); // Clean up interval on component unmount
+  }, [setStocks]);
 
   // Fetch user-specific data on login, and reset on logout
   useEffect(() => {

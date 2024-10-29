@@ -11,6 +11,7 @@ const SignOut = ({ msgAlert, clearUser, user }) => {
     const handleSignOut = async () => {
       try {
         await signOut(user);
+        clearUser();
         msgAlert({
           heading: "Signed Out Successfully",
           message: messages.signOutSuccess,
@@ -20,7 +21,6 @@ const SignOut = ({ msgAlert, clearUser, user }) => {
         console.error("Sign Out failed with error:", error);
       } finally {
         navigate("/");
-        clearUser();
       }
     };
 

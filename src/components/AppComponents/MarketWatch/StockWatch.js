@@ -7,7 +7,6 @@ import "./StockWatch.css";
 const StockWatch = () => {
   const { stocks, loading, error, marketSchedule } = useStocks();
   const navigate = useNavigate();
-  console.log("stocks are,", stocks);
 
   const today = new Date().toISOString().split("T")[0];
   const currentDay = new Date().getDay(); // 0: Sunday, 6: Saturday

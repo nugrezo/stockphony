@@ -12,6 +12,7 @@ const AdminSignOut = ({ msgAlert, clearAdmin, admin }) => {
       try {
         console.log("Admin object before sign-out:", admin);
         await adminSignOut(admin);
+        clearAdmin();
         msgAlert({
           heading: "Admin Signed Out Successfully",
           message: messages.signOutSuccess,
@@ -21,7 +22,6 @@ const AdminSignOut = ({ msgAlert, clearAdmin, admin }) => {
         console.error("Admin Sign Out failed with error:", error);
       } finally {
         navigate("/");
-        clearAdmin();
       }
     };
 
