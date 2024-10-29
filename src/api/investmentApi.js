@@ -33,15 +33,15 @@ export const fetchInvestments = async (user) => {
 };
 
 // Sell shares of an investment
-export const updateInvestment = (investmentId, updateData, userToken) => {
+export const updateInvestment = (updateData, user) => {
   return axios({
-    method: "PATCH",
-    url: `${apiUrl}/${investmentId}/sell`, // PATCH to /sell for selling
+    method: "POST",
+    url: `${apiUrl}/sell`, // Updated to match the new sell endpoint
     headers: {
-      Authorization: `Token token=${userToken}`,
+      Authorization: `Token token=${user.token}`,
     },
     data: {
-      investment: updateData,
+      investment: updateData, // Ensure updateData includes `stockTicker`, `sharesToSell`, and `sellPrice`
     },
   });
 };

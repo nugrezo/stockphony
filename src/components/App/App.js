@@ -126,14 +126,18 @@ function App() {
                     element={<StockWatch msgAlert={msgAlert} />}
                   />
                 )}
-                <Route
-                  path="/buy/:stockTicker"
-                  element={<BuyPage msgAlert={msgAlert} user={user} />}
-                />
-                <Route
-                  path="/sell/:stockTicker"
-                  element={<SellPage msgAlert={msgAlert} user={user} />}
-                />
+                {user && (
+                  <Route
+                    path="/buy/:stockTicker"
+                    element={<BuyPage msgAlert={msgAlert} user={user} />}
+                  />
+                )}
+                {user && (
+                  <Route
+                    path="/sell/:stockTicker"
+                    element={<SellPage msgAlert={msgAlert} user={user} />}
+                  />
+                )}
                 {user && (
                   <Route
                     path="/transfer-funds"

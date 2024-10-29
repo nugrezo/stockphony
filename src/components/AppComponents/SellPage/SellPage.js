@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useStocks } from "../AdminOperations/StockContext";
-import { updateInvestment } from "../../../api/investmentApi";
-import "./SellPage.css"; // Ensure CSS changes are here
+import { updateInvestment } from "../../../api/investmentApi"; // Ensure this is correct
+import "./SellPage.css";
 
 const SellPage = ({ msgAlert, user }) => {
   const { stockTicker } = useParams();
@@ -24,7 +24,6 @@ const SellPage = ({ msgAlert, user }) => {
   const marketPrice = getStockPrice(stockTicker);
 
   const investment = investments.find((inv) => inv.stockTicker === stockTicker);
-  const investmentId = investment?._id;
   const ownedShares = investment?.shares || 0;
 
   useEffect(() => {
@@ -45,15 +44,6 @@ const SellPage = ({ msgAlert, user }) => {
   }, [amount, marketPrice, sellInType]);
 
   const handleSell = async () => {
-    if (!investmentId) {
-      msgAlert({
-        heading: "Error",
-        message: "Investment ID is missing. Please try again.",
-        variant: "danger",
-      });
-      return;
-    }
-
     if (
       !amount ||
       parseFloat(amount) <= 0 ||
@@ -73,11 +63,17 @@ const SellPage = ({ msgAlert, user }) => {
         : Math.floor(amount / marketPrice);
     const sellAmount = sharesSold * marketPrice;
 
+    const investmentData = {
+      stockTicker,
+      sharesToSell: sharesSold,
+      sellPrice: marketPrice,
+      date: new Date().toISOString().split("T")[0],
+    };
+
     try {
-      const updatedInvestment = { shares: sharesSold, sellPrice: marketPrice };
-      await updateInvestment(investmentId, updatedInvestment, user.token);
-      sellStock(stockTicker, sharesSold, marketPrice);
-      await updateBuyingPower(buyingPower + sellAmount); // Sync updated buying power with backend
+      await updateInvestment(investmentData, user); // Pass `user` object, not `user.token`
+      sellStock(stockTicker, sharesSold, marketPrice); // Update in local state
+      await updateBuyingPower(buyingPower + sellAmount); // Update in backend
 
       msgAlert({
         heading: "Sell Confirmation",
