@@ -7,10 +7,34 @@ import { fetchInvestments } from "../../../api/investmentApi";
 import {
   fetchBuyingPower,
   updateBuyingPower as updateBuyingPowerApi,
-  createBuyingPower, // Import createBuyingPower API call
+  createBuyingPower,
 } from "../../../api/buyingPowerApi";
 
 const StockContext = createContext();
+
+// Function to apply random fluctuation (define this above StockProvider)
+const applyRandomPriceChange = (stock) => {
+  const fluctuationPercentage = Math.random() * 0.02 - 0.01; // Range: -1% to +1%
+  const newPrice = stock.initialPrice * (1 + fluctuationPercentage);
+  const priceChange = newPrice - stock.initialPrice;
+  const changePercent = (priceChange / stock.initialPrice) * 100;
+
+  console.log(
+    "Updating stock:",
+    stock.stockTicker,
+    "Old price:",
+    stock.initialPrice,
+    "New price:",
+    newPrice
+  );
+
+  return {
+    ...stock,
+    initialPrice: newPrice,
+    change: priceChange,
+    changePercent,
+  };
+};
 
 export const StockProvider = ({ children, user }) => {
   const [stocks, setStocks] = useState([]);
@@ -22,8 +46,14 @@ export const StockProvider = ({ children, user }) => {
   const [investments, setInvestments] = useState([]);
 
   // Add stock to the local state
-  const addStock = (newStock) =>
+  const addStock = (newStock) => {
+    console.log(
+      "Adding new stock with random price generator:",
+      newStock.randomPriceGenerator
+    );
+
     setStocks((prevStocks) => [...prevStocks, newStock]);
+  };
 
   const increaseBuyingPower = (amount) =>
     setBuyingPower((prev) => prev + amount);
@@ -101,19 +131,19 @@ export const StockProvider = ({ children, user }) => {
 
   // Fetch user's buying power from backend
   const fetchUserBuyingPower = async () => {
-    console.log("Calling fetchUserBuyingPower"); // Log initiation
+    console.log("Calling fetchUserBuyingPower");
     try {
       if (user) {
-        console.log("Fetching buying power for user:", user._id); // Log user ID
+        console.log("Fetching buying power for user:", user._id);
 
         const userBuyingPower = await fetchBuyingPower(user);
-        console.log("Setting buying power in context:", userBuyingPower); // Log fetched amount
+        console.log("Setting buying power in context:", userBuyingPower);
 
         setBuyingPower(userBuyingPower);
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        await createInitialBuyingPower(); // Create buying power if not found
+        await createInitialBuyingPower();
       } else {
         console.error("Failed to fetch buying power:", error);
         setError("Failed to fetch buying power.");
@@ -127,13 +157,11 @@ export const StockProvider = ({ children, user }) => {
       if (user) {
         const userInvestments = await fetchInvestments(user);
 
-        // Merge investments by stockTicker
         const mergedInvestments = userInvestments.reduce((acc, investment) => {
           const existing = acc.find(
             (inv) => inv.stockTicker === investment.stockTicker
           );
           if (existing) {
-            // Update shares and average cost for duplicate entries
             const totalShares = existing.shares + investment.shares;
             const avgCost = (
               (existing.shares * existing.avgCost +
@@ -143,7 +171,7 @@ export const StockProvider = ({ children, user }) => {
             existing.shares = totalShares;
             existing.avgCost = parseFloat(avgCost);
           } else {
-            acc.push(investment); // Add new investment if it doesn't exist in the merged array
+            acc.push(investment);
           }
           return acc;
         }, []);
@@ -183,6 +211,33 @@ export const StockProvider = ({ children, user }) => {
       setError("Failed to fetch market schedule.");
     }
   };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log("Current stocks in interval update:", stocks); // Log to see current stocks
+
+      setStocks((prevStocks) => {
+        // Filter for stocks with randomPriceGenerator set to "yes"
+        const stocksToUpdate = prevStocks.filter(
+          (stock) => stock.randomPriceGenerator === "yes"
+        );
+
+        // Log stocks that should be updated
+        console.log("Stocks marked for random price updates:", stocksToUpdate);
+
+        const updatedStocks = prevStocks.map((stock) =>
+          stock.randomPriceGenerator === "yes"
+            ? applyRandomPriceChange(stock)
+            : stock
+        );
+
+        console.log("Updated stocks array:", updatedStocks);
+        return updatedStocks;
+      });
+    }, 5000);
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, []);
 
   // Fetch user-specific data on login, and reset on logout
   useEffect(() => {

@@ -1,0 +1,55 @@
+/* Container for the Transaction History component */
+.transaction-history-container {
+  color: white;
+  background-color: #121212;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 1rem auto;
+  border-radius: 8px;
+}
+
+/* Table styling */
+.transaction-table {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Row styling */
+.transaction-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr; /* Adjust column widths as needed */
+  gap: 10px;
+  padding: 10px;
+  background: #1a1a1a;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+/* Header row styling */
+.transaction-row.header {
+  font-weight: bold;
+  background: #333333;
+  color: white;
+  padding: 10px 0;
+}
+
+/* Styling each cell for alignment and padding */
+.transaction-row span {
+  text-align: center;
+  white-space: nowrap;
+  padding: 5px 0;
+}
+
+/* Styling for the amount column */
+.amount {
+  font-weight: bold;
+}
+
+/* Positive and negative amount colors */
+.amount.positive {
+  color: green;
+}
+
+.amount.negative {
+  color: red;
+}

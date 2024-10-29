@@ -6,6 +6,7 @@
   background-color: #000;
   color: #fff;
   border-radius: 10px;
+  border: 1px solid #2b8a3e;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -13,7 +14,7 @@
   text-align: center;
   font-size: 22px;
   margin-bottom: 1.5rem;
-  color: #1abc9c;
+  color: #2b8a3e;
 }
 
 .form-group {
@@ -24,7 +25,7 @@
   display: block;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #1abc9c;
+  color: #fff;
 }
 
 .form-group input {
@@ -34,7 +35,7 @@
   border: 1px solid #2b8a3e;
   border-radius: 5px;
   background-color: #000;
-  color: #fff;
+  color: #1abc9c;
 }
 
 .form-group input:focus {
@@ -43,7 +44,7 @@
   outline: none;
 }
 
-.btn-primary {
+.btn-primary-bank-info {
   display: block;
   width: 100%;
   padding: 10px;
@@ -56,6 +57,11 @@
   transition: background-color 0.3s ease;
 }
 
-.btn-primary:hover {
-  background-color: #1abc9c;
+.btn-primary-bank-info:hover {
+  background-color: #418e51;
+}
+
+.btn-primary-bank-info:active {
+  background-color: #1a8830;
+  color: #fff;
 }

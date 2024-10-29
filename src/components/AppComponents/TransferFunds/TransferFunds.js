@@ -104,11 +104,11 @@ const TransferFunds = ({ msgAlert }) => {
 
   return (
     <div className="transfer-funds">
-      <h2>Transfer Funds</h2>
       <div className="transfer-funds-container">
+        <h2>Transfer Funds</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group as={Col} controlId="formTransferType">
-            <Form.Label>Select Transfer Type:</Form.Label>
+            <Form.Label>Select Transfer Type</Form.Label>
             <Form.Select
               value={transferType}
               onChange={handleTransferTypeChange}
@@ -122,7 +122,7 @@ const TransferFunds = ({ msgAlert }) => {
             </Form.Select>
           </Form.Group>
           <Form.Group as={Col} controlId="formBankSelection">
-            <Form.Label>Registered Bank</Form.Label>
+            <Form.Label>Select Bank</Form.Label>
             <Form.Select onChange={handleBankSelection}>
               <option value="select">Select Registered Bank</option>
               {bankInfo && (

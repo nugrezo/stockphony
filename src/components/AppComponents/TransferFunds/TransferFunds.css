@@ -15,9 +15,10 @@
 /* Form container with border */
 .transfer-funds-container {
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
   padding: 1rem;
   background-color: #000;
+  border: 1px solid #2b8a3e;
   color: #fff;
   border-radius: 10px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
@@ -25,7 +26,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1.5rem;
+}
+
+.transfer-funds-container label {
+  margin-top: 2rem;
 }
 
 /* Spacing between form groups */
@@ -37,7 +41,6 @@
 .transfer-funds h2 {
   font-size: 28px;
   font-weight: 600;
-  margin-bottom: 2rem;
   text-align: center;
 }
 
@@ -81,22 +84,28 @@
 
 /* Button styling */
 .transfer-funds .btn-primary {
-  background-color: #000;
-  color: #fff;
-  border: 1px solid #2b8a3e;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 15px;
+  display: block;
   width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  background-color: #2b8a3e;
+  color: #fff;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  margin-top: 2rem;
 }
 
 /* Button hover effect */
 .transfer-funds .btn-primary:hover {
-  background-color: #2b8a3e;
+  background-color: #418e51;
+  color: white;
+}
+
+.transfer-funds .btn-primary:active {
+  background-color: #1a8830;
   color: white;
 }
 

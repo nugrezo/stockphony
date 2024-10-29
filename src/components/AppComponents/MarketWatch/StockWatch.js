@@ -7,8 +7,10 @@ import "./StockWatch.css";
 const StockWatch = () => {
   const { stocks, loading, error, marketSchedule } = useStocks();
   const navigate = useNavigate();
+  console.log("stocks are,", stocks);
 
   const today = new Date().toISOString().split("T")[0];
+  const currentDay = new Date().getDay(); // 0: Sunday, 6: Saturday
   const openTime = marketSchedule?.openTime || null;
   const closeTime = marketSchedule?.closeTime || null;
   const holidays = marketSchedule?.holidays || [];
@@ -20,13 +22,20 @@ const StockWatch = () => {
     minute: "2-digit",
   });
 
-  const isHoliday = holidays.includes(today);
+  const isWeekend = currentDay === 0 || currentDay === 6; // Check if it's Saturday or Sunday
+  const isHoliday = holidays.includes(today); // Check if today is a holiday
   let isMarketOpen = false;
   let marketMessage = "";
 
-  if (!openTime || !closeTime) {
+  // Check if market should be closed by default (weekends or holidays)
+  if (isWeekend || isHoliday) {
+    marketMessage = isWeekend
+      ? "The market is closed on weekends."
+      : "The market is closed today due to a holiday.";
+  } else if (!openTime || !closeTime) {
     marketMessage = "The market schedule has not been set by the admin.";
   } else {
+    // Check if market is open based on admin-set hours
     const crossesMidnight = openTime > closeTime;
     if (crossesMidnight) {
       isMarketOpen =
@@ -36,13 +45,9 @@ const StockWatch = () => {
       isMarketOpen = currentTime >= openTime && currentTime <= closeTime;
     }
 
-    if (isHoliday) {
-      marketMessage = "The market is closed today due to a holiday.";
-    } else if (!isMarketOpen) {
-      marketMessage = `The market is currently closed. It will open at ${openTime} (local time).`;
-    } else {
-      marketMessage = `The market is currently open and will close at ${closeTime} (local time).`;
-    }
+    marketMessage = isMarketOpen
+      ? `The market is currently open and will close at ${closeTime} (local time).`
+      : `The market is currently closed. It will open at ${openTime} (local time).`;
   }
 
   const handleNavigate = (type, stock) => {
@@ -90,12 +95,14 @@ const StockWatch = () => {
             <button
               className="stock-btn buy-btn"
               onClick={() => handleNavigate("buy", stock)}
+              disabled={!isMarketOpen}
             >
               Buy
             </button>
             <button
               className="stock-btn sell-btn"
               onClick={() => handleNavigate("sell", stock)}
+              disabled={!isMarketOpen}
             >
               Sell
             </button>
@@ -109,7 +116,7 @@ const StockWatch = () => {
     <div className="stock-watch-container">
       <h1>Stock Market Watch</h1>
       <p>{marketMessage}</p>
-      {isMarketOpen && !isHoliday && (
+      {isMarketOpen && !isWeekend && !isHoliday && (
         <table className="stock-table">
           <thead>
             <tr>

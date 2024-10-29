@@ -13,7 +13,9 @@ const AddStock = ({ admin }) => {
     initialPrice: "",
     dayHigh: "",
     dayLow: "",
+    randomPriceGenerator: "no", // New field for random price generator
   });
+  console.log("Form data being submitted:", formData);
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -30,6 +32,7 @@ const AddStock = ({ admin }) => {
     event.preventDefault();
     setMessage("");
     setError("");
+    console.log("Form data being submitted:", formData); // Log form data
 
     const {
       companyName,
@@ -38,9 +41,10 @@ const AddStock = ({ admin }) => {
       initialPrice,
       dayHigh,
       dayLow,
+      randomPriceGenerator,
     } = formData;
+    console.log("Random Price Generator value:", randomPriceGenerator); // Check its value here
 
-    // Validate that all required fields are filled out
     if (
       !companyName ||
       !stockTicker ||
@@ -53,7 +57,6 @@ const AddStock = ({ admin }) => {
       return;
     }
 
-    // Validate that numeric fields are actually numbers
     if (
       isNaN(stockVolume) ||
       isNaN(initialPrice) ||
@@ -64,12 +67,6 @@ const AddStock = ({ admin }) => {
       return;
     }
 
-    console.log("Submitting stock:", formData); // Log the data being sent
-
-    // Log the admin token to check if it's being passed correctly
-    console.log("Admin token:", admin.token);
-
-    // API call to add stock with admin's token
     try {
       const response = await apiAddStock(
         {
@@ -79,33 +76,26 @@ const AddStock = ({ admin }) => {
           initialPrice,
           dayHigh,
           dayLow,
+          randomPriceGenerator, // Pass randomPriceGenerator option
         },
         admin.token // Pass admin token for authorization
       );
 
-      console.log("API Response:", response); // Log the response to check
-
       if (response.status === 201) {
         const addedStock = response.data.stock;
-
-        // Add the stock to the context
         addStock({
           symbol: addedStock.stockTicker,
           price: addedStock.initialPrice,
           dayHigh: addedStock.dayHigh,
           dayLow: addedStock.dayLow,
+          randomPriceGenerator,
           change: 0,
           changePercent: 0,
         });
 
         setMessage(`Stock ${addedStock.companyName} added successfully!`);
+        setTimeout(() => setMessage(""), 3000);
 
-        // Clear the success message after 3 seconds
-        setTimeout(() => {
-          setMessage("");
-        }, 3000); // 3000 milliseconds = 3 seconds
-
-        // Reset the form fields after successful submission
         setFormData({
           companyName: "",
           stockTicker: "",
@@ -113,14 +103,12 @@ const AddStock = ({ admin }) => {
           initialPrice: "",
           dayHigh: "",
           dayLow: "",
+          randomPriceGenerator: "no",
         });
       } else {
         setError("Unexpected response from server. Please try again.");
       }
     } catch (error) {
-      console.error("API Error:", error); // Log the error in detail
-
-      // Check if the error is due to a duplicate stock
       if (
         error.response &&
         error.response.data.message === "Stock with this ticker already exists."
@@ -206,6 +194,19 @@ const AddStock = ({ admin }) => {
             onChange={handleChange}
             required
           />
+        </div>
+
+        <div className="form-group-add-new-stock">
+          <label htmlFor="randomPriceGenerator">Random Price Generator:</label>
+          <select
+            id="randomPriceGenerator"
+            name="randomPriceGenerator"
+            value={formData.randomPriceGenerator}
+            onChange={handleChange}
+          >
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
         </div>
 
         <button type="submit" className="submit-btn">

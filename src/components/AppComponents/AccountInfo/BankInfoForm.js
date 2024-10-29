@@ -151,7 +151,11 @@ const BankInfoForm = ({ user, msgAlert }) => {
           />
         </div>
 
-        <button type="submit" className="btn-primary" disabled={loading}>
+        <button
+          type="submit"
+          className="btn-primary-bank-info"
+          disabled={loading}
+        >
           {loading ? "Updating..." : "Register Bank Info"}
         </button>
       </form>

@@ -25,6 +25,7 @@ import BankInfoForm from "../AppComponents/AccountInfo/BankInfoForm";
 import Investments from "../AppComponents/Investments/Investments";
 import BuyPage from "../AppComponents/BuyPage/BuyPage";
 import SellPage from "../AppComponents/SellPage/SellPage";
+import TransactionHistory from "../AppComponents/TransactionHistory/TransactionHistory";
 // import BuyPage from "../AppComponents/BuyPage/BuyPage";
 // import SellPage from "../AppComponents/SellPage/SellPage";
 
@@ -39,6 +40,13 @@ function App() {
   const msgAlert = ({ heading, message, variant }) => {
     setMsgAlerts([...msgAlerts, { heading, message, variant }]);
   };
+
+  const transactions = [
+    { date: "2024-10-01", type: "Stock Purchased", amount: 500.0 },
+    { date: "2024-10-02", type: "Deposit", amount: 1000.0 },
+    { date: "2024-10-03", type: "Stock Sold", amount: -300.0 },
+    { date: "2024-10-04", type: "Withdrawal", amount: -200.0 },
+  ];
 
   return (
     <Fragment>
@@ -142,6 +150,17 @@ function App() {
                   <Route
                     path="/transfer-funds"
                     element={<TransferFunds msgAlert={msgAlert} />}
+                  />
+                )}
+                {user && (
+                  <Route
+                    path="/transaction-history"
+                    element={
+                      <TransactionHistory
+                        user={user}
+                        transactions={transactions}
+                      />
+                    }
                   />
                 )}
                 {user && (

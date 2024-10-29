@@ -24,6 +24,7 @@
 /* Left half for stock details */
 .stock-details {
   width: 45%; /* Adjust for left-side content */
+  padding: 1rem;
   padding-right: 1rem;
 }
 
@@ -44,6 +45,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 4rem;
 }
 
 /* Lower part for the news section */

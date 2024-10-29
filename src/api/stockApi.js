@@ -18,8 +18,10 @@ export const addStock = (stockData, adminToken) => {
         initialPrice: stockData.initialPrice,
         dayHigh: stockData.dayHigh, // Include dayHigh
         dayLow: stockData.dayLow, // Include dayLow
+        randomPriceGenerator: stockData.randomPriceGenerator,
         change, // Add calculated change
-        changePercent, // Add calculated changePercent
+        changePercent,
+        // Add calculated changePercent
       },
     },
   });

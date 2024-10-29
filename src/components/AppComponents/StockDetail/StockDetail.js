@@ -17,12 +17,14 @@ const StockDetail = () => {
     const fetchCompanyProfile = async () => {
       try {
         // Fetch company profile and stock data from Finnhub API
+
         const companyProfileResponse = await axios.get(
           "https://finnhub.io/api/v1/stock/profile2",
           {
             params: { symbol, token: FINNHUB_API_KEY },
           }
         );
+        console.log("Company Profile Data:", companyProfileResponse.data);
 
         const stockPriceResponse = await axios.get(
           "https://finnhub.io/api/v1/quote",
@@ -75,10 +77,8 @@ const StockDetail = () => {
                     <th>Market Cap:</th>
                     <td>
                       {companyData.marketCapitalization
-                        ? `$${(companyData.marketCapitalization / 1e9).toFixed(
-                            2
-                          )}B`
-                        : "N/A"}
+                        ? `$${companyData.marketCapitalization.toFixed(2)}`
+                        : "Data Not Available"}
                     </td>
                   </tr>
                   <tr>
@@ -94,6 +94,12 @@ const StockDetail = () => {
                     </td>
                   </tr>
                   <tr>
+                    <th>Opening Price:</th>
+                    <td>
+                      {companyData.o ? `$${companyData.o.toFixed(2)}` : "N/A"}
+                    </td>
+                  </tr>
+                  <tr>
                     <th>Day High:</th>
                     <td>
                       {companyData.h ? `$${companyData.h.toFixed(2)}` : "N/A"}
@@ -103,12 +109,6 @@ const StockDetail = () => {
                     <th>Day Low:</th>
                     <td>
                       {companyData.l ? `$${companyData.l.toFixed(2)}` : "N/A"}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>PE Ratio:</th>
-                    <td>
-                      {companyData.pe ? companyData.pe.toFixed(2) : "N/A"}
                     </td>
                   </tr>
                   <tr>
@@ -124,20 +124,6 @@ const StockDetail = () => {
               {/* Upper part: Graph */}
               <div className="stock-graph">
                 <StockGraph symbol={symbol} />
-              </div>
-
-              {/* Lower part: News section */}
-              <div className="stock-news">
-                <h2>Latest News</h2>
-                {/* Placeholder news articles */}
-                <div className="news-article">
-                  <h3>News Title 1</h3>
-                  <p>Summary of the first news article...</p>
-                </div>
-                <div className="news-article">
-                  <h3>News Title 2</h3>
-                  <p>Summary of the second news article...</p>
-                </div>
               </div>
             </div>
           </>
