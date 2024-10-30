@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useStocks } from "../AdminOperations/StockContext";
 import { createInvestment } from "../../../api/investmentApi";
+import { createTransaction } from "../../../api/transactionsHistoryApi"; // Import transaction API
+
 import "./BuyPage.css"; // Ensure CSS changes are here
 
 const BuyPage = ({ msgAlert, user }) => {
@@ -72,10 +74,7 @@ const BuyPage = ({ msgAlert, user }) => {
       return;
     }
 
-    // Decrease locally
     decreaseBuyingPower(cost);
-
-    // Sync with backend after local decrease
     await updateBuyingPower(buyingPower - cost);
 
     const investmentData = {
@@ -91,9 +90,19 @@ const BuyPage = ({ msgAlert, user }) => {
       await createInvestment(investmentData, user.token);
       addInvestment(investmentData);
 
+      // Log the buy transaction
+      const transactionData = {
+        transactionType: "buy",
+        stockTicker,
+        amount: cost, // Amount spent in dollars
+        shares: sharesToBuy,
+        pricePerShare: marketPrice, // Include pricePerShare for the transaction
+      };
+      await createTransaction(user, transactionData);
+
       msgAlert({
         heading: "Buy Confirmation",
-        message: `Successfully bought ${sharesToBuy} shares of ${stockTicker} at the market price of $${marketPrice}. Total cost: $${cost}.`,
+        message: `Successfully bought ${sharesToBuy} shares of ${stockTicker} at $${marketPrice}. Total cost: $${cost}.`,
         variant: "success",
       });
       navigate("/stock-watch");

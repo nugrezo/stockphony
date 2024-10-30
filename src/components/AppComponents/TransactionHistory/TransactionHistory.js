@@ -62,10 +62,16 @@ const TransactionHistory = ({ user }) => {
               <span>{transaction.transactionType}</span>
               <span
                 className={`amount ${
-                  transaction.amount >= 0 ? "positive" : "negative"
+                  transaction.transactionType === "sell" ||
+                  transaction.transactionType === "withdrawal"
+                    ? "negative"
+                    : "positive"
                 }`}
               >
-                {formatCurrency(transaction.amount)} {/* Format the amount */}
+                {transaction.transactionType === "sell" ||
+                transaction.transactionType === "withdrawal"
+                  ? `-${formatCurrency(transaction.amount)}`
+                  : formatCurrency(transaction.amount)}
               </span>
             </div>
           ))}

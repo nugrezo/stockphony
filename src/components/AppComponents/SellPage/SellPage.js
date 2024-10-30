@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useStocks } from "../AdminOperations/StockContext";
 import { updateInvestment } from "../../../api/investmentApi"; // Ensure this is correct
+import { createTransaction } from "../../../api/transactionsHistoryApi"; // Import transaction API
+
 import "./SellPage.css";
 
 const SellPage = ({ msgAlert, user }) => {
@@ -71,9 +73,19 @@ const SellPage = ({ msgAlert, user }) => {
     };
 
     try {
-      await updateInvestment(investmentData, user); // Pass `user` object, not `user.token`
+      await updateInvestment(investmentData, user); // Update the backend
       sellStock(stockTicker, sharesSold, marketPrice); // Update in local state
-      await updateBuyingPower(buyingPower + sellAmount); // Update in backend
+      await updateBuyingPower(buyingPower + sellAmount); // Sync with backend
+
+      // Log the sell transaction
+      const transactionData = {
+        transactionType: "sell",
+        stockTicker,
+        amount: -sellAmount, // Negative for sell
+        shares: sharesSold,
+        pricePerShare: marketPrice, // Include pricePerShare for the transaction
+      };
+      await createTransaction(user, transactionData);
 
       msgAlert({
         heading: "Sell Confirmation",
@@ -87,7 +99,6 @@ const SellPage = ({ msgAlert, user }) => {
         message: "Could not complete the sale. Please try again later.",
         variant: "danger",
       });
-      console.error("Error updating investment:", error);
     }
   };
 
