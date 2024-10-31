@@ -4,6 +4,8 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import { fetchAllStocksApi } from "../../../api/stockApi";
 import { fetchMarketScheduleApi } from "../../../api/marketScheduleApi";
 import { fetchInvestments } from "../../../api/investmentApi";
+import { getBankInfo } from "../../../api/accountApi"; // API to fetch bank info
+
 import {
   fetchBuyingPower,
   updateBuyingPower as updateBuyingPowerApi,
@@ -112,6 +114,20 @@ export const StockProvider = ({ children, user }) => {
 
     setBuyingPower((prevBuyingPower) => prevBuyingPower + sharesToSell * price);
   };
+
+  useEffect(() => {
+    const fetchBankInfo = async () => {
+      if (user && user.token) {
+        try {
+          const data = await getBankInfo(user.token); // Fetch bank info from the server
+          setBankInfo(data); // Store it in context
+        } catch (error) {
+          console.error("Failed to fetch bank info:", error);
+        }
+      }
+    };
+    fetchBankInfo();
+  }, [user]);
 
   const updateBankInfo = (info) => setBankInfo(info);
 

@@ -1,21 +1,32 @@
-/* Container for the Investments component */
+/* Flex container to display investments and pie chart side by side */
+.investment-container-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  max-width: 100%;
+  height: 600px;
+  align-items: stretch; /* Make both containers equal height */
+  margin: 1rem;
+}
+/* Container styling for left side (line chart and investment details) */
 .investments-container {
   color: white;
   background-color: #121212;
   padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
+  flex: 1; /* Take up available space */
   margin-top: 1rem;
   margin-bottom: 1rem;
   border-radius: 8px;
+  max-height: 600px; /* Set a max height */
+  overflow-y: auto; /* Add scrolling if it overflows */
 }
 
 /* Graph styling */
 .investment-graph {
   height: 300px;
   margin-bottom: 20px;
+  overflow: hidden;
 }
-
 /* General styling for each section like Buying Power, Stock Investment, and Total Investment */
 .investment-info {
   display: flex;
@@ -79,4 +90,35 @@
 /* Additional styling for header text */
 .stock-item.header span {
   color: white;
+}
+
+/* Container styling for right side (pie chart) */
+.pie-chart-container {
+  color: white;
+  background-color: #121212;
+  padding: 20px;
+  flex: 1; /* Take up available space */
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  max-height: 600px; /* Set a max height */
+  overflow-y: auto; /* Add scrolling if it overflows */
+  flex: 1; /* Take up available space */
+  flex-shrink: 0; /* Prevent resizing */
+}
+
+@media (max-width: 768px) {
+  .investment-container {
+    flex-direction: column; /* Stack charts vertically on smaller screens */
+  }
+
+  .investments-container,
+  .pie-chart-container {
+    max-width: 100%; /* Full width for each container on small screens */
+    margin: 0;
+  }
+
+  .investment-graph {
+    height: 250px; /* Reduce height for smaller screens */
+  }
 }
