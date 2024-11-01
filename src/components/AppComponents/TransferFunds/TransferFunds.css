@@ -1,24 +1,25 @@
 /* Adjust the form container */
 .transfer-funds {
   display: flex;
+  width: 30%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   min-height: 70vh;
   margin: auto;
-  padding-top: 1.5rem;
+  margin-top: 2rem;
   background-color: #000;
   color: #fff;
   font-family: "Arial", sans-serif;
+  border: 1px solid #2b8a3e;
+  border-radius: 10px;
 }
 
 /* Form container with border */
 .transfer-funds-container {
   width: 100%;
   max-width: 500px;
-  padding: 1rem;
   background-color: #000;
-  border: 1px solid #2b8a3e;
   color: #fff;
   border-radius: 10px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
@@ -42,6 +43,12 @@
   font-size: 28px;
   font-weight: 600;
   text-align: center;
+  background-color: #2b8a3e;
+  color: #000;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 1rem;
 }
 
 /* Form field styling */
@@ -53,7 +60,7 @@
 /* Label Styling */
 .transfer-funds .form-label {
   font-weight: 600;
-  color: #fff;
+  color: #2b8a3e;
   margin-bottom: 0.5rem;
 }
 
@@ -89,7 +96,7 @@
   padding: 10px;
   font-size: 18px;
   background-color: #2b8a3e;
-  color: #fff;
+  color: #000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
