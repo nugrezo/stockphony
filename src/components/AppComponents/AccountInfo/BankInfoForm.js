@@ -112,9 +112,8 @@ const BankInfoForm = ({ user, msgAlert }) => {
 
   return (
     <div className="bank-info-form">
+      <h3>Register Bank Information</h3>
       <form onSubmit={handleSubmit}>
-        <h3>Register Bank Information</h3>
-
         <div className="form-group">
           <label htmlFor="bankName">Bank Name</label>
           <input

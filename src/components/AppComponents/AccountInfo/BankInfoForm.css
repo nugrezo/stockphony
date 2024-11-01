@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 400px;
   margin: 2rem auto;
-  padding: 2rem;
+  padding-top: 0;
   background-color: #000;
   color: #fff;
   border-radius: 10px;
@@ -12,20 +12,28 @@
 
 .bank-info-form h3 {
   text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  width: 100%;
   font-size: 22px;
   margin-bottom: 1.5rem;
-  color: #2b8a3e;
+  background-color: #2b8a3e;
+  color: #000;
+  font-weight: bold;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
 }
 
 .form-group label {
   display: block;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #fff;
+  color: #2b8a3e;
 }
 
 .form-group input {
@@ -46,11 +54,13 @@
 
 .btn-primary-bank-info {
   display: block;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
   padding: 10px;
   font-size: 18px;
   background-color: #2b8a3e;
-  color: #fff;
+  color: #000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
