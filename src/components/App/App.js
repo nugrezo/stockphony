@@ -45,6 +45,7 @@ function App() {
     <Fragment>
       <div className="App">
         <Header user={user} admin={admin} />
+
         {msgAlerts.map((msgAlert, index) => (
           <AutoDismissAlert
             key={index}
@@ -55,7 +56,6 @@ function App() {
         ))}
         <div className="content">
           <StockProvider user={user}>
-            {" "}
             {/* Wrap routes with StockProvider */}
             <HashRouter>
               <Routes>

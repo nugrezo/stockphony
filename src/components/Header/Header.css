@@ -65,25 +65,3 @@
     font-size: 14px;
   }
 }
-
-/* Sliding Message styling */
-.sliding-message {
-  color: #fff; /* White text */
-  font-size: 18px;
-  margin-left: 20px;
-  margin-top: 2rem;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  animation: slide-left-to-right 15s linear infinite;
-}
-
-/* Keyframes for sliding animation */
-@keyframes slide-left-to-right {
-  0% {
-    transform: translateX(-75%);
-  }
-  100% {
-    transform: translateX(75%);
-  }
-}
