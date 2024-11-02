@@ -88,7 +88,9 @@ const Header = ({ user, admin }) => (
         </span>
       )}
     </div>
-
+    <div className="sliding-message">
+      We are here to help for your investment growth
+    </div>
     <Nav className="ml-auto">
       {user && <HamburgerMenu />}
       {alwaysOptions}

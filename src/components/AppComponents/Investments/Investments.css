@@ -1,12 +1,18 @@
 /* Flex container to display investments and pie chart side by side */
+
+.investment-container-wrapper-h2-included {
+  border: 1px solid #2b8a3e;
+  border-radius: 10px;
+  margin: 1rem;
+}
+
 .investment-container-wrapper {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 10px;
   max-width: 100%;
   height: 600px;
   align-items: stretch; /* Make both containers equal height */
-  margin: 1rem;
   margin-top: 0;
 }
 
@@ -16,7 +22,7 @@
   background-color: #121212;
   padding: 20px;
   flex: 1; /* Take up available space */
-  margin-top: 1rem;
+  margin: 1rem;
   margin-bottom: 1rem;
   border-radius: 8px;
   max-height: 600px; /* Set a max height */
@@ -24,8 +30,13 @@
 }
 
 .investment-container-wrapper-h2-included h2 {
-  margin-top: 1rem;
+  font-size: 24px;
   margin-bottom: 0;
+  background-color: #2b8a3e;
+  color: #000;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 1rem;
 }
 
 /* Graph styling */
@@ -107,6 +118,7 @@
   flex: 1; /* Take up available space */
   margin-top: 1rem;
   margin-bottom: 1rem;
+  margin-right: 1rem;
   border-radius: 8px;
   overflow-y: auto; /* Add scrolling if it overflows */
   flex: 1; /* Take up available space */

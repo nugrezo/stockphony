@@ -35,56 +35,58 @@ const AccountInfo = ({ user, msgAlert }) => {
     <div className="account-info-wrapper">
       {/* Account Info Section */}
       <div className="account-info-container">
-        <h2>Account Information</h2>
-        <ul className="account-info-grid account-info-list">
-          <li>
-            <span className="account-info-label">Full Name:</span>
-            <input
-              className="account-info-value"
-              type="text"
-              value={accountInfo.fullName}
-              readOnly
-            />
-          </li>
-          <li>
-            <span className="account-info-label">Email:</span>
-            <input
-              className="account-info-value"
-              type="text"
-              value={accountInfo.email}
-              readOnly
-            />
-          </li>
-          <li>
-            <span className="account-info-label">Username:</span>
-            <input
-              className="account-info-value"
-              type="text"
-              value={accountInfo.username}
-              readOnly
-            />
-          </li>
-          <li>
-            <span className="account-info-label">
-              StockPhony Account Number:
-            </span>
-            <input
-              className="account-info-value"
-              type="text"
-              value={accountInfo.stockphonyAccountNumber}
-              readOnly
-            />
-          </li>
-          <li>
-            <span className="account-info-label">Password:</span>
-            <input
-              className="account-info-value"
-              type="password"
-              value="********"
-              readOnly
-            />
-          </li>
-        </ul>
+        <div>
+          <h2>Account Information</h2>
+          <ul className="account-info-grid account-info-list">
+            <li>
+              <span className="account-info-label">Full Name:</span>
+              <input
+                className="account-info-value"
+                type="text"
+                value={accountInfo.fullName}
+                readOnly
+              />
+            </li>
+            <li>
+              <span className="account-info-label">Email:</span>
+              <input
+                className="account-info-value"
+                type="text"
+                value={accountInfo.email}
+                readOnly
+              />
+            </li>
+            <li>
+              <span className="account-info-label">Username:</span>
+              <input
+                className="account-info-value"
+                type="text"
+                value={accountInfo.username}
+                readOnly
+              />
+            </li>
+            <li>
+              <span className="account-info-label">
+                StockPhony Account Number:
+              </span>
+              <input
+                className="account-info-value"
+                type="text"
+                value={accountInfo.stockphonyAccountNumber}
+                readOnly
+              />
+            </li>
+            <li>
+              <span className="account-info-label">Password:</span>
+              <input
+                className="account-info-value"
+                type="password"
+                value="********"
+                readOnly
+              />
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* Bank Info Section */}

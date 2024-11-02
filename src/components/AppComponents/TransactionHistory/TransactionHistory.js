@@ -45,40 +45,42 @@ const TransactionHistory = ({ user }) => {
   };
 
   return (
-    <div className="transaction-history-container">
+    <div className="transaction-history-wrapper">
       <h2>Transaction History</h2>
-      {error && <p className="error-message">{error}</p>}
-      {transactions.length > 0 ? (
-        <div className="transaction-table">
-          <div className="transaction-row header">
-            <span>Transaction Date</span>
-            <span>Transaction Type</span>
-            <span>Amount</span>
-          </div>
-
-          {transactions.map((transaction, index) => (
-            <div key={transaction._id || index} className="transaction-row">
-              <span>{formatDate(transaction.createdAt)}</span>
-              <span>{transaction.transactionType}</span>
-              <span
-                className={`amount ${
-                  transaction.transactionType === "sell" ||
-                  transaction.transactionType === "withdrawal"
-                    ? "negative"
-                    : "positive"
-                }`}
-              >
-                {transaction.transactionType === "sell" ||
-                transaction.transactionType === "withdrawal"
-                  ? `-${formatCurrency(transaction.amount)}`
-                  : formatCurrency(transaction.amount)}
-              </span>
+      <div className="transaction-history-container">
+        {error && <p className="error-message">{error}</p>}
+        {transactions.length > 0 ? (
+          <div className="transaction-table">
+            <div className="transaction-row header">
+              <span>Transaction Date</span>
+              <span>Transaction Type</span>
+              <span>Amount</span>
             </div>
-          ))}
-        </div>
-      ) : (
-        !error && <p>No transactions found.</p>
-      )}
+
+            {transactions.map((transaction, index) => (
+              <div key={transaction._id || index} className="transaction-row">
+                <span>{formatDate(transaction.createdAt)}</span>
+                <span>{transaction.transactionType}</span>
+                <span
+                  className={`amount ${
+                    transaction.transactionType === "sell" ||
+                    transaction.transactionType === "withdrawal"
+                      ? "negative"
+                      : "positive"
+                  }`}
+                >
+                  {transaction.transactionType === "sell" ||
+                  transaction.transactionType === "withdrawal"
+                    ? `-${formatCurrency(transaction.amount)}`
+                    : formatCurrency(transaction.amount)}
+                </span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          !error && <p>No transactions found.</p>
+        )}
+      </div>
     </div>
   );
 };

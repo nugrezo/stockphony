@@ -9,35 +9,56 @@
 }
 
 /* Container for both account info and bank info sections */
-.account-info-container,
-.bank-info-container {
-  flex: 1; /* Make both sections equal in width */
-  background-color: #000;
-  color: #ffffff;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.account-info-container {
   border: 1px solid #2b8a3e;
+  flex: 1;
+  padding: 2rem;
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   display: flex;
+  color: #2b8a3e;
   flex-direction: column;
-  justify-content: flex-start; /* Align content at the top */
+}
+.bank-info-container {
+  border: 1px solid #2b8a3e;
+  flex: 1;
+  padding: 2rem;
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  color: #2b8a3e;
+  flex-direction: column;
 }
 
 /* Title styling */
-.account-info-container h2,
+.account-info-container h2 {
+  font-size: 24px;
+  background-color: #2b8a3e;
+  color: #000;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding: 1rem;
+}
 .bank-info-container h2 {
   font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #1abc9c;
+  background-color: #2b8a3e;
+  color: #000;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding: 1rem;
 }
 
 /* Grid layout for account details and bank info */
 .account-info-grid,
 .bank-info-list {
   list-style-type: none;
-  padding: 0;
+  padding: 1rem;
   margin: 0;
   display: flex;
   flex-direction: column;
