@@ -44,6 +44,7 @@
 /* Form field styling */
 .transfer-funds .form-group {
   width: 100%;
+  margin-top: 2rem;
   margin-bottom: 2rem; /* Add more space between fields */
 }
 
