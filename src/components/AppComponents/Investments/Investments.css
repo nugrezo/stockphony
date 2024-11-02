@@ -7,6 +7,7 @@
   height: 600px;
   align-items: stretch; /* Make both containers equal height */
   margin: 1rem;
+  margin-top: 0;
 }
 
 /* Container styling for left side (line chart and investment details) */
@@ -24,6 +25,7 @@
 
 .investment-container-wrapper-h2-included h2 {
   margin-top: 1rem;
+  margin-bottom: 0;
 }
 
 /* Graph styling */
