@@ -123,29 +123,34 @@ const TransferFunds = ({ msgAlert }) => {
       <h2>Transfer Funds</h2>
       <div className="transfer-funds-container">
         <Form onSubmit={handleSubmit}>
-          <Form.Group as={Col} controlId="formTransferType">
-            <Form.Label>Select Transfer Type</Form.Label>
-            <Form.Select
-              value={transferType}
-              onChange={handleTransferTypeChange}
-            >
-              <option value="toStockphony">
-                Transfer to Stockphony Account
-              </option>
-              <option value="fromStockphony">
-                Transfer from Stockphony Account to Bank
-              </option>
-            </Form.Select>
-          </Form.Group>
-          <Form.Group as={Col} controlId="formBankSelection">
-            <Form.Label>Select Bank</Form.Label>
-            <Form.Select onChange={handleBankSelection}>
-              <option value="select">Select Registered Bank</option>
-              {bankInfo && (
-                <option value={bankInfo.bankName}>{bankInfo.bankName}</option>
-              )}
-            </Form.Select>
-          </Form.Group>
+          <div className="form-group">
+            <Form.Group as={Col} controlId="formTransferType">
+              <Form.Label>Select Transfer Type</Form.Label>
+              <Form.Select
+                value={transferType}
+                onChange={handleTransferTypeChange}
+              >
+                <option value="toStockphony">
+                  Transfer to Stockphony Account
+                </option>
+                <option value="fromStockphony">
+                  Transfer from Stockphony Account to Bank
+                </option>
+              </Form.Select>
+            </Form.Group>
+          </div>
+          <div className="form-group">
+            <Form.Group as={Col} controlId="formBankSelection">
+              <Form.Label>Select Bank</Form.Label>
+              <Form.Select onChange={handleBankSelection}>
+                <option value="select">Select Registered Bank</option>
+                {bankInfo && (
+                  <option value={bankInfo.bankName}>{bankInfo.bankName}</option>
+                )}
+              </Form.Select>
+            </Form.Group>
+          </div>
+
           {selectedBank && (
             <div className="bank-details">
               <div className="bank-item header">
@@ -160,16 +165,18 @@ const TransferFunds = ({ msgAlert }) => {
               </div>
             </div>
           )}
-          <Form.Group controlId="formAmount">
-            <Form.Label>Amount</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter amount"
-              value={amount}
-              onChange={handleAmountChange}
-              required
-            />
-          </Form.Group>
+          <div className="form-group">
+            <Form.Group controlId="formAmount">
+              <Form.Label>Amount</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter amount"
+                value={amount}
+                onChange={handleAmountChange}
+                required
+              />
+            </Form.Group>
+          </div>
           <Button className="btn-primary" type="submit" disabled={loading}>
             {loading ? "Processing..." : "Submit Transfer"}
           </Button>

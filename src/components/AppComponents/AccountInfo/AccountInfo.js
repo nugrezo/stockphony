@@ -89,7 +89,7 @@ const AccountInfo = ({ user, msgAlert }) => {
 
       {/* Bank Info Section */}
       <div className="bank-info-container">
-        <h3>Bank Information</h3>
+        <h2>Bank Information</h2>
         <ul className="account-info-grid bank-info-list">
           <li>
             <span className="bank-info-label">Bank Name:</span>

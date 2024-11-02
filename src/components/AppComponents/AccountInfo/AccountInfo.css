@@ -25,11 +25,11 @@
 
 /* Title styling */
 .account-info-container h2,
-.bank-info-container h3 {
+.bank-info-container h2 {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   color: #1abc9c;
 }
 

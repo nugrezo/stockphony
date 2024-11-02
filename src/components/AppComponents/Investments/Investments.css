@@ -8,6 +8,7 @@
   align-items: stretch; /* Make both containers equal height */
   margin: 1rem;
 }
+
 /* Container styling for left side (line chart and investment details) */
 .investments-container {
   color: white;
@@ -19,6 +20,10 @@
   border-radius: 8px;
   max-height: 600px; /* Set a max height */
   overflow-y: auto; /* Add scrolling if it overflows */
+}
+
+.investment-container-wrapper-h2-included h2 {
+  margin-top: 1rem;
 }
 
 /* Graph styling */
@@ -101,7 +106,6 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
   border-radius: 8px;
-  max-height: 600px; /* Set a max height */
   overflow-y: auto; /* Add scrolling if it overflows */
   flex: 1; /* Take up available space */
   flex-shrink: 0; /* Prevent resizing */

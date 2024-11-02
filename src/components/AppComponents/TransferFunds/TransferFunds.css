@@ -1,11 +1,11 @@
 /* Adjust the form container */
 .transfer-funds {
   display: flex;
-  width: 30%;
+  width: 25%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: 70vh;
+  min-height: 65vh;
   margin: auto;
   margin-top: 2rem;
   background-color: #000;
@@ -29,19 +29,9 @@
   align-items: center;
 }
 
-.transfer-funds-container label {
-  margin-top: 2rem;
-}
-
-/* Spacing between form groups */
-.transfer-funds-form-group {
-  margin-bottom: 1.5rem; /* Adjust the margin as needed for desired spacing */
-}
-
 /* Title styling */
 .transfer-funds h2 {
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 22px;
   text-align: center;
   background-color: #2b8a3e;
   color: #000;
@@ -54,7 +44,7 @@
 /* Form field styling */
 .transfer-funds .form-group {
   width: 100%;
-  margin-bottom: 1.5rem; /* Add more space between fields */
+  margin-bottom: 2rem; /* Add more space between fields */
 }
 
 /* Label Styling */
@@ -102,7 +92,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-bottom: 1.5rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
 /* Button hover effect */

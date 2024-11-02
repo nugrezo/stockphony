@@ -131,88 +131,92 @@ const Investments = () => {
   // };
 
   return (
-    <div className="investment-container-wrapper">
-      {/* Left side: Line chart and investment details */}
-      <div className="investments-container">
-        <div className="investment-graph">
-          <Line
-            data={graphData}
+    <div className="investment-container-wrapper-h2-included">
+      <h2>Investments</h2>
+      <div className="investment-container-wrapper">
+        <div className="investments-container">
+          <div className="investment-graph">
+            <Line
+              data={graphData}
+              options={{ responsive: true, maintainAspectRatio: false }}
+            />
+          </div>
+
+          {/* Buying Power */}
+          <div className="investment-info">
+            <span className="label">Buying Power:</span>
+            <span className="amount">
+              $
+              {buyingPower.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+              })}
+            </span>
+          </div>
+
+          {/* Stock Investment */}
+          <div className="investment-info" onClick={toggleExpand}>
+            <span className="label">Stock Investment:</span>
+            <span className="amount">
+              $
+              {totalStockInvestment.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+              })}
+            </span>
+          </div>
+
+          {/* Expandable Stock List */}
+          {isExpanded && (
+            <div className="stock-investments">
+              {/* Headers */}
+              <div className="stock-item header">
+                <span>Stock Name</span>
+                <span>Shares</span>
+                <span>Purchase Price</span>
+                <span>Avg Cost</span>
+                <span>Amount</span>
+              </div>
+
+              {/* Dynamic Stock Data */}
+              {investments.map((stock, index) => (
+                <div key={index} className="stock-item">
+                  <span>{stock.stockTicker}</span>
+                  <span>{stock.shares}</span>
+                  <span>${stock.purchasePrice.toFixed(2)}</span>
+                  <span>
+                    $
+                    {typeof stock.avgCost === "number"
+                      ? stock.avgCost.toFixed(2)
+                      : "N/A"}
+                  </span>
+                  <span>
+                    $
+                    {(stock.shares * stock.avgCost).toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                    })}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Total Investment */}
+          <div className="investment-info total">
+            <span className="label">Total Investment:</span>
+            <span className="amount">
+              $
+              {totalInvestment.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+              })}
+            </span>
+          </div>
+        </div>
+        {/* Right side: Pie chart */}
+        <div className="pie-chart-container">
+          <Pie
+            data={pieChartData}
             options={{ responsive: true, maintainAspectRatio: false }}
           />
         </div>
-
-        {/* Buying Power */}
-        <div className="investment-info">
-          <span className="label">Buying Power:</span>
-          <span className="amount">
-            ${buyingPower.toLocaleString("en-US", { minimumFractionDigits: 2 })}
-          </span>
-        </div>
-
-        {/* Stock Investment */}
-        <div className="investment-info" onClick={toggleExpand}>
-          <span className="label">Stock Investment:</span>
-          <span className="amount">
-            $
-            {totalStockInvestment.toLocaleString("en-US", {
-              minimumFractionDigits: 2,
-            })}
-          </span>
-        </div>
-
-        {/* Expandable Stock List */}
-        {isExpanded && (
-          <div className="stock-investments">
-            {/* Headers */}
-            <div className="stock-item header">
-              <span>Stock Name</span>
-              <span>Shares</span>
-              <span>Purchase Price</span>
-              <span>Avg Cost</span>
-              <span>Amount</span>
-            </div>
-
-            {/* Dynamic Stock Data */}
-            {investments.map((stock, index) => (
-              <div key={index} className="stock-item">
-                <span>{stock.stockTicker}</span>
-                <span>{stock.shares}</span>
-                <span>${stock.purchasePrice.toFixed(2)}</span>
-                <span>
-                  $
-                  {typeof stock.avgCost === "number"
-                    ? stock.avgCost.toFixed(2)
-                    : "N/A"}
-                </span>
-                <span>
-                  $
-                  {(stock.shares * stock.avgCost).toLocaleString("en-US", {
-                    minimumFractionDigits: 2,
-                  })}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Total Investment */}
-        <div className="investment-info total">
-          <span className="label">Total Investment:</span>
-          <span className="amount">
-            $
-            {totalInvestment.toLocaleString("en-US", {
-              minimumFractionDigits: 2,
-            })}
-          </span>
-        </div>
-      </div>
-
-      {/* Right side: Pie chart */}
-      <div className="pie-chart-container">
-        <Pie
-          data={pieChartData}
-          options={{ responsive: true, maintainAspectRatio: false }}
-        />
       </div>
     </div>
   );

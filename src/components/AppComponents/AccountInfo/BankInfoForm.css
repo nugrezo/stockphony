@@ -24,8 +24,7 @@
   font-weight: bold;
 }
 
-.form-group {
-  margin-bottom: 1rem;
+.bank-info-form .form-group {
   padding: 1rem;
 }
 
@@ -37,7 +36,7 @@
 }
 
 .form-group input {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #2b8a3e;
@@ -54,9 +53,9 @@
 
 .btn-primary-bank-info {
   display: block;
-  width: 80%;
+  width: 83%;
   margin: 0 auto;
-  margin-bottom: 1rem;
+  margin-bottom: 4rem;
   padding: 10px;
   font-size: 18px;
   background-color: #2b8a3e;
