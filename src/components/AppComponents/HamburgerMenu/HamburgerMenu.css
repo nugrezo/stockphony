@@ -5,6 +5,16 @@
   border: none;
   cursor: pointer;
   outline: none;
+  transition: transform 0.3s ease;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.hamburger-btn:hover,
+.hamburger-btn:hover:active {
+  transform: rotate(90deg);
+  background-color: #000;
+  color: #18610b;
 }
 
 .menu-container {
