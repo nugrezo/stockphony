@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/stockphony/static/css/main.dd1cab9c.css",
+    "main.js": "/stockphony/static/js/main.277199d9.js",
+    "index.html": "/stockphony/index.html",
+    "main.dd1cab9c.css.map": "/stockphony/static/css/main.dd1cab9c.css.map",
+    "main.277199d9.js.map": "/stockphony/static/js/main.277199d9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dd1cab9c.css",
+    "static/js/main.277199d9.js"
+  ]
+}
