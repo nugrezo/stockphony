@@ -1,6 +1,6 @@
 let apiUrl;
 const apiUrls = {
-  // production: "https://stockphony-server-w.onrender.com",
+  production: "https://stockphony-server.onrender.com",
   development: "http://localhost:4741",
 };
 
